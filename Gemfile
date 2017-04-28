@@ -39,7 +39,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'byebug', platform: :mri
-  gem 'simplecov', :require => false
+  gem 'coveralls', require: false
   gem 'rspec-rails', '~> 3.5'
 end
 

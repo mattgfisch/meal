@@ -11,9 +11,9 @@ RSpec.describe User, type: :model do
     before(:each) do
       admin.created_groups << group
       group.save
-      group.users << admin
-      group.users << creator
-      group.users << member
+      group.members << admin
+      group.members << creator
+      group.members << member
 
       creator.created_hangouts << hangout
       group.hangouts << hangout
