@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-04-28T15:21:21-07:00">2017-04-28T15:21:21-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-04-28T15:31:52-07:00">2017-04-28T15:31:52-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -709,7 +709,7 @@
         <li class="covered" data-hits="1" data-linenumber="5">
           <span class="hits">1</span>
           
-          <code class="ruby">  has_many :hangouts, through: :groups, source: :hangout</code>
+          <code class="ruby">  has_many :hangouts, through: :groups, source: :hangouts</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="6">
@@ -721,7 +721,7 @@
         <li class="covered" data-hits="1" data-linenumber="7">
           <span class="hits">1</span>
           
-          <code class="ruby">  has_many :created_hangouts, foreign_key: :creator_id</code>
+          <code class="ruby">  has_many :created_hangouts, class_name: &quot;Hangout&quot;, foreign_key: &quot;creator_id&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="8">
