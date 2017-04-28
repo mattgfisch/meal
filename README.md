@@ -2,10 +2,10 @@
 
 ## Contributors
 
-* Austin Kading: @austin-kading
-* Dillon Estelle: @destelle
-* Eitan Greene: @eitan-g
-* Matt Fischer: @mattgfisch
+* Austin Kading: https://github.com/austin-kading
+* Dillon Estelle: https://github.com/destelle
+* Eitan Greene: https://github.com/eitan-g
+* Matt Fischer: https://github.com/mattgfisch
 
 ## Description
 
