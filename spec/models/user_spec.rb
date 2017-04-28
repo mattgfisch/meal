@@ -18,6 +18,7 @@ RSpec.describe User, type: :model do
       creator.created_hangouts << hangout
       group.hangouts << hangout
       hangout.save
+      creator.hangouts << hangout
     end
 
     context "User" do
@@ -52,7 +53,11 @@ RSpec.describe User, type: :model do
 
     context "Creator" do
       it "has a created hangout" do
-        expect(creator.hangouts[0]).to be_a Hangout
+        expect(creator.created_hangouts[0]).to be_a Hangout
+      end
+
+      it "has joined a hangout" do
+        expect(creator.hangouts).to all be_a Hangout
       end
     end
 

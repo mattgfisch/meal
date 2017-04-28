@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170428172300) do
+ActiveRecord::Schema.define(version: 20170428230351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,13 @@ ActiveRecord::Schema.define(version: 20170428172300) do
     t.integer  "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "hangouts_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "hangout_id"
+    t.index ["hangout_id"], name: "index_hangouts_users_on_hangout_id", using: :btree
+    t.index ["user_id"], name: "index_hangouts_users_on_user_id", using: :btree
   end
 
   create_table "locations", force: :cascade do |t|
