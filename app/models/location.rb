@@ -1,3 +1,3 @@
 class Location < ApplicationRecord
-  belongs_to :hangouts
+  belongs_to :hangout
 end
