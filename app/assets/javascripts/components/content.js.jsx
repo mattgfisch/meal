@@ -9,17 +9,20 @@ class Content extends React.Component {
   render () {
     return (
       <div>
-        <UserContent />
+        <UserContent sessionID={this.state.sessionID} />
       </div>
     )
   }
 
   componentDidMount () {
+    let contentRef = this
     $.ajax({
       url: '/sessions',
       type: 'GET'
     }).done((response) => {
-      debugger;
+      contentRef.setState({
+        sessionID: response.sessionID
+      })
     })
   }
 }
