@@ -1,0 +1,22 @@
+.card-header {
+  text-align: center;
+}
+
+.user-home {
+  text-align: center;
+}
+
+.create-group-btn {
+  display: inline;
+  padding: 0;
+  margin-left: 0;
+}
+
+.user-show-title {
+  margin-right: 10px;
+}
+
+.card {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}

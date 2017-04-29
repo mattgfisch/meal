@@ -2,8 +2,13 @@ class UserGroupContent extends React.Component {
 
   render () {
     return (
-      <div>
-        And again
+      <div className='card'>
+        <div className='card-header'>
+          <h3>Joined Groups</h3>
+        </div>
+        <div className='card-block user-home'>
+          Here they are
+        </div>
       </div>
     )
   }
