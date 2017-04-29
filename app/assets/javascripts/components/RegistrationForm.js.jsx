@@ -33,10 +33,7 @@ class RegistrationForm extends React.Component {
     var userName = this.state.name
     var userEmail = this.state.email
     var userPassword = this.state.password
-    console.log(userName)
-    console.log(userEmail)
-    console.log(userPassword)
-
+    
     $.ajax({
      url: 'http://localhost:3000/users',
      method: 'POST',
