@@ -1,0 +1,23 @@
+{
+  "name": "meal",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "index.js",
+  "dependencies": {
+    "eslint": "^3.19.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattgfisch/meal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattgfisch/meal/issues"
+  },
+  "homepage": "https://github.com/mattgfisch/meal#readme"
+}
