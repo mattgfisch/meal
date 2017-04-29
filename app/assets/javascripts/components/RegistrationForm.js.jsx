@@ -90,7 +90,6 @@ class RegistrationForm extends React.Component {
 
   render () {
     var error = this.state.errors
-    console.log(error)
     return (
       <div className='card'>
         <div className='card-header'>
