@@ -53,7 +53,7 @@ class RegistrationForm extends React.Component {
        method: 'POST',
        data: {
          user: {
-          name: userName,
+          email: userEmail,
           password: userPassword
          }
        }

@@ -1,10 +1,13 @@
 class SessionsController < ApplicationController
 
   def create
+    p 'look here'
+    p session_params
+    p 'look above'
     raise Exceptions::AlreadyLoggedInError if session[:user_id]
-    user = User.find_by(name: session_params[:name].downcase)
+    user = User.find_by(email: session_params[:email])
     raise Exceptions::UnauthorizedError if
-    !user || !user.authenticate(session_params)
+    !user || !user.authenticate(session_params[:password])
 
     session[:user_id] = user.id
     render json: { user_id: user.id }, status: :created
@@ -18,6 +21,6 @@ class SessionsController < ApplicationController
   private
 
   def session_params
-    session_params.require(:user).permit(:name, :password)
+    params.require(:user).permit(:email, :password)
   end
 end
