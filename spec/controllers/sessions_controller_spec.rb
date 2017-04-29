@@ -19,5 +19,10 @@ RSpec.describe SessionsController, type: :controller do
       get :create, user: { email: user.email, password: user.password }
       expect(session[:user_id]).not_to be nil
     end
+
+    it 'destroys a session' do
+      delete :destroy, :id => 1
+      expect(session[:user_id]).to be nil
+    end
   end
 end

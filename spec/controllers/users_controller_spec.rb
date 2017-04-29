@@ -6,11 +6,8 @@ RSpec.describe UsersController, type: :controller do
     it 'responds with status code 200' do
       expect(response).to have_http_status 200
     end
-
     it 'creates a new user' do
-
       expect(User.first.name).to eq 'Josh'
     end
-
   end
 end

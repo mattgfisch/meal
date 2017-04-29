@@ -6,6 +6,13 @@ describe 'RegistrationForm' do
       visit '/'
       expect(page).to have_content 'Register'
     end
+    it 'is able to click on the register button, not register' do
+      visit '/'
+      fill_in 'Full Name', with: 'Tester Name'
+      fill_in 'Password', with: 'password'
+      click_on 'Register'
+     expect(find('h2')).to have_content "Register For Meal"
+    end
     it 'is able to fill the register form, register and render the user show page' do
       visit '/'
       fill_in 'Full Name', with: 'Tester Name'
@@ -14,12 +21,6 @@ describe 'RegistrationForm' do
       click_on 'Register'
       # expect(find('.col-xs-10').find('h1')).to have_content('Meal')
     end
-    it 'is able to click on the register button, not register' do
-      visit '/'
-      fill_in 'Full Name', with: 'Tester Name'
-      fill_in 'Password', with: 'password'
-      click_on 'Register'
-      # expect(find('.col-xs-10').find('.errors-block')).to have_content('Registration information not valid.')
-    end
+
   end
 end

@@ -47,6 +47,9 @@ class RegistrationForm extends React.Component {
      },
    })
    request.fail(function(response,status,error){
+     form.setState({
+       errors: null
+     })
      var error = response.responseJSON['errors']
      var valueArray = []
      for (var key in error){
@@ -57,7 +60,10 @@ class RegistrationForm extends React.Component {
      })
 
      form.setState({
-        errors: valueArray
+        errors: valueArray,
+        name: null,
+        email: null,
+        password: null
      })
    })
    request.success((successfulRegistration) => {
@@ -72,7 +78,7 @@ class RegistrationForm extends React.Component {
        }
 
      }).done((user) => {
-       form.props.handlePostLogin(user)
+
      })
    })
    // Reset registration fields
@@ -90,7 +96,7 @@ class RegistrationForm extends React.Component {
         <div className='card-header'>
           <h2>Register For Meal</h2>
         </div>
-        <ul>
+        <ul className='errors'>
           {this.state.errors}
         </ul>
         <form action='/users' method='post'>
