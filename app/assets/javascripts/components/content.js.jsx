@@ -5,14 +5,6 @@ class Content extends React.Component {
       sessionID: null
     }
   }
-  // componentWillMount () {
-  //   $.ajax({
-  //     url: '/sessions'
-  //
-  //   }).done((response) => {
-  //     
-  //   })
-  // }
 
   render () {
     return (
@@ -20,5 +12,14 @@ class Content extends React.Component {
         <UserContent />
       </div>
     )
+  }
+
+  componentDidMount () {
+    $.ajax({
+      url: '/sessions',
+      type: 'GET'
+    }).done((response) => {
+      debugger;
+    })
   }
 }

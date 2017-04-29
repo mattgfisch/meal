@@ -1,0 +1,106 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/apprentice/meal/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/apprentice/meal/app/controllers/sessions_controller.rb": [
+        1,
+        null,
+        1,
+        3,
+        2,
+        null,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null,
+        1,
+        null,
+        1,
+        3,
+        null,
+        null
+      ],
+      "/Users/apprentice/meal/app/controllers/application_controller.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/apprentice/meal/app/controllers/users_controller.rb": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null
+      ],
+      "/Users/apprentice/meal/app/models/group.rb": [
+        1,
+        1,
+        1,
+        1,
+        null
+      ],
+      "/Users/apprentice/meal/app/models/application_record.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/apprentice/meal/app/models/hangout.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        null
+      ],
+      "/Users/apprentice/meal/app/models/location.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/apprentice/meal/app/models/user.rb": [
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null
+      ],
+      "/Users/apprentice/meal/app/controllers/index_controller.rb": [
+        1,
+        1,
+        3,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1493496624
+  }
+}
