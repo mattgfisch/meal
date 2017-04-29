@@ -3,9 +3,6 @@ class Content extends React.Component {
     return (
       <div>
         <UserContent />
-        <UserCreateGroup />
-        <UserGroupContent />
-        <UserHangoutContent />
       </div>
     )
   }

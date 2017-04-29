@@ -3,7 +3,9 @@ class UserContent extends React.Component {
   render () {
     return (
       <div>
-        Again
+        <UserCreateGroup />
+        <UserGroupContent />
+        <UserHangoutContent />
       </div>
     )
   }
