@@ -5,7 +5,8 @@ class RegistrationForm extends React.Component {
     this.state = {
       name: null,
       email: null,
-      password: null
+      password: null,
+      errors: null
     }
   }
 
@@ -33,8 +34,8 @@ class RegistrationForm extends React.Component {
     var userName = this.state.name
     var userEmail = this.state.email
     var userPassword = this.state.password
-    
-    $.ajax({
+
+    var request = $.ajax({
      url: 'http://localhost:3000/users',
      method: 'POST',
      data: {
@@ -43,8 +44,24 @@ class RegistrationForm extends React.Component {
         email: userEmail,
         password: userPassword
        }
+     },
+   })
+   request.fail(function(response,status,error){
+     var error = response.responseJSON['errors']
+     var keyArray = []
+     var valueArray = []
+     for (var key in error){
+       valueArray.push(key +' '+ error[key])
      }
-   }).done((successfulRegistration) => {
+     valueArray.map((error)=> {
+       return(<br><li>{error}</li></br>)
+     })
+
+     form.setState({
+        errors: valueArray
+     })
+   })
+   request.success((successfulRegistration) => {
      $.ajax({
        url: 'http://localhost:3000/sessions',
        method: 'POST',
@@ -54,6 +71,7 @@ class RegistrationForm extends React.Component {
           password: userPassword
          }
        }
+
      }).done((user) => {
        form.props.handlePostLogin(user)
      })
@@ -66,10 +84,15 @@ class RegistrationForm extends React.Component {
   }
 
   render () {
+    var error = this.state.errors
+    console.log(error)
     return (
       <div className='card'>
         <div className='card-header'>
           <h2>Register For Meal</h2>
+        </div>
+        <div>
+          {this.state.errors}
         </div>
         <form action='/users' method='post'>
           <div className='form-group'>

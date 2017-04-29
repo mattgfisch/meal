@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
+  validates :name, :email, presence: true
+  
 
   has_and_belongs_to_many :groups
   has_and_belongs_to_many :hangouts
