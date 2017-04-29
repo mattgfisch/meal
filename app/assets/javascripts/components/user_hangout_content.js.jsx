@@ -7,7 +7,7 @@ class UserHangoutContent extends React.Component {
           <h3>Current Hangouts</h3>
         </div>
         <div className='card-block user-home'>
-          Here be the hangouts
+          <HangoutList />
         </div>
       </div>
     )
