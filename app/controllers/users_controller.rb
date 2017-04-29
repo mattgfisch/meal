@@ -11,7 +11,6 @@ class UsersController < ApplicationController
         render json: {
           errors: user.errors.messages
         }, status: 400
-        p user.errors.messages
       end
     end
 
