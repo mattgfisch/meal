@@ -1,7 +1,4 @@
-import React, { Component } from 'react'
-import $ from 'jquery'
-
-class Login extends Component {
+class Login extends React.Component {
   render () {
     return (
       <div className='card'>
@@ -29,5 +26,3 @@ class Login extends Component {
     )
   };
 };
-
-export default Login
