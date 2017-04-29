@@ -16,7 +16,7 @@ class HangoutList extends React.Component {
         hangoutList = (
         response.hangouts.map((hangout) => {
           return (
-            <HangoutListItem hangoutInfo={hangout} key={'hangout' + hangout.id} />
+            <HangoutListItem hangout={hangout} key={'hangout' + hangout.id} />
           )
         })
       )
