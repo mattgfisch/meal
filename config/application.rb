@@ -23,3 +23,7 @@ module Meal
     # -- all .rb files in that directory are automatically loaded.
   end
 end
+
+Meal::Application.configure do
+  config.react.addons = true # defaults to false
+end

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
   def show
-    render '/test'
+    render component: 'Content'
   end
 end
