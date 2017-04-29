@@ -1,9 +1,6 @@
 class SessionsController < ApplicationController
 
   def create
-    p 'look here'
-    p session_params
-    p 'look above'
     raise Exceptions::AlreadyLoggedInError if session[:user_id]
     user = User.find_by(email: session_params[:email])
     raise Exceptions::UnauthorizedError if

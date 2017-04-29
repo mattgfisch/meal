@@ -17,7 +17,7 @@ RSpec.describe SessionsController, type: :controller do
 
     it 'creates a new session' do
       get :create, user: { email: user.email, password: user.password }
-      p session[:user_id]
+      expect(session[:user_id]).not_to be nil
     end
   end
 end
