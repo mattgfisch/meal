@@ -48,13 +48,12 @@ class RegistrationForm extends React.Component {
    })
    request.fail(function(response,status,error){
      var error = response.responseJSON['errors']
-     var keyArray = []
      var valueArray = []
      for (var key in error){
        valueArray.push(key +' '+ error[key])
      }
      valueArray.map((error)=> {
-       return(<br><li>{error}</li></br>)
+       return(<div>{error}</div>)
      })
 
      form.setState({
@@ -91,9 +90,9 @@ class RegistrationForm extends React.Component {
         <div className='card-header'>
           <h2>Register For Meal</h2>
         </div>
-        <div>
+        <ul>
           {this.state.errors}
-        </div>
+        </ul>
         <form action='/users' method='post'>
           <div className='form-group'>
             <label htmlFor='exampleInputName'>Full Name</label>
