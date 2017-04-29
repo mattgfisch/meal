@@ -6,12 +6,12 @@ RSpec.describe SessionsController, type: :controller do
     it 'responds with status code 200' do
       expect(response).to have_http_status 200
     end
-    it 'rasies AlreadyLoggedInError if a session already exist' do
+    it 'raises AlreadyLoggedInError if a session already exist' do
       controller.session[:user_id] = user.id
       expect { get :create }.to raise_error
     end
 
-    it 'rasies UnauthorizedError if a user doesnt exist' do
+    it 'raises UnauthorizedError if a user doesnt exist' do
       expect { get :create }.to raise_error
     end
 
