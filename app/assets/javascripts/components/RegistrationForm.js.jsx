@@ -27,6 +27,13 @@ class RegistrationForm extends React.Component {
       password: e.target.value
     })
   }
+  listErrors(){
+    if(this.state.errors != null){
+      return( this.state.errors.map((error) => {
+        return(<div className='indv-error' key={error}>{error}</div>)
+      }))
+    }
+  }
 
   handleClick (e) {
     e.preventDefault()
@@ -53,12 +60,8 @@ class RegistrationForm extends React.Component {
      var error = response.responseJSON['errors']
      var valueArray = []
      for (var key in error) {
-       valueArray.push(key +' '+ error[key])
+       valueArray.push(key.substring(0,1).toUpperCase()+ key.substring(1) +' '+ error[key])
      }
-     valueArray.map((error) => {
-       return(<div>{error}</div>)
-     })
-
      form.setState({
         errors: valueArray,
         name: null,
@@ -99,9 +102,9 @@ class RegistrationForm extends React.Component {
         <div className='card-header'>
           <h2>New Account</h2>
         </div>
-        <ul className='errors'>
-          {this.state.errors}
-        </ul>
+        <div className='errors errors-container'>
+          {this.listErrors()}
+        </div>
         <form action='/users' method='post'>
           <div className='form-group'>
             <label htmlFor='exampleInputName'>Full Name</label>
