@@ -35,12 +35,11 @@ class Login extends React.Component {
         }
       }
     })
-    request.fail(function (response, status, error) {
+    request.fail(function (response) {
       form.setState({
         errors: null
       })
-      error = response.responseJSON['errors']
-
+      var error = response.responseJSON['errors']
       form.setState({
         errors: error,
         name: null,
@@ -52,7 +51,9 @@ class Login extends React.Component {
       form.setState({
         errors: null
       })
-      this.props.changeMode('UserShow')
+      this.props.changeMode('Home')
+      this.props.changeSession(successfulLogin['user_id'])
+      this.props.changeUserName(successfulLogin['user_name'])
     })
   }
 
@@ -69,7 +70,7 @@ class Login extends React.Component {
         <ul className='errors'>
           {this.state.errors}
         </ul>
-        <form action='/sessions' method='post'>
+        <form action='/sessions' method='post' className='bottom-padding'>
 
           <div className='form-group'>
             <label htmlFor='email'>Email</label>

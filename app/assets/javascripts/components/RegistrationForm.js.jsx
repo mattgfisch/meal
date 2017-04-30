@@ -27,6 +27,13 @@ class RegistrationForm extends React.Component {
       password: e.target.value
     })
   }
+  listErrors(){
+    if(this.state.errors != null){
+      return( this.state.errors.map((error) => {
+        return(<div className='indv-error' key={error}>{error}</div>)
+      }))
+    }
+  }
 
   handleClick (e) {
     e.preventDefault()
@@ -36,70 +43,68 @@ class RegistrationForm extends React.Component {
     var userPassword = this.state.password
 
     var request = $.ajax({
-      url: '/users',
-      method: 'POST',
-      data: {
-        user: {
-          name: userName,
-          email: userEmail,
-          password: userPassword
-        }
-      }
-    })
-    request.fail(function (response, status, error) {
-      form.setState({
-        errors: null
-      })
-      error = response.responseJSON['errors']
-      var valueArray = []
-      for (var key in error) {
-        valueArray.push(key + ' ' + error[key])
-      }
-      valueArray.map((error) => {
-        return (<div>{error}</div>)
-      })
-      form.setState({
+     url: '/users',
+     method: 'POST',
+     data: {
+       user: {
+        name: userName,
+        email: userEmail,
+        password: userPassword
+       }
+     }
+   })
+   request.fail(function (response) {
+     form.setState({
+       errors: null
+     })
+     var error = response.responseJSON['errors']
+     var valueArray = []
+     for (var key in error) {
+       valueArray.push(key.substring(0,1).toUpperCase()+ key.substring(1) +' '+ error[key])
+     }
+     form.setState({
         errors: valueArray,
         name: null,
         email: null,
         password: null
-      })
-    })
-    request.success((successfulRegistration) => {
-      form.setState({
-        errors: null
-      })
-      $.ajax({
-        url: '/sessions',
-        method: 'POST',
-        data: {
-          user: {
-            email: userEmail,
-            password: userPassword
-          }
-        }
-      }).done((successfulLogin) => {
-        form.setState({
-          errors: null
-        })
-        this.props.changeMode('UserShow')
-      })
-    })
+     })
+   })
+   request.success((successfulRegistration) => {
+     form.setState({
+       errors: null
+     })
+     $.ajax({
+       url: '/sessions',
+       method: 'POST',
+       data: {
+         user: {
+          email: userEmail,
+          password: userPassword
+         }
+       }
+     }).done((successfulLogin) => {
+         form.setState({
+            errors: null
+         })
+         this.props.changeMode('Home')
+         this.props.changeUserName(userName)
+         this.props.changeSession(successfulLogin['user_id'])
+       })
+     })
    // Reset registration fields
-    this.refs.registrationName.value = ''
-    this.refs.registrationEmail.value = ''
-    this.refs.registrationPassword.value = ''
+   this.refs.registrationName.value = ''
+   this.refs.registrationEmail.value = ''
+   this.refs.registrationPassword.value = ''
   }
-
   render () {
     return (
       <div className='card'>
         <div className='card-header'>
           <h2>New Account</h2>
         </div>
-        <ul className='errors'>
-          {this.state.errors}
-        </ul>
+        <div className='errors errors-container'>
+          {this.listErrors()}
+        </div>
         <form action='/users' method='post'>
           <div className='form-group'>
             <label htmlFor='exampleInputName'>Full Name</label>
