@@ -1,7 +1,7 @@
 class AdminGroupContent extends React.Component {
   render () {
     return (
-      <div className='card user-content'>
+      <div className='card user-content' id='created-groups'>
         <div className='card-header'>
           <h3>
             <span className='user-show-title'>
