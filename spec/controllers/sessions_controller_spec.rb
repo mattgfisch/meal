@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe SessionsController, type: :controller do
   describe 'post session' do
     let!(:user) { User.create!(name: 'Josh', email: 'email@email.com', password: 'password') }
-    it 'responds with status code 200' do
-      expect(response).to have_http_status 200
+    it 'responds with status code 201' do
+      get :create, user: {email: user.email, password: user.password}
+      expect(response).to have_http_status 201
     end
     it 'raises AlreadyLoggedInError if a session already exist' do
       controller.session[:user_id] = user.id

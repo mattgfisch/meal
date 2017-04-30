@@ -87,6 +87,7 @@ class RegistrationForm extends React.Component {
             errors: null
          })
          this.props.changeMode('Home')
+
          this.props.changeUserName(userName)
          this.props.changeSession(successfulLogin['user_id'])
        })
