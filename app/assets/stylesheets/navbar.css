@@ -1,17 +1,13 @@
 .center{
   text-align: center;
 }
-
-.logo {
+.navbar {
+  position: relative;
+}
+.navbar-brand{
+  transform: translateX(-50%);
+  position: absolute;
+   left: 50%;
+  display: block;
   font-size: 2em;
-}
-
-.inline{
-  display: inline;
-  padding-left: 40px;
-  padding-right: 40px;
-}
-
-.user{
-  padding-left: 30px;
 }

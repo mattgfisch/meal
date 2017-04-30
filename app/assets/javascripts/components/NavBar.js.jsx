@@ -20,11 +20,8 @@ class NavBar extends React.Component {
   sessionId () {
     if (this.props.session != null) {
     return(
-        <div className='logout inline center'>
-          <span>
-            <a href='#' onClick={this.logoutHandler.bind(this)}>Logout</a>
-          </span>
-        </div>)
+      <button type='button' className='btn pull-right btn-default navbar-btn navbar-right' href='#' onClick={this.logoutHandler.bind(this)}>Logout</button>
+        )
       }
   }
 
@@ -40,29 +37,23 @@ class NavBar extends React.Component {
       }
     }
     return (
-      <span className='navbar-text logo'>
-        <a href='#' onClick={handler} className='navbar-link'>Meals</a>
-      </span>
+        <a href='#' onClick={handler} className='navbar-brand navbar-link'>Meals</a>
     )
   }
 
   userName () {
     if (this.props.user != null) {
       return (
-        <span>{this.props.user}</span>
+        <span className='navbar-text pull-left'>{this.props.user}</span>
       )
     }
   }
   render () {
     return (
-      <nav className='navbar navbar-toggleable-md navbar-light bg-faded'>
-        <div className='container'>
-          <div className='user inline center'>
-            {this.userName()}
-          </div>
-          <div className='center inline center'>
-            {this.homeLink()}
-          </div>
+      <nav className='navbar navbar-default'>
+        <div className='container-fluid'>
+          {this.userName()}
+          {this.homeLink()}
           {this.sessionId()}
         </div>
       </nav>
