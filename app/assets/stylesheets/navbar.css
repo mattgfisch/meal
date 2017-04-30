@@ -1,0 +1,17 @@
+.center{
+  text-align: center;
+}
+
+.logo {
+  font-size: 2em;
+}
+
+.inline{
+  display: inline;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.logout{
+  padding-left: 40px;
+}

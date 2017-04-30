@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
 
   def create
-    raise Exceptions::AlreadyLoggedInError if session[:user_id]
     user = User.find_by(email: session_params[:email])
     if !user || !user.authenticate(session_params[:password])
       render json: {
@@ -14,7 +13,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.clear
+    session.destroy
     render json: { message: 'You have been successfully logged out' }
   end
 
