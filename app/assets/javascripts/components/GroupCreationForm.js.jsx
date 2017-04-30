@@ -5,12 +5,18 @@ class GroupCreationForm extends React.Component {
       groupName: '',
       groupEmails: []
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit (event) {
     event.preventDefault()
-    alert(`Your form was submitted: ${this.state.groupName}\n
-      ${this.state.groupMembers}`)
+    $.ajax({
+      type: 'POST',
+      url: '/groups',
+      data: this.state
+    }).done((response) => {
+      console.log(response)
+    })
   }
 
   handleNameChange (event) {
