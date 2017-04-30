@@ -87,7 +87,7 @@ class Login extends React.Component {
 
         </form>
         <div className="register">
-          <p>don't have an account? <a href = '#' onClick={handler}>register</a> for meal!</p>
+          <p>Don't have an account? <a href = '#' onClick={handler}>Register</a> for meal!</p>
         </div>
       </div>
     )
