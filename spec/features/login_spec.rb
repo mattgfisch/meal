@@ -13,7 +13,6 @@ describe 'LoginForm' do
       fill_in 'Email', with: 'mattymoo'
       fill_in 'Password', with: 'password'
       click_on 'Log In'
-      sleep(1)
       expect(find('ul')).to have_content 'Email or Password incorrect'
     end
 
