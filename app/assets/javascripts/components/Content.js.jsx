@@ -47,7 +47,7 @@ changeMode (mode) {
   const login = <Login changeMode={this.changeMode}  changeSession={this.changeSession} changeUserName={this.changeUserName} />
   const userShow = <UserContent changeMode={this.changeMode} />
   const createGroup = <GroupCreationForm changeMode={this.changeMode} />
-  const Home = <UserContent />
+  const Home = <UserContent changeMode={this.changeMode} />
   let stateVariable = null
 
   switch (mode) {
@@ -60,8 +60,10 @@ changeMode (mode) {
     case 'Home':
       stateVariable = Home
       break
+    case 'CreateGroup':
+      stateVariable = createGroup
+      break
     default:
-      console.log('OMG errorz')
       stateVariable = login
       break
   }

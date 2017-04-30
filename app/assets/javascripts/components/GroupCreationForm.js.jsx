@@ -8,7 +8,6 @@ class GroupCreationForm extends React.Component {
   }
 
   handleSubmit (event) {
-    console.log(event)
     event.preventDefault()
     alert(`Your form was submitted: ${this.state.groupName}\n
       ${this.state.groupMembers}`)
@@ -23,7 +22,6 @@ class GroupCreationForm extends React.Component {
   handleEmailChange (event) {
     let index = parseInt(event.target.id.split('-')[1])
     this.state.groupEmails[index] = event.target.value
-    console.log(this.state.groupEmails)
   }
 
   render () {
