@@ -9,9 +9,7 @@ class HangoutList extends React.Component {
     let hangoutList = null
     $.ajax({
       url: '/hangouts',
-      method: 'GET',
-      crossDomain: true,
-      xhrFields: { withCredentials: true }
+      method: 'GET'
     }).done((response) => {
         hangoutList = (
         response.hangouts.map((hangout) => {

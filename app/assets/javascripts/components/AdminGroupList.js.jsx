@@ -9,9 +9,7 @@ class AdminGroupList extends React.Component {
     let adminGroupList = null
     $.ajax({
       url: '/admin_groups',
-      method: 'GET',
-      crossDomain: true,
-      xhrFields: { withCredentials: true }
+      method: 'GET'
     }).done((response) => {
         adminGroupList = (
         response.admin_groups.map((group) => {

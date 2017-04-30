@@ -9,9 +9,7 @@ class GroupList extends React.Component {
     let groupList = null
     $.ajax({
       url: '/groups',
-      method: 'GET',
-      crossDomain: true,
-      xhrFields: { withCredentials: true }
+      method: 'GET'
     }).done((response) => {
         groupList = (
         response.groups.map((group) => {
