@@ -67,6 +67,9 @@ class RegistrationForm extends React.Component {
      })
    })
    request.success((successfulRegistration) => {
+     form.setState({
+       errors: null
+     })
      $.ajax({
        url: 'http://localhost:3000/sessions',
        method: 'POST',
@@ -77,10 +80,13 @@ class RegistrationForm extends React.Component {
          }
        }
 
-     }).done((user) => {
-
+     }).done((successfulLogin) => {
+         form.setState({
+            errors: null
+         })
+         this.props.changeMode('UserShow')
+       })
      })
-   })
    // Reset registration fields
    this.refs.registrationName.value = ''
    this.refs.registrationEmail.value = ''

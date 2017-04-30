@@ -3,7 +3,8 @@ class Login extends React.Component {
     super()
     this.state = {
       email: null,
-      password: null
+      password: null,
+      errors: null
     }
   }
 
@@ -24,7 +25,7 @@ class Login extends React.Component {
     let form = this
     var userEmail = this.state.email
     var userPassword = this.state.password
-    $.ajax({
+    var request =$.ajax({
       url: '/sessions',
       method: 'POST',
       data: {
@@ -33,8 +34,25 @@ class Login extends React.Component {
         password: userPassword
         }
       }
-    }).done(function(response){
-      //render show page
+    })
+    request.fail(function(response,status,error){
+      form.setState({
+        errors: null
+      })
+      var error = response.responseJSON['errors']
+
+      form.setState({
+         errors: error,
+         name: null,
+         email: null,
+         password: null
+      })
+    })
+    request.success((successfulLogin) => {
+      form.setState({
+         errors: null
+      })
+      this.props.changeMode('UserShow')
     })
   }
 
@@ -48,6 +66,9 @@ class Login extends React.Component {
         <div className='card-header'>
           <h2>Log In</h2>
         </div>
+        <ul className='errors'>
+          {this.state.errors}
+        </ul>
         <form action='/sessions' method='post'>
 
           <div className='form-group'>
