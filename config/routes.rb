@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   get '/groups', to: 'groups#joined_groups'
   get '/hangouts', to: 'hangouts#current_hangouts'
   get '/admin_groups', to: 'groups#admin_groups'
-
+  delete '/sessions/:id', to: 'sessions#destroy' 
 end

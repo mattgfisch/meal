@@ -12,7 +12,9 @@ class Content extends React.Component {
   }
 
   componentDidMount () {
-<<<<<<< HEAD
+    this.changeSession(null)
+    this.changeUserName(null)
+
     let sessionID = null
     var request = $.ajax({
       url: '/sessions',
@@ -27,51 +29,17 @@ class Content extends React.Component {
     })
   }
 
-  changeMode (mode) {
-    const registration = <RegistrationForm changeMode={this.changeMode} />;
-    const login = <Login changeMode={this.changeMode}  />;
-    const userShow = <UserContent />;
-    let stateVariable = null
-
-    switch(mode) {
-      case 'Register':
-        stateVariable = registration;
-        break;
-      case 'Login':
-        stateVariable = login;
-        break;
-      case 'Home':
-        stateVariable = userShow;
-        break;
-      default:
-        console.log('OMG errorz');
-        stateVariable = login;
-        break;
-    }
+  changeSession (sessionId) {
     this.setState({
-      mode: stateVariable,
+      session: sessionId
     })
-  };
-=======
-    this.changeMode('Login')
-    this.changeSession(null)
-    this.changeUserName(null)
-
-  }
-
-  changeSession (session_id) {
-      this.setState({
-        session: session_id
-      })
   }
 
   changeUserName (name) {
     this.setState({
       username: name
     })
-
   }
->>>>>>> master
 
   changeMode (mode) {
     const registration = <RegistrationForm changeMode={this.changeMode} changeSession={this.changeSession} changeUserName={this.changeUserName} />
