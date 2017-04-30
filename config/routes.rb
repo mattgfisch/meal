@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :index, only: [:index]
   resource :users
   resource :sessions
-  resource :groups, except: [:show]
+  resources :groups, except: [:index]
   resource :hangouts, except: [:show]
   resource :locations
 
