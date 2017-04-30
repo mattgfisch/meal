@@ -36,7 +36,7 @@ class RegistrationForm extends React.Component {
     var userPassword = this.state.password
 
     var request = $.ajax({
-     url: 'http://localhost:3000/users',
+     url: '/users',
      method: 'POST',
      data: {
        user: {
@@ -71,7 +71,7 @@ class RegistrationForm extends React.Component {
        errors: null
      })
      $.ajax({
-       url: 'http://localhost:3000/sessions',
+       url: '/sessions',
        method: 'POST',
        data: {
          user: {
@@ -98,7 +98,7 @@ class RegistrationForm extends React.Component {
     return (
       <div className='card'>
         <div className='card-header'>
-          <h2>Register For Meal</h2>
+          <h2>New Account</h2>
         </div>
         <ul className='errors'>
           {this.state.errors}

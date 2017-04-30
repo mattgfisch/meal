@@ -1,5 +1,8 @@
 class UserContent extends React.Component {
   render(){
-    return(<div>Hello there</div>)
+    return(
+      <div>
+        <h2>Your Meals</h2>
+      </div>)
   }
 }
