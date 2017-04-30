@@ -30,7 +30,7 @@ class RegistrationForm extends React.Component {
   listErrors(){
     if(this.state.errors != null){
       return( this.state.errors.map((error) => {
-        return(<div className='indv-error' key ={error}>{error}</div>)
+        return(<div className='indv-error' key={error}>{error}</div>)
       }))
     }
   }
