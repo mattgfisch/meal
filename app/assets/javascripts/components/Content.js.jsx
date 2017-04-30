@@ -32,7 +32,6 @@ changeMode (mode) {
       stateVariable = createGroup
       break
     default:
-      console.log('OMG errorz')
       stateVariable = login
   }
   this.setState({

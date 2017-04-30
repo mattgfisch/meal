@@ -1,6 +1,18 @@
 class GroupCreationForm extends React.Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
+    this.state = {
+      gropuName: '',
+      groupMembers: []
+    }
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleSubmit (event) {
+    alert(`Your form was submitted: ${this.state.groupName}\n
+      ${this.state.groupMembers}`)
+    event.preventDefault()
   }
 
   render () {
@@ -12,7 +24,7 @@ class GroupCreationForm extends React.Component {
         <form action='/users' method='post'>
           <div className='form-group'>
             <label htmlFor='name'>Name</label>
-            <input type='text' ref='groupName' className='form-control' id='name' placeholder='John Doe' />
+            <input type='text' name='groupName' className='form-control' id='name' placeholder='Grouptastic' />
           </div>
           <div className='form-group'>
             <label htmlFor='exampleInputPassword1'>Send invites to:</label>
@@ -25,7 +37,7 @@ class GroupCreationForm extends React.Component {
             <input type='email' className='form-control' placeholder='johndoe@email.com' />
           </div>
           <div className='register-btn'>
-            <button type='submit' className='btn btn-default'>Invite Users</button>
+            <button type='submit' onClick={this.handleSubmit} className='btn btn-default'>Invite Users</button>
           </div>
         </form>
       </div>
