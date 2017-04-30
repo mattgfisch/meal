@@ -9,50 +9,52 @@ class NavBar extends React.Component {
     e.preventDefault()
     $.ajax({
       url: '/sessions/'+ this.props.session,
-      type: 'DELETE',
-    }).done((response)=>{
+      type: 'DELETE'
+    }).done((response) => {
       this.props.changeUserName(null)
       this.props.changeSession(null)
       this.props.changeMode('Login')
-
     })
   }
 
-  sessionId(){
-    if (this.props.session != null){
+  sessionId () {
+    if (this.props.session != null) {
     return(
         <div className='logout inline center'>
-          <span><a href = '#' onClick={this.logoutHandler.bind(this)}>Logout</a></span>
+          <span>
+            <a href='#' onClick={this.logoutHandler.bind(this)}>Logout</a>
+          </span>
         </div>)
       }
   }
 
-  homeLink(){
+  homeLink () {
     const handler = (e) => {
       e.preventDefault()
-      if(this.props.session != null){
+      if (this.props.session != null) {
         this.props.changeMode('Home')
       }
-      else{
+      else
+      {
         this.props.changeMode('Login')
       }
-
     }
-
-  return(<span className='navbar-text logo'><a href='#' onClick={handler} className='navbar-link'>Meals</a></span>)
-
+    return (
+      <span className='navbar-text logo'>
+        <a href='#' onClick={handler} className='navbar-link'>Meals</a>
+      </span>
+    )
   }
 
-  userName(){
-    if(this.props.user != null){
-      return(
+  userName () {
+    if (this.props.user != null) {
+      return (
         <span>{this.props.user}</span>
       )
     }
   }
-  render(){
-
-    return(
+  render () {
+    return (
       <nav className='navbar navbar-toggleable-md navbar-light bg-faded'>
         <div className='container'>
           <div className='user inline center'>
@@ -62,7 +64,6 @@ class NavBar extends React.Component {
             {this.homeLink()}
           </div>
           {this.sessionId()}
-
         </div>
       </nav>
     )

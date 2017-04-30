@@ -1,5 +1,5 @@
 class Content extends React.Component {
-  constructor() {
+  constructor () {
     super()
     this.state = {
       mode: null,
@@ -11,20 +11,20 @@ class Content extends React.Component {
     this.changeUserName = this.changeUserName.bind(this)
   }
 
-  componentDidMount(){
+  componentDidMount () {
     this.changeMode('Login')
     this.changeSession(null)
     this.changeUserName(null)
 
   }
 
-  changeSession(session_id){
+  changeSession (session_id) {
       this.setState({
         session: session_id
       })
   }
 
-  changeUserName(name){
+  changeUserName (name) {
     this.setState({
       username: name
     })
@@ -32,36 +32,34 @@ class Content extends React.Component {
   }
 
   changeMode (mode) {
-    const registration = <RegistrationForm changeMode={this.changeMode} changeSession={this.changeSession} changeUserName={this.changeUserName} />;
-    const login = <Login changeMode={this.changeMode}  changeSession={this.changeSession} changeUserName={this.changeUserName} />;
-    const Home = <UserContent />;
+    const registration = <RegistrationForm changeMode={this.changeMode} changeSession={this.changeSession} changeUserName={this.changeUserName} />
+    const login = <Login changeMode={this.changeMode}  changeSession={this.changeSession} changeUserName={this.changeUserName} />
+    const Home = <UserContent />
     let stateVariable = null
 
-    switch(mode){
-      case "Register":
-        stateVariable = registration;
-        break;
-      case "Login":
-        stateVariable = login;
-        break;
-      case "Home":
-        stateVariable = Home;
-        break;
+    switch (mode) {
+      case 'Register':
+        stateVariable = registration
+        break
+      case 'Login':
+        stateVariable = login
+        break
+      case 'Home':
+        stateVariable = Home
+        break
       default:
-        console.log("OMG errorz");
-        stateVariable = login;
-        break;
+        console.log('OMG errorz')
+        stateVariable = login
+        break
     }
     this.setState({
-      mode: stateVariable,
+      mode: stateVariable
     })
   };
-
   render () {
-
     return (
       <div>
-        <NavBar user={this.state.username} session={this.state.session} changeMode={this.changeMode} changeSession={this.changeSession} changeUserName={this.changeUserName}/>
+        <NavBar user={this.state.username} session={this.state.session} changeMode={this.changeMode} changeSession={this.changeSession} changeUserName={this.changeUserName} />
         {this.state.mode}
       </div>
     )

@@ -44,18 +44,18 @@ class RegistrationForm extends React.Component {
         email: userEmail,
         password: userPassword
        }
-     },
+     }
    })
-   request.fail(function(response,status,error){
+   request.fail(function (response) {
      form.setState({
        errors: null
      })
      var error = response.responseJSON['errors']
      var valueArray = []
-     for (var key in error){
+     for (var key in error) {
        valueArray.push(key +' '+ error[key])
      }
-     valueArray.map((error)=> {
+     valueArray.map((error) => {
        return(<div>{error}</div>)
      })
 
@@ -79,12 +79,10 @@ class RegistrationForm extends React.Component {
           password: userPassword
          }
        }
-
      }).done((successfulLogin) => {
          form.setState({
             errors: null
          })
-         console.log(successfulLogin)
          this.props.changeMode('Home')
          this.props.changeUserName(userName)
          this.props.changeSession(successfulLogin['user_id'])
@@ -94,9 +92,7 @@ class RegistrationForm extends React.Component {
    this.refs.registrationName.value = ''
    this.refs.registrationEmail.value = ''
    this.refs.registrationPassword.value = ''
-
   }
-
   render () {
     return (
       <div className='card'>
