@@ -1,15 +1,8 @@
 {
-  "name": "meal",
+  "name": "y",
   "version": "1.0.0",
-  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "description": "## Contributors",
   "main": "index.js",
-  "dependencies": {
-    "eslint": "^3.19.0"
-  },
-  "devDependencies": {
-    "eslint": "^3.19.0"
-  },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mattgfisch/meal.git"
@@ -19,5 +12,12 @@
   "bugs": {
     "url": "https://github.com/mattgfisch/meal/issues"
   },
-  "homepage": "https://github.com/mattgfisch/meal#readme"
+  "homepage": "https://github.com/mattgfisch/meal#readme",
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3"
+  }
 }

@@ -1,13 +1,16 @@
 class UserContent extends React.Component {
-
   render () {
-    const createGroup = () => {
-      this.props.changeMode('CreateGroup')
-    }
     return (
-      <div>
-        <h2>Your Meals</h2>
-        <button className='btn btn-default' onClick={createGroup}>Create Group</button>
-      </div>)
+      <div className='card'>
+        <div className='card-header'>
+          <h2>Your Meals</h2>
+        </div>
+        <div className='card-block'>
+          <UserHangoutContent sessionID={this.props.sessionID} />
+          <UserGroupContent sessionID={this.props.sessionID} />
+          <AdminGroupContent sessionID={this.props.sessionID} />
+        </div>
+      </div>
+    )
   }
 }
