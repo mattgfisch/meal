@@ -1,27 +1,27 @@
-class GroupList extends React.Component {
+class AdminGroupList extends React.Component {
   constructor () {
     super()
     this.state = {
-      userGroups: null
+      adminGroups: null
     }
   }
   componentDidMount() {
-    let groupList = null
+    let adminGroupList = null
     $.ajax({
-      url: '/groups',
+      url: '/admin_groups',
       method: 'GET',
       crossDomain: true,
       xhrFields: { withCredentials: true }
     }).done((response) => {
-        groupList = (
-        response.groups.map((group) => {
+        adminGroupList = (
+        response.admin_groups.map((group) => {
           return (
-            <GroupListItem group={group} key={'group' + group.id} />
+            <AdminGroupListItem group={group} key={'adminGroup' + group.id} />
           )
         })
       )
       this.setState({
-        userGroups: groupList
+        adminGroups: adminGroupList
       })
     });
   }
@@ -29,7 +29,7 @@ class GroupList extends React.Component {
   render () {
     return (
       <div>
-        {this.state.userGroups}
+        {this.state.adminGroups}
       </div>
     )
   }

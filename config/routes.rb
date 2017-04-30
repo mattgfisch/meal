@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   resource :hangouts
   resource :locations
 
+  get '/admin_groups', to: 'groups#admin_groups'
+
 end

@@ -12,7 +12,7 @@ class UserAdminGroupsContent extends React.Component {
           </h3>
         </div>
         <div className='card-block user-home'>
-          YOU made this
+          <AdminGroupList />
         </div>
       </div>
     )

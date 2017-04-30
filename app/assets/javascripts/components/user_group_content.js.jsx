@@ -7,7 +7,7 @@ class UserGroupContent extends React.Component {
           <h3>Joined Groups</h3>
         </div>
         <div className='card-block user-home'>
-          Here they are
+          <GroupList />
         </div>
       </div>
     )

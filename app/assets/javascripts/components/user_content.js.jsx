@@ -7,8 +7,8 @@ class UserContent extends React.Component {
         </div>
         <div className='card-block'>
           <UserHangoutContent sessionID={this.props.sessionID} />
-          <UserGroupContent />
-          <UserAdminGroupsContent />
+          <UserGroupContent sessionID={this.props.sessionID} />
+          <UserAdminGroupsContent sessionID={this.props.sessionID} />
         </div>
       </div>
     )
