@@ -4,7 +4,6 @@ class SessionsController < ApplicationController
   end
 
   def create
-    raise Exceptions::AlreadyLoggedInError if session[:user_id]
     user = User.find_by(email: session_params[:email])
     if !user || !user.authenticate(session_params[:password])
       render json: {
@@ -12,12 +11,12 @@ class SessionsController < ApplicationController
       }, status: 400
     else
       session[:user_id] = user.id
-      render json: { user_id: user.id }, status: :created
+      render json: { user_id: user.id, user_name: user.name }, status: :created
     end
   end
 
   def destroy
-    session.clear
+    session[:user_id] = nil
     render json: { message: 'You have been successfully logged out' }
   end
 

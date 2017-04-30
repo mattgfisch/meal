@@ -15,7 +15,7 @@ describe 'RegistrationForm' do
       fill_in 'Full Name', with: 'Tester Name'
       fill_in 'Password', with: 'password'
       click_on 'Register'
-      expect(find('ul')).to have_content "email can't be blank"
+      expect(page).to have_content "Email can't be blank"
     end
 
     it 'is able to click on the register button, not register' do
@@ -25,7 +25,7 @@ describe 'RegistrationForm' do
       fill_in 'Email', with: 'matt@matt.com'
       fill_in 'Password', with: 'password'
       click_on 'Register'
-      expect(find('ul')).to have_content "email has already been taken"
+      expect(page).to have_content "Email has already been taken"
     end
 
     it 'is able to fill the register form, register and render the user show page' do
