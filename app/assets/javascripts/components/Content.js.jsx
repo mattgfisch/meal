@@ -12,23 +12,34 @@ class Content extends React.Component {
   }
 
   componentDidMount () {
-    this.changeMode('Login')
     this.changeSession(null)
     this.changeUserName(null)
 
+    var request = $.ajax({
+      url: '/sessions',
+      type: 'GET'
+    })
+    request.done((response) => {
+      if (response.sessionID) {
+        this.changeMode('Home')
+        this.changeSession(response.sessionID)
+        this.changeUserName(response.userName)
+      } else {
+        this.changeMode('Login')
+      }
+    })
   }
 
-  changeSession (session_id) {
-      this.setState({
-        session: session_id
-      })
+  changeSession (sessionId) {
+    this.setState({
+      session: sessionId
+    })
   }
 
   changeUserName (name) {
     this.setState({
       username: name
     })
-
   }
 
   changeMode (mode) {
