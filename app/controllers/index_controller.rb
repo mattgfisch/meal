@@ -1,5 +1,5 @@
 class IndexController < ApplicationController
   def index
-    render component: 'RegistrationForm'
+    render component: 'Content'
   end
 end
