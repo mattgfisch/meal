@@ -14,7 +14,8 @@ class Content extends React.Component {
 changeMode (mode) {
   const registration = <RegistrationForm changeMode={this.changeMode} />;
   const login = <Login changeMode={this.changeMode}  />;
-  const userShow = <UserContent />;
+  const userShow = <UserContent changeMode={this.changeMode} />;
+  const createGroup = <GroupCreationForm changeMode={this.changeMode} />
   let stateVariable = null
 
   switch(mode){
@@ -26,6 +27,9 @@ changeMode (mode) {
       break;
     case "UserShow":
       stateVariable = userShow;
+      break;
+    case 'CreateGroup':
+      stateVariable = createGroup;
       break;
     default:
       console.log("OMG errorz");

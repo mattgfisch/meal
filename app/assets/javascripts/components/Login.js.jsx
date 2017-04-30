@@ -12,7 +12,7 @@ class Login extends React.Component {
     this.setState({
       email: e.target.value
     })
-  }
+  } 
 
   handlePasswordChange (e) {
     this.setState({
