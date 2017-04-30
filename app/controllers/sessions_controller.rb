@@ -1,9 +1,8 @@
 class SessionsController < ApplicationController
   def show
-    session[:user_id] = User.find_by(name: "Matt").id
     render json: {sessionID: session[:user_id]}
   end
-  
+
   def create
     raise Exceptions::AlreadyLoggedInError if session[:user_id]
     user = User.find_by(email: session_params[:email])

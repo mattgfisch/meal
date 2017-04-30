@@ -84,7 +84,7 @@ class RegistrationForm extends React.Component {
          form.setState({
             errors: null
          })
-         this.props.changeMode('UserShow')
+         this.props.changeMode('Home')
        })
      })
    // Reset registration fields

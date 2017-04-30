@@ -1,5 +1,5 @@
 class Content extends React.Component {
-  constructor() {
+  constructor () {
     super()
     this.state = {
       mode: null
@@ -7,35 +7,46 @@ class Content extends React.Component {
     this.changeMode = this.changeMode.bind(this)
   }
 
-  componentDidMount(){
-    this.changeMode('Login')
+  componentDidMount () {
+    let sessionID = null
+    var request = $.ajax({
+      url: '/sessions',
+      type: 'GET'
+    })
+    request.done((response) => {
+      if (response.sessionID) {
+        this.changeMode('Home')
+      } else {
+        this.changeMode('Login')
+      }
+    })
   }
 
-changeMode (mode) {
-  const registration = <RegistrationForm changeMode={this.changeMode} />;
-  const login = <Login changeMode={this.changeMode}  />;
-  const userShow = <UserContent />;
-  let stateVariable = null
+  changeMode (mode) {
+    const registration = <RegistrationForm changeMode={this.changeMode} />;
+    const login = <Login changeMode={this.changeMode}  />;
+    const userShow = <UserContent />;
+    let stateVariable = null
 
-  switch(mode){
-    case "Register":
-      stateVariable = registration;
-      break;
-    case "Login":
-      stateVariable = login;
-      break;
-    case "UserShow":
-      stateVariable = userShow;
-      break;
-    default:
-      console.log("OMG errorz");
-      stateVariable = login;
-      break;
-  }
-  this.setState({
-    mode: stateVariable,
-  })
-};
+    switch(mode) {
+      case 'Register':
+        stateVariable = registration;
+        break;
+      case 'Login':
+        stateVariable = login;
+        break;
+      case 'Home':
+        stateVariable = userShow;
+        break;
+      default:
+        console.log('OMG errorz');
+        stateVariable = login;
+        break;
+    }
+    this.setState({
+      mode: stateVariable,
+    })
+  };
 
   render () {
 
