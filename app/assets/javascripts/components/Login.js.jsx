@@ -21,11 +21,11 @@ class Login extends React.Component {
   }
 
   handleClick (e) {
-    e.preventDefault();
+    e.preventDefault()
     let form = this
     var userEmail = this.state.email
     var userPassword = this.state.password
-    var request =$.ajax({
+    var request = $.ajax({
       url: '/sessions',
       method: 'POST',
       data: {
@@ -35,12 +35,11 @@ class Login extends React.Component {
         }
       }
     })
-    request.fail(function(response,status,error){
+    request.fail(function (response) {
       form.setState({
         errors: null
       })
       var error = response.responseJSON['errors']
-
       form.setState({
          errors: error,
          name: null,
@@ -52,7 +51,9 @@ class Login extends React.Component {
       form.setState({
          errors: null
       })
-      this.props.changeMode('UserShow')
+      this.props.changeMode('Home')
+      this.props.changeSession(successfulLogin['user_id'])
+      this.props.changeUserName(successfulLogin['user_name'])
     })
   }
 
@@ -69,25 +70,25 @@ class Login extends React.Component {
         <ul className='errors'>
           {this.state.errors}
         </ul>
-        <form action='/sessions' method='post'>
+        <form action='/sessions' method='post' className='bottom-padding'>
 
           <div className='form-group'>
             <label htmlFor='email'>Email</label>
-            <input type='email' className='form-control' id='email' placeholder='Email' onChange={this.handleEmailChange.bind(this)}  />
+            <input type='email' className='form-control' id='email' placeholder='Email' onChange={this.handleEmailChange.bind(this)} />
           </div>
 
           <div className='form-group'>
             <label htmlFor='password'>Password</label>
-            <input type='password' className='form-control' id='password' placeholder='Password' onChange={this.handlePasswordChange.bind(this)}/>
+            <input type='password' className='form-control' id='password' placeholder='Password' onChange={this.handlePasswordChange.bind(this)} />
           </div>
 
           <div className='register-btn'>
-            <button  type='submit' className='btn btn-default' onClick={this.handleClick.bind(this)}>Log In</button>
+            <button type='submit' className='btn btn-default' onClick={this.handleClick.bind(this)}>Log In</button>
           </div>
 
         </form>
-        <div className="register">
-          <p>don't have an account? <a href = '#' onClick={handler}>register</a> for meal!</p>
+        <div className='register'>
+          <p>don't have an account? <a href='#' onClick={handler}>register</a> for meal!</p>
         </div>
       </div>
     )
