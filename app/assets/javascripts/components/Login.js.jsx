@@ -52,7 +52,6 @@ class Login extends React.Component {
       form.setState({
          errors: null
       })
-      console.log(successfulLogin)
       this.props.changeMode('Home')
       this.props.changeSession(successfulLogin['user_id'])
       this.props.changeUserName(successfulLogin['user_name'])
