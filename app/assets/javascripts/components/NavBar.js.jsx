@@ -31,12 +31,12 @@ class NavBar extends React.Component {
     const handler = (e) => {
       e.preventDefault()
       if(this.props.session != null){
-        this.props.changeMode('UserShow')
+        this.props.changeMode('Home')
       }
       else{
         this.props.changeMode('Login')
       }
-      
+
     }
 
   return(<span className='navbar-text logo'><a href='#' onClick={handler} className='navbar-link'>Meals</a></span>)

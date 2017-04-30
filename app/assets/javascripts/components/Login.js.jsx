@@ -53,7 +53,7 @@ class Login extends React.Component {
          errors: null
       })
       console.log(successfulLogin)
-      this.props.changeMode('UserShow')
+      this.props.changeMode('Home')
       this.props.changeSession(successfulLogin['user_id'])
       this.props.changeUserName(successfulLogin['user_name'])
     })

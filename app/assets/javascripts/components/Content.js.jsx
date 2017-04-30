@@ -34,7 +34,7 @@ class Content extends React.Component {
   changeMode (mode) {
     const registration = <RegistrationForm changeMode={this.changeMode} changeSession={this.changeSession} changeUserName={this.changeUserName} />;
     const login = <Login changeMode={this.changeMode}  changeSession={this.changeSession} changeUserName={this.changeUserName} />;
-    const userShow = <UserContent />;
+    const Home = <UserContent />;
     let stateVariable = null
 
     switch(mode){
@@ -44,8 +44,8 @@ class Content extends React.Component {
       case "Login":
         stateVariable = login;
         break;
-      case "UserShow":
-        stateVariable = userShow;
+      case "Home":
+        stateVariable = Home;
         break;
       default:
         console.log("OMG errorz");

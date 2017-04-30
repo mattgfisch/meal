@@ -47,5 +47,15 @@ describe 'NavBar' do
       expect(page).to have_content('Log In')
     end
 
+    it 'is able to fill the register form, register, become logged in and see their home page' do
+      visit '/'
+      click_on 'register'
+      fill_in 'Full Name', with: 'Tester Name'
+      fill_in 'Email', with: 'tester23@test.com'
+      fill_in 'Password', with: 'password'
+      click_on 'Register'
+      expect(page).to have_content('Tester')
+    end
+
   end
 end
