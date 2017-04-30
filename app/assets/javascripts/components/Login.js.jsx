@@ -52,11 +52,9 @@ class Login extends React.Component {
          errors: null
       })
       this.props.changeMode('Home')
-<<<<<<< HEAD
-=======
+
       this.props.changeSession(successfulLogin['user_id'])
       this.props.changeUserName(successfulLogin['user_name'])
->>>>>>> master
     })
   }
 
