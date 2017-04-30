@@ -14,17 +14,33 @@ class NavBar extends React.Component {
       this.props.changeUserName(null)
       this.props.changeSession(null)
       this.props.changeMode('Login')
-      location.reload(true)
+
     })
   }
 
   sessionId(){
     if (this.props.session != null){
     return(
-        <div className='logout inline'>
+        <div className='logout inline center'>
           <span><a href = '#' onClick={this.logoutHandler.bind(this)}>Logout</a></span>
         </div>)
       }
+  }
+
+  homeLink(){
+    const handler = (e) => {
+      e.preventDefault()
+      if(this.props.session != null){
+        this.props.changeMode('UserShow')
+      }
+      else{
+        this.props.changeMode('Login')
+      }
+      
+    }
+
+  return(<span className='navbar-text logo'><a href='#' onClick={handler} className='navbar-link'>Meals</a></span>)
+
   }
 
   userName(){
@@ -35,18 +51,15 @@ class NavBar extends React.Component {
     }
   }
   render(){
-    const handler = (e) => {
-      e.preventDefault()
-      this.props.changeMode('Login')
-    }
+
     return(
       <nav className='navbar navbar-toggleable-md navbar-light bg-faded'>
         <div className='container'>
-          <div className='user inline'>
+          <div className='user inline center'>
             {this.userName()}
           </div>
-          <div className='center inline'>
-            <span className='navbar-text logo'><a href='#' onClick={handler} className='navbar-link'>Meals</a></span>
+          <div className='center inline center'>
+            {this.homeLink()}
           </div>
           {this.sessionId()}
 

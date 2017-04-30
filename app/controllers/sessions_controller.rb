@@ -8,12 +8,12 @@ class SessionsController < ApplicationController
       }, status: 400
     else
       session[:user_id] = user.id
-      render json: { user_id: user.id }, status: :created
+      render json: { user_id: user.id, user_name: user.name }, status: :created
     end
   end
 
   def destroy
-    session.destroy
+    session[:user_id] = nil
     render json: { message: 'You have been successfully logged out' }
   end
 

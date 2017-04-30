@@ -55,7 +55,7 @@ class Login extends React.Component {
       console.log(successfulLogin)
       this.props.changeMode('UserShow')
       this.props.changeSession(successfulLogin['user_id'])
-      this.props.changeUserName()
+      this.props.changeUserName(successfulLogin['user_name'])
     })
   }
 
