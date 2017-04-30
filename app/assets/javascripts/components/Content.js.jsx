@@ -1,5 +1,5 @@
 class Content extends React.Component {
-  constructor() {
+  constructor () {
     super()
     this.state = {
       mode: null
@@ -7,42 +7,40 @@ class Content extends React.Component {
     this.changeMode = this.changeMode.bind(this)
   }
 
-  componentDidMount(){
+  componentDidMount () {
     this.changeMode('Login')
   }
 
 changeMode (mode) {
   const registration = <RegistrationForm changeMode={this.changeMode} />;
-  const login = <Login changeMode={this.changeMode}  />;
+  const login = <Login changeMode={this.changeMode} />;
   const userShow = <UserContent changeMode={this.changeMode} />;
   const createGroup = <GroupCreationForm changeMode={this.changeMode} />
   let stateVariable = null
 
-  switch(mode){
-    case "Register":
-      stateVariable = registration;
-      break;
-    case "Login":
-      stateVariable = login;
-      break;
-    case "UserShow":
-      stateVariable = userShow;
-      break;
+  switch (mode) {
+    case 'Register':
+      stateVariable = registration
+      break
+    case 'Login':
+      stateVariable = login
+      break
+    case 'UserShow':
+      stateVariable = userShow
+      break
     case 'CreateGroup':
-      stateVariable = createGroup;
-      break;
+      stateVariable = createGroup
+      break
     default:
-      console.log("OMG errorz");
-      stateVariable = login;
-      break;
+      console.log('OMG errorz')
+      stateVariable = login
   }
   this.setState({
-    mode: stateVariable,
+    mode: stateVariable
   })
 };
 
   render () {
-
     return (
       <div>
         {this.state.mode}

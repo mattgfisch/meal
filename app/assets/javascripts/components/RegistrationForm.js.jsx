@@ -36,62 +36,59 @@ class RegistrationForm extends React.Component {
     var userPassword = this.state.password
 
     var request = $.ajax({
-     url: '/users',
-     method: 'POST',
-     data: {
-       user: {
-        name: userName,
-        email: userEmail,
-        password: userPassword
-       }
-     },
-   })
-   request.fail(function(response,status,error){
-     form.setState({
-       errors: null
-     })
-     var error = response.responseJSON['errors']
-     var valueArray = []
-     for (var key in error){
-       valueArray.push(key +' '+ error[key])
-     }
-     valueArray.map((error)=> {
-       return(<div>{error}</div>)
-     })
-
-     form.setState({
+      url: '/users',
+      method: 'POST',
+      data: {
+        user: {
+          name: userName,
+          email: userEmail,
+          password: userPassword
+        }
+      }
+    })
+    request.fail(function (response, status, error) {
+      form.setState({
+        errors: null
+      })
+      error = response.responseJSON['errors']
+      var valueArray = []
+      for (var key in error) {
+        valueArray.push(key + ' ' + error[key])
+      }
+      valueArray.map((error) => {
+        return (<div>{error}</div>)
+      })
+      form.setState({
         errors: valueArray,
         name: null,
         email: null,
         password: null
-     })
-   })
-   request.success((successfulRegistration) => {
-     form.setState({
-       errors: null
-     })
-     $.ajax({
-       url: '/sessions',
-       method: 'POST',
-       data: {
-         user: {
-          email: userEmail,
-          password: userPassword
-         }
-       }
-
-     }).done((successfulLogin) => {
-         form.setState({
-            errors: null
-         })
-         this.props.changeMode('UserShow')
-       })
-     })
+      })
+    })
+    request.success((successfulRegistration) => {
+      form.setState({
+        errors: null
+      })
+      $.ajax({
+        url: '/sessions',
+        method: 'POST',
+        data: {
+          user: {
+            email: userEmail,
+            password: userPassword
+          }
+        }
+      }).done((successfulLogin) => {
+        form.setState({
+          errors: null
+        })
+        this.props.changeMode('UserShow')
+      })
+    })
    // Reset registration fields
-   this.refs.registrationName.value = ''
-   this.refs.registrationEmail.value = ''
-   this.refs.registrationPassword.value = ''
-
+    this.refs.registrationName.value = ''
+    this.refs.registrationEmail.value = ''
+    this.refs.registrationPassword.value = ''
   }
 
   render () {

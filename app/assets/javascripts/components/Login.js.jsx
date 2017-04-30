@@ -1,5 +1,5 @@
 class Login extends React.Component {
-  constructor() {
+  constructor () {
     super()
     this.state = {
       email: null,
@@ -12,7 +12,7 @@ class Login extends React.Component {
     this.setState({
       email: e.target.value
     })
-  } 
+  }
 
   handlePasswordChange (e) {
     this.setState({
@@ -21,36 +21,36 @@ class Login extends React.Component {
   }
 
   handleClick (e) {
-    e.preventDefault();
+    e.preventDefault()
     let form = this
     var userEmail = this.state.email
     var userPassword = this.state.password
-    var request =$.ajax({
+    var request = $.ajax({
       url: '/sessions',
       method: 'POST',
       data: {
-       user: {
-        email: userEmail,
-        password: userPassword
+        user: {
+          email: userEmail,
+          password: userPassword
         }
       }
     })
-    request.fail(function(response,status,error){
+    request.fail(function (response, status, error) {
       form.setState({
         errors: null
       })
-      var error = response.responseJSON['errors']
+      error = response.responseJSON['errors']
 
       form.setState({
-         errors: error,
-         name: null,
-         email: null,
-         password: null
+        errors: error,
+        name: null,
+        email: null,
+        password: null
       })
     })
     request.success((successfulLogin) => {
       form.setState({
-         errors: null
+        errors: null
       })
       this.props.changeMode('UserShow')
     })
@@ -73,21 +73,21 @@ class Login extends React.Component {
 
           <div className='form-group'>
             <label htmlFor='email'>Email</label>
-            <input type='email' className='form-control' id='email' placeholder='Email' onChange={this.handleEmailChange.bind(this)}  />
+            <input type='email' className='form-control' id='email' placeholder='Email' onChange={this.handleEmailChange.bind(this)} />
           </div>
 
           <div className='form-group'>
             <label htmlFor='password'>Password</label>
-            <input type='password' className='form-control' id='password' placeholder='Password' onChange={this.handlePasswordChange.bind(this)}/>
+            <input type='password' className='form-control' id='password' placeholder='Password' onChange={this.handlePasswordChange.bind(this)} />
           </div>
 
           <div className='register-btn'>
-            <button  type='submit' className='btn btn-default' onClick={this.handleClick.bind(this)}>Log In</button>
+            <button type='submit' className='btn btn-default' onClick={this.handleClick.bind(this)}>Log In</button>
           </div>
 
         </form>
-        <div className="register">
-          <p>Don't have an account? <a href = '#' onClick={handler}>Register</a> for MEAL!</p>
+        <div className='register'>
+          <p>Don't have an account? <a href='#' onClick={handler}>Register</a> for MEAL!</p>
         </div>
       </div>
     )
