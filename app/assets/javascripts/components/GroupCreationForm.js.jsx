@@ -9,13 +9,14 @@ class GroupCreationForm extends React.Component {
   }
 
   handleSubmit (event) {
+    let form = this
     event.preventDefault()
     $.ajax({
       type: 'POST',
       url: '/groups',
       data: this.state
     }).done((response) => {
-      console.log(response)
+      form.props.changeMode("GroupShow")
     })
   }
 
