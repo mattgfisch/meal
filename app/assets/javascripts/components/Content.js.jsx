@@ -15,7 +15,6 @@ class Content extends React.Component {
     this.changeSession(null)
     this.changeUserName(null)
 
-    let sessionID = null
     var request = $.ajax({
       url: '/sessions',
       type: 'GET'
