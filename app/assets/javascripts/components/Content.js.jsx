@@ -23,6 +23,8 @@ class Content extends React.Component {
     request.done((response) => {
       if (response.sessionID) {
         this.changeMode('Home')
+        this.changeSession(response.sessionID)
+        this.changeUserName(response.userName)
       } else {
         this.changeMode('Login')
       }

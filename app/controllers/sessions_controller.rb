@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   def show
-    render json: {sessionID: session[:user_id]}
+    user = User.find(session[:user_id])
+    render json: {sessionID: user.id, userName: user.name }
   end
 
   def create
