@@ -4,10 +4,12 @@ describe 'RegistrationForm' do
   feature 'Navigates Registration Form', js: true do
     it ' Shows the Form' do
       visit '/'
+      click_on 'register'
       expect(page).to have_content 'Register'
     end
     it 'is able to click on the register button, not register' do
       visit '/'
+      click_on 'register'
       fill_in 'Full Name', with: 'Tester Name'
       fill_in 'Password', with: 'password'
       click_on 'Register'
@@ -15,6 +17,7 @@ describe 'RegistrationForm' do
     end
     it 'is able to fill the register form, register and render the user show page' do
       visit '/'
+      click_on 'register'
       fill_in 'Full Name', with: 'Tester Name'
       fill_in 'Email', with: 'tester23@test.com'
       fill_in 'Password', with: 'password'
