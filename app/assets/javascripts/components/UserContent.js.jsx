@@ -11,7 +11,7 @@ class UserContent extends React.Component {
     return(
       <div>
         <h2>Your Meals</h2>
-        <button onClick={createGroup}>Create Group</button>
+        <button className='btn btn-default' onClick={createGroup}>Create Group</button>
       </div>)
   }
 }

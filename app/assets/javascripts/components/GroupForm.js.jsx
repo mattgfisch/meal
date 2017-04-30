@@ -7,7 +7,7 @@ class GroupCreationForm extends React.Component {
     return (
       <div className='card'>
         <div className='card-header'>
-          <h2>New Group</h2>
+          <h2>Create Group</h2>
         </div>
         <form action='/users' method='post'>
           <div className='form-group'>
