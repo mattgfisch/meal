@@ -33,7 +33,7 @@ class GroupsController < ApplicationController
   def show
     group = Group.find(params[:id])
     render json: {groupTitle: group.name, groupMembers: group.members, groupAdminId: group.admin_id }
- end
+  end
 
   def joined_groups
     user = User.find(session[:user_id])
