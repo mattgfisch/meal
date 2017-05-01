@@ -1,5 +1,5 @@
 class Login extends React.Component {
-  constructor() {
+  constructor () {
     super()
     this.state = {
       email: null,
@@ -29,9 +29,9 @@ class Login extends React.Component {
       url: '/sessions',
       method: 'POST',
       data: {
-       user: {
-        email: userEmail,
-        password: userPassword
+        user: {
+          email: userEmail,
+          password: userPassword
         }
       }
     })
@@ -41,15 +41,15 @@ class Login extends React.Component {
       })
       var error = response.responseJSON['errors']
       form.setState({
-         errors: error,
-         name: null,
-         email: null,
-         password: null
+        errors: error,
+        name: null,
+        email: null,
+        password: null
       })
     })
     request.success((successfulLogin) => {
       form.setState({
-         errors: null
+        errors: null
       })
       this.props.changeStates('Home', successfulLogin['user_id'], successfulLogin['user_name'])
     })
@@ -86,7 +86,7 @@ class Login extends React.Component {
 
         </form>
         <div className='register'>
-          <p>don't have an account? <a href='#' onClick={handler}>register</a> for meal!</p>
+          <p>Don't have an account? <a href='#' onClick={handler}>Register</a> for MEAL!</p>
         </div>
       </div>
     )

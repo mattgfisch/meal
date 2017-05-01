@@ -8,7 +8,6 @@ class Content extends React.Component {
       pageId: null
     }
     this.changeStates = this.changeStates.bind(this)
-
   }
 
   componentDidMount () {
@@ -24,12 +23,12 @@ class Content extends React.Component {
       }
     })
   }
-  changeStates (mode,  sessionID=null, username=null, pageId=null) {
-    const GroupPage = <GroupShow groupId={pageId}/>
+  changeStates (mode, sessionID = null, username = null, pageId = null) {
+    const GroupPage = <GroupShow groupId={pageId} />
     const registration = <RegistrationForm changeStates={this.changeStates} />
     const login = <Login changeStates={this.changeStates} />
-    const Home = <UserContent changeStates={this.changeStates} />
-
+    const Home = <UserContent changeStates={this.changeStates} sessionID={sessionID} username={username} />
+    let CreateGroup = <GroupCreationForm changeStates={this.changeStates} sessionID={sessionID} username={username} />
     let stateVariable = null
 
     switch (mode) {
@@ -45,6 +44,9 @@ class Content extends React.Component {
       case 'GroupPage':
         stateVariable = GroupPage
         break
+      case 'CreateGroup':
+        stateVariable = CreateGroup
+        break
       default:
         console.log('OMG errorz')
         stateVariable = login
@@ -52,7 +54,7 @@ class Content extends React.Component {
     }
     if (pageId) {
       this.setState({
-        mode: stateVariable,
+        mode: stateVariable
       })
     } else {
       this.setState({

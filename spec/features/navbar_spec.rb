@@ -16,7 +16,7 @@ describe 'NavBar' do
 
     it 'is able to navigate to log in from registration' do
       visit '/'
-      click_on 'register'
+      click_on 'Register'
       click_on 'Meals'
       expect(page).to have_content('Log In')
     end
@@ -47,9 +47,9 @@ describe 'NavBar' do
       expect(page).to have_content('Log In')
     end
 
-    it 'is able to fill the register form, register, become logged in and see their home page' do
+    it 'is able to fill the Register form, Register, become logged in and see their home page' do
       visit '/'
-      click_on 'register'
+      click_on 'Register'
       fill_in 'Full Name', with: 'Tester Name'
       fill_in 'Email', with: 'tester23@test.com'
       fill_in 'Password', with: 'password'

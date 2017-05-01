@@ -90,9 +90,8 @@ class RegistrationForm extends React.Component {
        })
      })
    // Reset registration fields
-   this.refs.registrationName.value = ''
-   this.refs.registrationEmail.value = ''
-   this.refs.registrationPassword.value = ''
+   $("input").val('')
+
   }
   render () {
     return (
@@ -106,15 +105,15 @@ class RegistrationForm extends React.Component {
         <form action='/users' method='post'>
           <div className='form-group'>
             <label htmlFor='exampleInputName'>Full Name</label>
-            <input type='text' ref='registrationName' className='form-control' id='exampleInputName' placeholder='John Doe' onChange={this.handleNameChange.bind(this)} />
+            <input type='text' className='form-control' id='exampleInputName' placeholder='John Doe' onChange={this.handleNameChange.bind(this)} />
           </div>
           <div className='form-group'>
             <label htmlFor='exampleInputEmail1'>Email address</label>
-            <input type='email' ref='registrationEmail' className='form-control' id='exampleInputEmail1' placeholder='Email' onChange={this.handleEmailChange.bind(this)} />
+            <input type='email' className='form-control' id='exampleInputEmail1' placeholder='Email' onChange={this.handleEmailChange.bind(this)} />
           </div>
           <div className='form-group'>
             <label htmlFor='exampleInputPassword1'>Password</label>
-            <input type='password' ref='registrationPassword' className='form-control' id='exampleInputPassword1' placeholder='Password' onChange={this.handlePasswordChange.bind(this)} />
+            <input type='password' className='form-control' id='exampleInputPassword1' placeholder='Password' onChange={this.handlePasswordChange.bind(this)} />
           </div>
           <div className='register-btn'>
             <button type='submit' className='btn btn-default' onClick={this.handleClick.bind(this)}>Register</button>

@@ -1,7 +1,6 @@
 class UserContent extends React.Component {
 
   render () {
-
     return (
       <div className='card'>
         <div className='card-header'>
@@ -10,7 +9,7 @@ class UserContent extends React.Component {
         <div className='card-block'>
           <UserHangoutContent changeStates={this.props.changeStates} />
           <UserGroupContent  changeStates={this.props.changeStates}  />
-          <AdminGroupContent changeStates={this.props.changeStates} />
+          <AdminGroupContent changeStates={this.props.changeStates} sessionID={this.props.sessionID} username={this.props.username} />
         </div>
       </div>
     )
