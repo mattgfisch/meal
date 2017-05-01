@@ -3,7 +3,8 @@ class GroupCreationForm extends React.Component {
     super(props)
     this.state = {
       groupName: '',
-      groupEmails: []
+      groupEmails: [],
+      errors: null
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -11,12 +12,24 @@ class GroupCreationForm extends React.Component {
   handleSubmit (event) {
     let form = this
     event.preventDefault()
-    $.ajax({
+    let request = $.ajax({
       type: 'POST',
       url: '/groups',
       data: this.state
-    }).done((response) => {
+    })
+
+    request.success((response) => {
+      debugger;
       form.props.changeMode("GroupShow")
+    })
+
+    request.fail((response) => {
+      var error = response.responseJSON['errors']
+      form.setState({
+        errors: error
+      })
+      debugger;
+      form.props.changeMode("CreateGroup")
     })
   }
 
@@ -31,6 +44,8 @@ class GroupCreationForm extends React.Component {
     this.state.groupEmails[index] = event.target.value
   }
 
+
+
   render () {
     return (
       <div className='card'>
@@ -38,6 +53,9 @@ class GroupCreationForm extends React.Component {
           <h2>Create Group</h2>
         </div>
         <form action='/users' method='post'>
+          <div className='errors errors-container'>
+            {this.state.errors}
+          </div>
           <div className='form-group'>
             <label htmlFor='groupNname'>Name</label>
             <input type='text' name='groupName' value={this.state.groupName} onChange={this.handleNameChange.bind(this)} className='form-control' id='name' placeholder='Grouptastic' />
