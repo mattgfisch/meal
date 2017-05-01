@@ -54,14 +54,14 @@ class GroupShow extends React.Component {
       if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(sendPosition)
       } else {
-          x = "Geolocation is not supported by this browser.";
+          x = "Geolocation is not supported by this browser."
       }
       function sendPosition(position) {
           let lat = position.coords.latitude
           let long = position.coords.longitude
           var joinRequest = $.ajax ({
             url: `/groups/${page.props.groupId}/hangouts/${page.state.hangoutId}`,
-            type: 'PUT',
+            type: 'PATCH',
             data: {lat: lat, long: long}
           })
           joinRequest.done((response) => {
@@ -72,11 +72,37 @@ class GroupShow extends React.Component {
   }
 
   createHangout () {
-
+    let page = this
     if (!this.state.hangoutId) {
-
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(sendPosition)
+      } else {
+          x = "Geolocation is not supported by this browser."
+      }
+      function sendPosition (position) {
+          let lat = position.coords.latitude
+          let long = position.coords.longitude
+          function sendRequest (page, result) {
+            var joinRequest = $.ajax ({
+              url: `/groups/${page.props.groupId}/hangouts`,
+              type: 'POST',
+              data: {lat: lat, long: long}
+            })
+            joinRequest.done((response) => {
+              result(response, page)
+            })
+          }
+          sendRequest(page, function (result, page) {
+            page.setState({
+              inHangout: result.inHangout,
+              hangoutId: result.hangoutId
+            })
+          })
+      }
     }
   }
+
+
 
   loadHangoutButton () {
     if (this.state.hangoutId) {
