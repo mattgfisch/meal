@@ -26,8 +26,6 @@ class GroupShow extends React.Component {
       url: '/groups/'+ this.props.groupId,
       type: 'GET',
     }).done(function(response){
-      console.log(response)
-      console.log(response.groupTitle)
       var groupMemberNames = []
       response.groupMembers.map((member) => {
         return(

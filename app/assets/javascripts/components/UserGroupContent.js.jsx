@@ -4,7 +4,7 @@ class UserGroupContent extends React.Component {
 
     return (
       <div className='card user-content' id='joined-groups'>
-        <div className='card-header'>
+        <div className='card-header joined'>
           <h3>Joined Groups</h3>
         </div>
         <div className='card-block user-home'>
