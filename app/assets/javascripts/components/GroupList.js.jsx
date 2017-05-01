@@ -14,7 +14,7 @@ class GroupList extends React.Component {
         groupList = (
         response.groups.map((group) => {
           return (
-            <GroupListItem group={group} key={'group' + group.id} />
+            <GroupListItem changeStates={this.props.changeStates} group={group} key={'group' + group.id} />
           )
         })
       )
@@ -25,6 +25,7 @@ class GroupList extends React.Component {
   }
 
   render () {
+
     return (
       <div>
         {this.state.userGroups}

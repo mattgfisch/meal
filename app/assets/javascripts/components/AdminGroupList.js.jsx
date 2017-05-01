@@ -14,7 +14,7 @@ class AdminGroupList extends React.Component {
         adminGroupList = (
         response.admin_groups.map((group) => {
           return (
-            <AdminGroupListItem group={group} key={'adminGroup' + group.id} />
+            <AdminGroupListItem changeStates={this.props.changeStates} group={group} key={'adminGroup' + group.id} />
           )
         })
       )

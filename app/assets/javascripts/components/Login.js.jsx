@@ -51,17 +51,14 @@ class Login extends React.Component {
       form.setState({
          errors: null
       })
-      this.props.changeMode('Home')
-
-      this.props.changeSession(successfulLogin['user_id'])
-      this.props.changeUserName(successfulLogin['user_name'])
+      this.props.changeStates('Home', successfulLogin['user_id'], successfulLogin['user_name'])
     })
   }
 
   render () {
     const handler = (e) => {
       e.preventDefault()
-      this.props.changeMode('Register')
+      this.props.changeStates('Register')
     }
     return (
       <div className='card'>

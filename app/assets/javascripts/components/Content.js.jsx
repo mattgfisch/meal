@@ -4,48 +4,32 @@ class Content extends React.Component {
     this.state = {
       mode: null,
       session: null,
-      username: null
+      username: null,
+      pageId: null
     }
-    this.changeMode = this.changeMode.bind(this)
-    this.changeSession = this.changeSession.bind(this)
-    this.changeUserName = this.changeUserName.bind(this)
+    this.changeStates = this.changeStates.bind(this)
+
   }
 
   componentDidMount () {
-    this.changeSession(null)
-    this.changeUserName(null)
-
     var request = $.ajax({
       url: '/sessions',
       type: 'GET'
     })
     request.done((response) => {
       if (response.sessionID) {
-        this.changeMode('Home')
-        this.changeSession(response.sessionID)
-        this.changeUserName(response.userName)
+        this.changeStates('Home', response.sessionID, response.userName, null)
       } else {
-        this.changeMode('Login')
+        this.changeStates('Login')
       }
     })
   }
+  changeStates (mode,  sessionID=null, username=null, pageId=null) {
+    const GroupPage = <GroupShow groupId={pageId}/>
+    const registration = <RegistrationForm changeStates={this.changeStates} />
+    const login = <Login changeStates={this.changeStates} />
+    const Home = <UserContent changeStates={this.changeStates} />
 
-  changeSession (sessionId) {
-    this.setState({
-      session: sessionId
-    })
-  }
-
-  changeUserName (name) {
-    this.setState({
-      username: name
-    })
-  }
-
-  changeMode (mode) {
-    const registration = <RegistrationForm changeMode={this.changeMode} changeSession={this.changeSession} changeUserName={this.changeUserName} />
-    const login = <Login changeMode={this.changeMode}  changeSession={this.changeSession} changeUserName={this.changeUserName} />
-    const Home = <UserContent />
     let stateVariable = null
 
     switch (mode) {
@@ -58,19 +42,31 @@ class Content extends React.Component {
       case 'Home':
         stateVariable = Home
         break
+      case 'GroupPage':
+        stateVariable = GroupPage
+        break
       default:
         console.log('OMG errorz')
         stateVariable = login
         break
     }
-    this.setState({
-      mode: stateVariable
-    })
-  };
+    if (pageId) {
+      this.setState({
+        mode: stateVariable,
+      })
+    } else {
+      this.setState({
+        mode: stateVariable,
+        session: sessionID,
+        username: username
+      })
+    }
+  }
+
   render () {
     return (
       <div>
-        <NavBar user={this.state.username} session={this.state.session} changeMode={this.changeMode} changeSession={this.changeSession} changeUserName={this.changeUserName} />
+        <NavBar user={this.state.username} session={this.state.session} changeStates={this.changeStates} />
         {this.state.mode}
       </div>
     )
