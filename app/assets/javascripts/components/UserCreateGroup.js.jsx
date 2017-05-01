@@ -1,13 +1,16 @@
 class UserCreateGroup extends React.Component {
-
+  constructor () {
+    super()
+    this.handleClick = this.handleClick.bind(this)
+  }
+  handleClick (event) {
+    event.preventDefault()
+    this.props.changeStates('CreateGroup', this.props.sessionID, this.props.username)
+  }
   render () {
-    const handleClick = (event) => {
-      event.preventDefault()
-      this.props.changeMode('CreateGroup')
-    }
     return (
       <div className='create-group-btn'>
-        <button onClick={handleClick} className='btn btn-default'> + </button>
+        <button onClick={this.handleClick} className='btn btn-default'> + </button>
       </div>
     )
   }

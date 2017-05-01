@@ -7,7 +7,7 @@ class AdminGroupContent extends React.Component {
             <span className='user-show-title'>
               Created Groups
             </span>
-            <UserCreateGroup changeMode={this.props.changeMode} />
+            <UserCreateGroup changeStates={this.props.changeStates} sessionID={this.props.sessionID} username={this.props.username} />
           </h3>
         </div>
         <div className='card-block user-home'>

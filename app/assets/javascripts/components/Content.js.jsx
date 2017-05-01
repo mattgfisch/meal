@@ -27,7 +27,8 @@ class Content extends React.Component {
     const GroupPage = <GroupShow groupId={pageId} />
     const registration = <RegistrationForm changeStates={this.changeStates} />
     const login = <Login changeStates={this.changeStates} />
-    const Home = <UserContent changeStates={this.changeStates} />
+    const Home = <UserContent changeStates={this.changeStates} sessionID={sessionID} username={username} />
+    let CreateGroup = <GroupCreationForm changeStates={this.changeStates} sessionID={sessionID} username={username} />
     let stateVariable = null
 
     switch (mode) {
@@ -42,6 +43,9 @@ class Content extends React.Component {
         break
       case 'GroupPage':
         stateVariable = GroupPage
+        break
+      case 'CreateGroup':
+        stateVariable = CreateGroup
         break
       default:
         console.log('OMG errorz')

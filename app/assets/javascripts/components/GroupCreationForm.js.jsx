@@ -21,7 +21,7 @@ class GroupCreationForm extends React.Component {
     })
 
     request.success((response) => {
-      form.props.changeMode("GroupShow")
+      form.props.changeStates('GroupPage', this.props.sessionID, this.props.username)
     })
 
     request.fail((response) => {
