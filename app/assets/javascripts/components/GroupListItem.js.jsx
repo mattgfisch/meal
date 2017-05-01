@@ -17,7 +17,7 @@ class GroupListItem extends React.Component {
 
     return (
       <div>
-        <a href='#' onClick={this.handler}> {this.props.group.name} </a>
+        <a id='joined' href='#' onClick={this.handler}> {this.props.group.name} </a>
       </div>
     )
   }

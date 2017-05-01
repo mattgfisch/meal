@@ -14,7 +14,7 @@ class AdminGroupListItem extends React.Component {
   render () {
     return (
       <div>
-        <a href='#' onClick={this.handler}> {this.props.group.name} </a>
+        <a id='created' href='#' onClick={this.handler}> {this.props.group.name} </a>
       </div>
     )
   }
