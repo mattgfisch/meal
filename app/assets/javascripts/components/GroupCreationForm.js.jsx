@@ -4,10 +4,11 @@ class GroupCreationForm extends React.Component {
     this.state = {
       groupName: '',
       groupEmails: [],
-      completedFields: [],
+      currentEmail: null,
       errors: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleInvite = this.handleInvite.bind(this)
   }
 
   handleSubmit (event) {
@@ -24,17 +25,21 @@ class GroupCreationForm extends React.Component {
     })
 
     request.fail((response) => {
-      form.setState({
-        errors: null
-      })
       var error = response.responseJSON['errors']
       form.setState({
         errors: error,
-        // groupName: null,
-        groupEmails: ['']
+        groupEmails: []
       })
-      // form.props.changeMode("CreateGroup")
     })
+  }
+
+  handleInvite (event) {
+    event.preventDefault()
+    this.state.groupEmails.push(this.state.currentEmail)
+    this.setState({
+      currentEmail: null
+    })
+    this.refs.inviteEmail.value = ''
   }
 
   handleNameChange (event) {
@@ -44,16 +49,9 @@ class GroupCreationForm extends React.Component {
   }
 
   handleEmailChange (event) {
-    function hasAlreadyBeenEntered (element, index, array) {
-      debugger
-      return element === event.target
-    }
-    if (this.state.completedFields.some(hasAlreadyBeenEntered)) {
-      var index = this.state.completedFields.indexOf(event.target)
-      this.state.groupEmails[index] = this.state.groupEmails[index] + event.target.value
-    } else {
-      this.state.groupEmails.push(event.target.value)
-    }
+    this.setState({
+      currentEmail: event.target.value
+    })
   }
 
   render () {
@@ -72,16 +70,13 @@ class GroupCreationForm extends React.Component {
           </div>
           <label>Send invites to:</label>
           <div className='form-group'>
-            <input type='email' value={this.state.groupEmails[0]} onChange={this.handleEmailChange.bind(this)} className='form-control' placeholder='johndoe@email.com' />
-          </div>
-          <div className='form-group'>
-            <input type='email' value={this.state.groupEmails[1]} onChange={this.handleEmailChange.bind(this)} className='form-control' placeholder='johndoe@email.com' />
-          </div>
-          <div className='form-group'>
-            <input type='email' value={this.state.groupEmails[2]} onChange={this.handleEmailChange.bind(this)} className='form-control' placeholder='johndoe@email.com' />
+            <input type='email' ref='inviteEmail' onChange={this.handleEmailChange.bind(this)} className='form-control' placeholder='johndoe@email.com' />
           </div>
           <div className='register-btn'>
-            <button onClick={this.handleSubmit} className='btn btn-default'>Invite Users</button>
+            <button onClick={this.handleInvite} className='btn btn-default'>Invite User</button>
+          </div>
+          <div className='register-btn'>
+            <button onClick={this.handleSubmit} className='btn btn-default'>Create Group</button>
           </div>
         </form>
       </div>
