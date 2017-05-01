@@ -42,6 +42,7 @@ class GroupShow extends React.Component {
     })
   }
   render() {
+    renderMap()
     return (
       <div className="card">
         <div className="card-body">
