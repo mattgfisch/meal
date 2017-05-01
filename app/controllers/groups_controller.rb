@@ -18,11 +18,11 @@ class GroupsController < ApplicationController
         end
       end
       group.members << creator
-      render json: { group_id: group.id }
+      return render json: { group_id: group.id }
     end
     if group.save
       group.members << creator
-      render json: { group_id: group.id }
+      return render json: { group_id: group.id }
     end
   end
 
