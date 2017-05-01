@@ -10,10 +10,12 @@ class GroupShow extends React.Component {
 
   showMembers(){
     if(this.state.members != null){
+      let n = 0
       return(
-        this.state.members.map((member) => {
+        this.state.members.map((member, n) => {
+          n++
           return(
-            <div>{member}</div>
+            <div key={this.state.title + n}>{member}</div>
           )
         })
       )
