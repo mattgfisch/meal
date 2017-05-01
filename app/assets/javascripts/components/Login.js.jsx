@@ -51,7 +51,7 @@ class Login extends React.Component {
       form.setState({
          errors: null
       })
-      this.props.changeStates('Home', successfulLogin['user_id'], successfulLogin['user_name'], null)
+      this.props.changeStates('Home', successfulLogin['user_id'], successfulLogin['user_name'])
     })
   }
 
