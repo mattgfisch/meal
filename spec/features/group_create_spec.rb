@@ -14,8 +14,8 @@ describe 'GroupCreate' do
       click_on '+'
     end
 
-    it ' Shows the Form' do
-      expect(page).to have_content ''
+    it 'Shows the Form' do
+      expect(page).to have_content 'Create Group Name'
     end
 
     it 'is able enter valid information' do
