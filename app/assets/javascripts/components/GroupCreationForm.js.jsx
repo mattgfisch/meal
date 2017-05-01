@@ -55,7 +55,7 @@ class GroupCreationForm extends React.Component {
       currentEmail: event.target.value
     })
   }
-
+//
   render () {
     return (
       <div className='card'>
