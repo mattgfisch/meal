@@ -7,16 +7,18 @@ function initializeGeocoder () {
 var lat
 var long
 
-function getLocation() {
+function getUserLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(returnPosition, function(coordinates) {
+          debugger
+        })
     } else {
         x = "Geolocation is not supported by this browser.";
     }
 }
 
-function showPosition(position) {
-    lat = "Latitude: " + position.coords.latitude
-    long = "Longitude: " + position.coords.longitude
-    debugger;
+function returnPosition(position, result) {
+    lat = position.coords.latitude
+    long = position.coords.longitude
+    result(lat + ' ' + long)
 }

@@ -46,15 +46,29 @@ class GroupShow extends React.Component {
     })
   }
   joinHangout () {
+    // let location = getUserLocation()
+    debugger;
     if (this.state.hangoutId) {
       let page = this
-      var joinRequest = $.ajax ({
-        url: `/groups/${page.props.groupId}/hangouts/${page.state.hangoutId}`,
-        type: 'PUT'
-      })
-      joinRequest.done((response) => {
-        debugger
-      })
+
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(sendPosition)
+      } else {
+          x = "Geolocation is not supported by this browser.";
+      }
+      function sendPosition(position) {
+          let lat = position.coords.latitude
+          let long = position.coords.longitude
+          var joinRequest = $.ajax ({
+            url: `/groups/${page.props.groupId}/hangouts/${page.state.hangoutId}`,
+            type: 'PUT',
+            data: {lat: lat, long: long}
+          })
+          joinRequest.done((response) => {
+            debugger
+          })
+      }
+
     }
   }
 
