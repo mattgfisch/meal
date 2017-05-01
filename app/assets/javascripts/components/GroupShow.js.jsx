@@ -7,6 +7,8 @@ class GroupShow extends React.Component {
       members: null,
       hangoutId: null
     }
+    this.joinHangout = this.joinHangout.bind(this)
+    this.createHangout = this.createHangout.bind(this)
   }
 
   showMembers(){
@@ -24,7 +26,7 @@ class GroupShow extends React.Component {
   }
 
   componentDidMount() {
-    let form = this
+    let page = this
     $.ajax ({
       url: '/groups/'+ this.props.groupId,
       type: 'GET',
@@ -35,7 +37,7 @@ class GroupShow extends React.Component {
           groupMemberNames.push(member.name)
         )
       })
-      form.setState({
+      page.setState({
         title: response.groupTitle,
         adminId: response.groupAdminId,
         members: groupMemberNames,
@@ -43,12 +45,31 @@ class GroupShow extends React.Component {
       })
     })
   }
+  joinHangout () {
+    if (this.state.hangoutId) {
+      let page = this
+      var joinRequest = $.ajax ({
+        url: `/groups/${page.props.groupId}/hangouts/${page.state.hangoutId}`,
+        type: 'PUT'
+      })
+      joinRequest.done((response) => {
+        debugger
+      })
+    }
+  }
+
+  createHangout () {
+
+    if (!this.state.hangoutId) {
+
+    }
+  }
 
   loadHangoutButton () {
     if (this.state.hangoutId) {
-      return <button className='btn btn-default' >Join Hangout</button>
+      return <button className='btn btn-default' onClick={this.joinHangout}>Join Hangout</button>
     }else {
-      return <button className='btn btn-default' >Create Hangout</button>
+      return <button className='btn btn-default' onClick={this.createHangout}>Create Hangout</button>
     }
   }
   render() {

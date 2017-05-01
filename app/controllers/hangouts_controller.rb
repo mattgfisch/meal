@@ -4,4 +4,9 @@ class HangoutsController < ApplicationController
     hangouts = user.hangouts
     render json: { hangouts: hangouts }
   end
+  def show
+    p params[:group_id]
+    p params[:id]
+    render json: {response: "hehe"}
+  end
 end
