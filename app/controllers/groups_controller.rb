@@ -31,13 +31,15 @@ class GroupsController < ApplicationController
   end
 
   def show
+    user = User.find(session[:user_id])
     group = Group.find(params[:id])
     if !(group.hangouts.empty?)
       hangout_id = group.hangouts.first.id
+      in_hangout = user.hangouts.any?{|user_hangout| user_hangout.id == hangout_id}
     else
       hangout_id = nil
     end
-    render json: {groupTitle: group.name, groupMembers: group.members, groupAdminId: group.admin_id, hangoutId: hangout_id }
+    render json: {groupTitle: group.name, groupMembers: group.members, groupAdminId: group.admin_id, hangoutId: hangout_id, inHangout: in_hangout }
   end
 
   def joined_groups

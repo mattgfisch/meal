@@ -5,7 +5,8 @@ class GroupShow extends React.Component {
       title: null,
       adminId: null,
       members: null,
-      hangoutId: null
+      hangoutId: null,
+      inHangout: false
     }
     this.joinHangout = this.joinHangout.bind(this)
     this.createHangout = this.createHangout.bind(this)
@@ -41,7 +42,8 @@ class GroupShow extends React.Component {
         title: response.groupTitle,
         adminId: response.groupAdminId,
         members: groupMemberNames,
-        hangoutId: response.hangoutId
+        hangoutId: response.hangoutId,
+        inHangout: response.inHangout
       })
     })
   }
@@ -63,7 +65,6 @@ class GroupShow extends React.Component {
             data: {lat: lat, long: long}
           })
           joinRequest.done((response) => {
-            debugger
           })
       }
 
@@ -79,7 +80,11 @@ class GroupShow extends React.Component {
 
   loadHangoutButton () {
     if (this.state.hangoutId) {
-      return <button className='btn btn-default' onClick={this.joinHangout}>Join Hangout</button>
+      if (this.state.inHangout){
+        return <button className='btn btn-default'>HANGING OUT</button>
+      } else {
+        return <button className='btn btn-default' onClick={this.joinHangout}>Join Hangout</button>
+      }
     }else {
       return <button className='btn btn-default' onClick={this.createHangout}>Create Hangout</button>
     }
