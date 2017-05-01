@@ -35,10 +35,12 @@ class GroupCreationForm extends React.Component {
 
   handleInvite (event) {
     event.preventDefault()
-    this.state.groupEmails.push(this.state.currentEmail)
-    this.setState({
-      currentEmail: null
-    })
+    if (this.state.currentEmail) {
+      this.state.groupEmails.push(this.state.currentEmail)
+      this.setState({
+        currentEmail: null
+      })
+    }
     this.refs.inviteEmail.value = ''
   }
 
