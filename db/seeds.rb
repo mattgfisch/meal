@@ -2,6 +2,7 @@ User.delete_all
 Group.delete_all
 Hangout.delete_all
 
+
 User.create(name: "Eitan", email: "eitan@eitan.com", password: "password")
 User.create(name: "Austin", email: "austin@austin.com", password: "password")
 

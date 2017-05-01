@@ -11,9 +11,7 @@ class NavBar extends React.Component {
       url: '/sessions/'+ this.props.session,
       type: 'DELETE'
     }).done((response) => {
-      this.props.changeUserName(null)
-      this.props.changeSession(null)
-      this.props.changeMode('Login')
+      this.props.changeStates('Login')
     })
   }
 
@@ -29,11 +27,11 @@ class NavBar extends React.Component {
     const handler = (e) => {
       e.preventDefault()
       if (this.props.session != null) {
-        this.props.changeMode('Home')
+        this.props.changeStates('Home',this.props.session,this.props.user)
       }
       else
       {
-        this.props.changeMode('Login')
+        this.props.changeStates('Login')
       }
     }
     return (
