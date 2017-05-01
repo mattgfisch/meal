@@ -86,10 +86,7 @@ class RegistrationForm extends React.Component {
          form.setState({
             errors: null
          })
-         this.props.changeMode('Home')
-
-         this.props.changeUserName(userName)
-         this.props.changeSession(successfulLogin['user_id'])
+         this.props.changeStates('Home', successfulLogin['user_id'], successfulLogin['user_name'])
        })
      })
    // Reset registration fields
