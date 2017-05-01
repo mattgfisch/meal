@@ -43,12 +43,26 @@ class GroupShow extends React.Component {
   }
   render() {
     return (
-      <div>
-        <h2>{this.state.title}</h2>
-        <div className='members'>
-          {this.showMembers()}
+      <div className="card">
+        <div className="card-body">
+          <div className='card group-content' >
+            <div className='card-header'>
+              <h3>Group Name</h3>
+            </div>
+            <div className="card-body text-center">
+              {this.state.title}
+            </div>
+          </div>
+          <div className='card group-content' >
+            <div className='card-header'>
+              <h3>Members</h3>
+            </div>
+            <div className="card-body text-center">
+              {this.showMembers()}
+            </div>
+          </div>
         </div>
-      </div>
+    </div>
     )
   }
 }
