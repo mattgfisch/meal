@@ -7,9 +7,6 @@ class GroupsController < ApplicationController
     #return render json: { errors: "You must provide at least one email" }, status: 400 unless emails
     group = Group.new(name: groupName)
     if emails && groupName
-      creator.created_groups << group
-      group.save
-
       emails.each do |email|
         user = User.find_by(email: email)
         if user
@@ -18,6 +15,8 @@ class GroupsController < ApplicationController
           return render json: {errors: "Invalid email(s)" }, status: 422
         end
       end
+      creator.created_groups << group
+      group.save
       group.members << creator
       return render json: { group_id: group.id }
     end

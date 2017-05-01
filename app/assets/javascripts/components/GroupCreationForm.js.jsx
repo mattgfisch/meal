@@ -27,7 +27,7 @@ class GroupCreationForm extends React.Component {
       form.setState({
         errors: error
       })
-      form.props.changeMode("CreateGroup")
+      // form.props.changeMode("CreateGroup")
     })
   }
 
