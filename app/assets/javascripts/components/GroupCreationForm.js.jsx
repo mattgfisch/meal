@@ -67,12 +67,12 @@ class GroupCreationForm extends React.Component {
             {this.state.errors}
           </div>
           <div className='form-group'>
-            <label htmlFor='groupNname'>Name</label>
+            <label htmlFor='groupName'>Name</label>
             <input type='text' name='groupName' value={this.state.groupName} onChange={this.handleNameChange.bind(this)} className='form-control' id='name' placeholder='Grouptastic' />
           </div>
-          <label>Send invites to:</label>
           <div className='form-group'>
-            <input type='email' ref='inviteEmail' onChange={this.handleEmailChange.bind(this)} className='form-control' placeholder='johndoe@email.com' />
+            <label htmlFor='email'>Send invites to:</label>
+            <input type='email' name="email" ref='inviteEmail' onChange={this.handleEmailChange.bind(this)} className='form-control' placeholder='johndoe@email.com' />
           </div>
           <div className='register-btn'>
             <button onClick={this.handleInvite} className='btn btn-default'>Invite User</button>
