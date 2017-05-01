@@ -4,17 +4,16 @@ class Content extends React.Component {
     this.state = {
       mode: null,
       session: null,
-      username: null
+      username: null,
+      pageId: null
     }
     this.changeMode = this.changeMode.bind(this)
     this.changeSession = this.changeSession.bind(this)
     this.changeUserName = this.changeUserName.bind(this)
+    this.changeId = this.changeId.bind(this)
   }
 
   componentDidMount () {
-    this.changeSession(null)
-    this.changeUserName(null)
-
     var request = $.ajax({
       url: '/sessions',
       type: 'GET'
@@ -36,6 +35,13 @@ class Content extends React.Component {
     })
   }
 
+  changeId(id){
+    this.setState({
+      pageId: id
+    })
+    debugger
+  }
+
   changeUserName (name) {
     this.setState({
       username: name
@@ -43,9 +49,11 @@ class Content extends React.Component {
   }
 
   changeMode (mode) {
+    const GroupPage = <GroupShow groupId={this.state.pageId}/>
     const registration = <RegistrationForm changeMode={this.changeMode} changeSession={this.changeSession} changeUserName={this.changeUserName} />
     const login = <Login changeMode={this.changeMode}  changeSession={this.changeSession} changeUserName={this.changeUserName} />
-    const Home = <UserContent />
+    const Home = <UserContent changeId={this.changeId} changeMode={this.changeMode} />
+
     let stateVariable = null
 
     switch (mode) {
@@ -57,6 +65,9 @@ class Content extends React.Component {
         break
       case 'Home':
         stateVariable = Home
+        break
+      case 'GroupPage':
+        stateVariable = GroupPage
         break
       default:
         console.log('OMG errorz')

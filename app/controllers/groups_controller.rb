@@ -1,10 +1,7 @@
 class GroupsController < ApplicationController
   def show
-    @user = User.find(session[:user_id])
-    @group = Group.find(params[:id])
-    respond_to do |format|
-     render json: {name: group.name }
-   end
+    group = Group.find(params[:id])
+    render json: {groupTitle: group.name, groupMembers: group.members, groupAdminId: group.admin_id }
  end
   def joined_groups
     user = User.find(session[:user_id])
