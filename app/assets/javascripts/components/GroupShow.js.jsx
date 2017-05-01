@@ -8,6 +8,18 @@ class GroupShow extends React.Component {
     }
   }
 
+  showMembers(){
+    if(this.state.members != null){
+      return(
+        this.state.members.map((member) => {
+          return(
+            <div>{member}</div>
+          )
+        })
+      )
+    }
+  }
+
   componentDidMount() {
     let form = this
     $.ajax ({
@@ -33,7 +45,9 @@ class GroupShow extends React.Component {
     return (
       <div>
         <h2>{this.state.title}</h2>
-        <h2>{this.state.admin_id}</h2>
+        <div className='members'>
+          {this.showMembers()}
+        </div>
       </div>
     )
   }

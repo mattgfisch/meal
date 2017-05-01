@@ -11,7 +11,7 @@ class AdminGroupContent extends React.Component {
           </h3>
         </div>
         <div className='card-block user-home'>
-          <AdminGroupList />
+          <AdminGroupList changeStates={this.props.changeStates} />
         </div>
       </div>
     )

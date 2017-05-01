@@ -10,7 +10,7 @@ class UserContent extends React.Component {
         <div className='card-block'>
           <UserHangoutContent changeStates={this.props.changeStates} />
           <UserGroupContent  changeStates={this.props.changeStates}  />
-          <AdminGroupContent sessionID={this.props.sessionID} />
+          <AdminGroupContent changeStates={this.props.changeStates} />
         </div>
       </div>
     )

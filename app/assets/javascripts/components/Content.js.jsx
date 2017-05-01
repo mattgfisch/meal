@@ -31,7 +31,7 @@ class Content extends React.Component {
   //     session: sessionId
   //   })
   // }
-  changeStates (mode, sessionID=null, username=null, pageId=null) {
+  changeStates (mode,  sessionID=null, username=null, pageId=null) {
     const GroupPage = <GroupShow groupId={pageId}/>
     const registration = <RegistrationForm changeStates={this.changeStates} />
     const login = <Login changeStates={this.changeStates} />

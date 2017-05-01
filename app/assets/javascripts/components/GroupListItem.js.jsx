@@ -8,7 +8,7 @@ class GroupListItem extends React.Component {
     event.preventDefault()
 
     let groupId = this.props.group.id
-    this.props.changeStates('GroupPage', groupId)
+    this.props.changeStates('GroupPage',null,null, groupId)
   }
 
 
