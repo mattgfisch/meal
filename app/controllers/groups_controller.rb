@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
 
     creator = User.find(session[:user_id])
     group = Group.new(name: groupName)
-    
+
     if emails && groupName
       emails.each do |email|
         user = User.find_by(email: email)
@@ -38,7 +38,6 @@ class GroupsController < ApplicationController
   def joined_groups
     user = User.find(session[:user_id])
     groups = user.groups
-    p groups
     render json: { groups: groups }
   end
 
