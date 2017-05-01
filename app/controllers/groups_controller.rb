@@ -4,7 +4,8 @@ class GroupsController < ApplicationController
     emails = params[:groupEmails]
     p "=========== #{emails} ============"
     return render json: { errors: "Group name can't be blank" }, status: 400 if groupName == ""
-    return render json: { errors: "You must provide at least one email" }, status: 400 unless emails
+    creator = User.find(session[:user_id])
+    #return render json: { errors: "You must provide at least one email" }, status: 400 unless emails
 
     group = Group.new(name: groupName, admin_id: session[:user_id])
     if emails && group.save
@@ -16,6 +17,11 @@ class GroupsController < ApplicationController
           return render json: {errors: "Invalid email(s)" }, status: 422
         end
       end
+      group.members << creator
+      render json: { group_id: group.id }
+    end
+    if group.save
+      group.members << creator
       render json: { group_id: group.id }
     end
   end
