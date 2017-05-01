@@ -19,7 +19,7 @@ class Content extends React.Component {
     })
     request.done((response) => {
       if (response.sessionID) {
-        this.changeStates('Home', response.sessionID, response.userName)
+        this.changeStates('Home', response.sessionID, response.userName, null)
       } else {
         this.changeMode('Login')
       }
@@ -31,11 +31,11 @@ class Content extends React.Component {
   //     session: sessionId
   //   })
   // }
-  changeStates (mode, sessionID, username) {
-    const GroupPage = <GroupShow groupId={this.state.pageId}/>
+  changeStates (mode, sessionID=null, username=null, pageId=null) {
+    const GroupPage = <GroupShow groupId={pageId}/>
     const registration = <RegistrationForm changeStates={this.changeStates} />
     const login = <Login changeStates={this.changeStates} />
-    const Home = <UserContent changeId={this.changeId} changeMode={this.changeMode} />
+    const Home = <UserContent changeStates={this.changeStates} />
 
     let stateVariable = null
 
@@ -57,11 +57,17 @@ class Content extends React.Component {
         stateVariable = login
         break
     }
-    this.setState({
-      mode: stateVariable,
-      session: sessionID,
-      username: username
-    })
+    if (pageId) {
+      this.setState({
+        mode: stateVariable,
+      })
+    } else {
+      this.setState({
+        mode: stateVariable,
+        session: sessionID,
+        username: username
+      })
+    }
   }
 
   changeId(id){
@@ -81,7 +87,7 @@ class Content extends React.Component {
     const GroupPage = <GroupShow groupId={this.state.pageId}/>
     const registration = <RegistrationForm changeStates={this.changeStates} />
     const login = <Login changeStates={this.changeStates} />
-    const Home = <UserContent changeId={this.changeId} changeMode={this.changeMode} />
+    const Home = <UserContent changeStates={this.changeStates} />
 
     let stateVariable = null
 
@@ -110,7 +116,7 @@ class Content extends React.Component {
   render () {
     return (
       <div>
-        <NavBar user={this.state.username} session={this.state.session} changeMode={this.changeMode} changeSession={this.changeSession} changeUserName={this.changeUserName} />
+        <NavBar user={this.state.username} session={this.state.session} changeMode={this.changeMode} changeStates={this.changeStates} />
         {this.state.mode}
       </div>
     )

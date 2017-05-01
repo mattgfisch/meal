@@ -9,22 +9,31 @@ class GroupListItem extends React.Component {
   }
 
   handler (event) {
-    debugger;
     event.preventDefault()
-    this.setState({
-      group: this.props.group.id
-    })
-    this.props.changeId(this.state.group)
-    this.props.changeMode('GroupPage')
+    debugger;
+    let groupId = this.props.group.id
+    this.props.changeStates('GroupPage', null, null, groupId)
+    // this.setState({
+    //   group: groupId
+    // })
+    this.test()
+  }
+  // shouldComponentUpdate () {
+  //   debugger;
+  //   if (this.state.group) {
+  //     this.props.changeId(this.state.group)
+  //     this.props.changeMode('GroupPage')
+  //   }
+  // }
+  test () {
+    debugger;
   }
 
   render () {
-
     // debugger
     //  const handler = (e) =>{
     //   e.preventDefault()
-    //   this.props.changeId(this.props.group.id)
-    //   this.props.changeMode('GroupPage')
+    //
     //   debugger
     // }
     return (

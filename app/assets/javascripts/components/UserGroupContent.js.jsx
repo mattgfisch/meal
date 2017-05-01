@@ -8,7 +8,7 @@ class UserGroupContent extends React.Component {
           <h3>Joined Groups</h3>
         </div>
         <div className='card-block user-home'>
-          <GroupList changeId={this.props.changeId} changeMode={this.props.changeMode.bind(this)}/>
+          <GroupList changeStates={this.props.changeStates} />
         </div>
       </div>
     )

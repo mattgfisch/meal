@@ -11,9 +11,7 @@ class NavBar extends React.Component {
       url: '/sessions/'+ this.props.session,
       type: 'DELETE'
     }).done((response) => {
-      this.props.changeUserName(null)
-      this.props.changeSession(null)
-      this.props.changeMode('Login')
+      this.props.changeStates('Login', null, null, null)
     })
   }
 
