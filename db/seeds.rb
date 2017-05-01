@@ -13,5 +13,3 @@ hangout1 = Hangout.create!(creator_id: 2, group_id: 1)
 
 group1.members << dillon
 group1.members << matt
-hangout1.members << matt
-hangout1.members << dillon

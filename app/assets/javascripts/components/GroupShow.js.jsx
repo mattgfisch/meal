@@ -3,8 +3,9 @@ class GroupShow extends React.Component {
     super();
     this.state = {
       title: null,
-      admin_id: null,
-      members: null
+      adminId: null,
+      members: null,
+      hangoutId: null
     }
   }
 
@@ -36,17 +37,28 @@ class GroupShow extends React.Component {
       })
       form.setState({
         title: response.groupTitle,
-        admin_id: response.groupAdminId,
-        members: groupMemberNames
+        adminId: response.groupAdminId,
+        members: groupMemberNames,
+        hangoutId: response.hangoutId
       })
     })
   }
+
+  loadHangoutButton () {
+    if (this.state.hangoutId) {
+      return <button className='btn btn-default' >Join Hangout</button>
+    }else {
+      return <button className='btn btn-default' >Create Hangout</button>
+    }
+  }
   render() {
-    renderMap()
     return (
       <div className="card">
         <div className="card-body">
           <div className='card group-content' >
+            <div className='hangout-button' >
+              {this.loadHangoutButton()}
+            </div>
             <div className='card-header'>
               <h3>Group Name</h3>
             </div>

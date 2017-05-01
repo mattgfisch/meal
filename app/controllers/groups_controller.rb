@@ -32,7 +32,12 @@ class GroupsController < ApplicationController
 
   def show
     group = Group.find(params[:id])
-    render json: {groupTitle: group.name, groupMembers: group.members, groupAdminId: group.admin_id }
+    if group.hangouts
+      hangout_id = group.hangouts.first.id
+    else
+      hangout_id = nil
+    end
+    render json: {groupTitle: group.name, groupMembers: group.members, groupAdminId: group.admin_id, hangoutId: hangout_id }
   end
 
   def joined_groups
