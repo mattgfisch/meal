@@ -2,13 +2,14 @@ class GroupsController < ApplicationController
   def create
     groupName = params[:groupName]
     emails = params[:groupEmails]
-    p "=========== #{emails} ============"
     return render json: { errors: "Group name can't be blank" }, status: 400 if groupName == ""
     creator = User.find(session[:user_id])
     #return render json: { errors: "You must provide at least one email" }, status: 400 unless emails
+    group = Group.new(name: groupName)
+    if emails && groupName
+      creator.created_groups << group
+      group.save
 
-    group = Group.new(name: groupName, admin_id: session[:user_id])
-    if emails && group.save
       emails.each do |email|
         user = User.find_by(email: email)
         if user
@@ -20,7 +21,9 @@ class GroupsController < ApplicationController
       group.members << creator
       return render json: { group_id: group.id }
     end
-    if group.save
+    if groupName
+      creator.created_groups << group
+      group.save
       group.members << creator
       return render json: { group_id: group.id }
     end

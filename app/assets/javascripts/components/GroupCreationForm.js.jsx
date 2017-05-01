@@ -19,7 +19,6 @@ class GroupCreationForm extends React.Component {
     })
 
     request.success((response) => {
-      debugger;
       form.props.changeMode("GroupShow")
     })
 
@@ -28,7 +27,6 @@ class GroupCreationForm extends React.Component {
       form.setState({
         errors: error
       })
-      debugger;
       form.props.changeMode("CreateGroup")
     })
   }
