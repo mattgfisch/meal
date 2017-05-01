@@ -3,9 +3,9 @@ class RegistrationForm extends React.Component {
   constructor () {
     super()
     this.state = {
-      name: null,
-      email: null,
-      password: null,
+      name: '',
+      email: '',
+      password: '',
       errors: null
     }
   }
@@ -64,9 +64,9 @@ class RegistrationForm extends React.Component {
      }
      form.setState({
         errors: valueArray,
-        name: null,
-        email: null,
-        password: null
+        name: '',
+        email: '',
+        password: ''
      })
    })
    request.success((successfulRegistration) => {
@@ -89,10 +89,6 @@ class RegistrationForm extends React.Component {
          this.props.changeStates('Home', successfulLogin['user_id'], successfulLogin['user_name'])
        })
      })
-   // Reset registration fields
-   this.refs.registrationName.value = ''
-   this.refs.registrationEmail.value = ''
-   this.refs.registrationPassword.value = ''
   }
   render () {
     return (
@@ -106,15 +102,15 @@ class RegistrationForm extends React.Component {
         <form action='/users' method='post'>
           <div className='form-group'>
             <label htmlFor='exampleInputName'>Full Name</label>
-            <input type='text' ref='registrationName' className='form-control' id='exampleInputName' placeholder='John Doe' onChange={this.handleNameChange.bind(this)} />
+            <input type='text' value={this.state.name} className='form-control' id='exampleInputName' placeholder='John Doe' onChange={this.handleNameChange.bind(this)} />
           </div>
           <div className='form-group'>
             <label htmlFor='exampleInputEmail1'>Email address</label>
-            <input type='email' ref='registrationEmail' className='form-control' id='exampleInputEmail1' placeholder='Email' onChange={this.handleEmailChange.bind(this)} />
+            <input type='email' value={this.state.email} className='form-control' id='exampleInputEmail1' placeholder='Email' onChange={this.handleEmailChange.bind(this)} />
           </div>
           <div className='form-group'>
             <label htmlFor='exampleInputPassword1'>Password</label>
-            <input type='password' ref='registrationPassword' className='form-control' id='exampleInputPassword1' placeholder='Password' onChange={this.handlePasswordChange.bind(this)} />
+            <input type='password' value={this.state.password} className='form-control' id='exampleInputPassword1' placeholder='Password' onChange={this.handlePasswordChange.bind(this)} />
           </div>
           <div className='register-btn'>
             <button type='submit' className='btn btn-default' onClick={this.handleClick.bind(this)}>Register</button>
