@@ -20,9 +20,10 @@ describe 'GroupCreate' do
 
     it 'is able enter valid information' do
       fill_in 'groupName', with: 'Grouptastic'
-      fill_in 'email', with: user1.email
+      fill_in 'email', with: batman.email
+      click_on 'Invite User'
       click_on 'Create Group'
-      expect(page).to have_content 'Members'
+      expect(page).to have_content "Members #{user1.name} #{batman.name}"
     end
 
     it 'invalid information returns error(s)' do
@@ -64,7 +65,7 @@ describe 'GroupCreate' do
       fill_in 'email', with: superman.email
       click_on 'Invite User'
       click_on 'Create Group'
-      expect(page).to have_content
+      expect(page).to have_content "#{batman.name} #{wonderwoman.name} #{superman.name}"
     end
   end
 end
