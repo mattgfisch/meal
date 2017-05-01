@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
     if emails && groupName
       emails.each do |email|
         user = User.find_by(email: email)
-        if user
+        if user && user != creator
           group.members << user
         else
           return render json: {errors: "Invalid email(s)" }, status: 422
@@ -31,6 +31,7 @@ class GroupsController < ApplicationController
   def joined_groups
     user = User.find(session[:user_id])
     groups = user.groups
+    p groups
     render json: { groups: groups }
   end
 
