@@ -4,14 +4,16 @@ class HangoutsController < ApplicationController
     hangouts = user.hangouts
     render json: { hangouts: hangouts }
   end
+  
   def show
+    hangout = Hangout.find(params[:id])
     user = User.find(session[:user_id])
-    if !(user.hangouts.any? {|hangout| hangout.id == params[:id]})
-      user.hangouts << Hangout.find(params[:id])
+    p user.hangouts
+    if !(user.hangouts.any? {|user_hangout| user_hangout.id == hangout.id})
+      user.hangouts << hangout
+      hangout.locations << Location.create(latitude: params[:lat], longitude: params[:long])
     end
-    p params[:group_id]
-    p params[:id]
-    p params
+    p hangout.locations
     render json: {response: "hehe"}
   end
 end

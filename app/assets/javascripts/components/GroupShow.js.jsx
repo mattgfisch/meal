@@ -46,8 +46,6 @@ class GroupShow extends React.Component {
     })
   }
   joinHangout () {
-    // let location = getUserLocation()
-    debugger;
     if (this.state.hangoutId) {
       let page = this
 

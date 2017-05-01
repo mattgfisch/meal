@@ -32,7 +32,7 @@ class GroupsController < ApplicationController
 
   def show
     group = Group.find(params[:id])
-    if group.hangouts
+    if !(group.hangouts.empty?)
       hangout_id = group.hangouts.first.id
     else
       hangout_id = nil
