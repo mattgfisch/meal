@@ -14,11 +14,12 @@ class GroupListItem extends React.Component {
     this.setState({
       group: this.props.group.id
     })
+    this.props.changeId(this.state.group)
     this.props.changeMode('GroupPage')
   }
 
   render () {
-      // this.props.changeId(this.props.group.id)
+
     // debugger
     //  const handler = (e) =>{
     //   e.preventDefault()

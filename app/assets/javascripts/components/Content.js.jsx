@@ -8,8 +8,7 @@ class Content extends React.Component {
       pageId: null
     }
     this.changeMode = this.changeMode.bind(this)
-    this.changeSession = this.changeSession.bind(this)
-    this.changeUserName = this.changeUserName.bind(this)
+    this.changeStates = this.changeStates.bind(this)
     this.changeId = this.changeId.bind(this)
   }
 
@@ -20,18 +19,48 @@ class Content extends React.Component {
     })
     request.done((response) => {
       if (response.sessionID) {
-        this.changeMode('Home')
-        this.changeSession(response.sessionID)
-        this.changeUserName(response.userName)
+        this.changeStates('Home', response.sessionID, response.userName)
       } else {
         this.changeMode('Login')
       }
     })
   }
 
-  changeSession (sessionId) {
+  // changeSession (sessionId) {
+  //   this.setState({
+  //     session: sessionId
+  //   })
+  // }
+  changeStates (mode, sessionID, username) {
+    const GroupPage = <GroupShow groupId={this.state.pageId}/>
+    const registration = <RegistrationForm changeStates={this.changeStates} />
+    const login = <Login changeStates={this.changeStates} />
+    const Home = <UserContent changeId={this.changeId} changeMode={this.changeMode} />
+
+    let stateVariable = null
+
+    switch (mode) {
+      case 'Register':
+        stateVariable = registration
+        break
+      case 'Login':
+        stateVariable = login
+        break
+      case 'Home':
+        stateVariable = Home
+        break
+      case 'GroupPage':
+        stateVariable = GroupPage
+        break
+      default:
+        console.log('OMG errorz')
+        stateVariable = login
+        break
+    }
     this.setState({
-      session: sessionId
+      mode: stateVariable,
+      session: sessionID,
+      username: username
     })
   }
 
@@ -42,16 +71,16 @@ class Content extends React.Component {
     debugger
   }
 
-  changeUserName (name) {
-    this.setState({
-      username: name
-    })
-  }
+  // changeUserName (name) {
+  //   this.setState({
+  //     username: name
+  //   })
+  // }
 
   changeMode (mode) {
     const GroupPage = <GroupShow groupId={this.state.pageId}/>
-    const registration = <RegistrationForm changeMode={this.changeMode} changeSession={this.changeSession} changeUserName={this.changeUserName} />
-    const login = <Login changeMode={this.changeMode}  changeSession={this.changeSession} changeUserName={this.changeUserName} />
+    const registration = <RegistrationForm changeStates={this.changeStates} />
+    const login = <Login changeStates={this.changeStates} />
     const Home = <UserContent changeId={this.changeId} changeMode={this.changeMode} />
 
     let stateVariable = null
