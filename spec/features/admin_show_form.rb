@@ -34,5 +34,26 @@ describe 'GroupShow' do
       expect(page).not_to have_content('Add Users')
     end
 
+    it 'Group admin can invite valid user' do
+      click_link('created', :match => :first)
+      fill_in 'email', with: 'jack@jack.com'
+      click_on 'Invite User'
+      expect(page).to have_content('Jack')
+    end
+
+    it 'Group admin can not invite themselves to group/ anyone already in group' do
+      click_link('created', :match => :first)
+      fill_in 'email', with: 'matt@matt.com'
+      click_on 'Invite User'
+      expect(page).to have_content('Invalid email')
+    end
+
+    it 'Group admin can not invite invaild emails' do
+      click_link('created', :match => :first)
+      fill_in 'email', with: 'weqrdsfasdfdfg'
+      click_on 'Invite User'
+      expect(page).to have_content('Invalid email')
+    end
+
   end
 end
