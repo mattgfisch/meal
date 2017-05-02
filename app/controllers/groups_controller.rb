@@ -43,9 +43,9 @@ class GroupsController < ApplicationController
 
   def add_members
     user = User.find_by(email: params[:currentEmail])
-    groups = Group.find(params[:id])
-    if user
-      groups.members << user
+    group = Group.find(params[:id])
+    if user && !group.members.include?(user)
+      group.members << user
       render json: {username: user.name}
     else
       return render json: {errors: "Invalid email" }, status: 422

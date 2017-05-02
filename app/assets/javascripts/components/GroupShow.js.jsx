@@ -12,7 +12,6 @@ class GroupShow extends React.Component {
 
   handleInvite (event) {
     event.preventDefault()
-    debugger
     let form = this
     if (this.state.currentEmail) {
       let request = $.ajax({
@@ -21,11 +20,10 @@ class GroupShow extends React.Component {
         data: {currentEmail: this.state.currentEmail}
       })
       request.success((response) => {
-        $('#member-list').append(response.username)
+        $('#member-list').append(<div>response.username</div>)
       })
       request.fail((response) => {
         var error = response.responseJSON['errors']
-        debugger
         form.setState({
           errors: error,
           currentEmail: null
@@ -36,7 +34,6 @@ class GroupShow extends React.Component {
   }
 
   handleEmailChange (event) {
-    console.log(event.target.value)
     this.setState({
       currentEmail: event.target.value
     })
