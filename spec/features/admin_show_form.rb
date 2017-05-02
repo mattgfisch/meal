@@ -52,9 +52,38 @@ describe 'GroupShow' do
       click_link('created', :match => :first)
       fill_in 'email', with: 'weqrdsfasdfdfg'
       click_on 'Invite User'
-      
+
       expect(page).to have_content('Invalid email')
     end
+
+    it 'Admin can invite valid user after creating a new group' do
+      click_on '+'
+      fill_in 'groupName', with: 'Grouptastic'
+      click_on 'Create Group'
+      fill_in 'email', with: 'jack@jack.com'
+      click_on 'Invite User'
+      expect(page).to have_content('Jack')
+    end
+
+    it 'Admin can not invite themselves to group/ anyone already in group after creating a new group' do
+      click_on '+'
+      fill_in 'groupName', with: 'Grouptastic'
+      click_on 'Create Group'
+      fill_in 'email', with: 'matt@matt.com'
+      click_on 'Invite User'
+      expect(page).to have_content('Invalid email')
+    end
+
+    it 'Admin can not invite invaild emails after creating a group' do
+      click_on '+'
+      fill_in 'groupName', with: 'Grouptastic'
+      click_on 'Create Group'
+      fill_in 'email', with: 'weqrdsfasdfdfg'
+      click_on 'Invite User'
+
+      expect(page).to have_content('Invalid email')
+    end
+
 
   end
 end
