@@ -168,6 +168,12 @@ class GroupShow extends React.Component {
     }
   }
 
+  showTimer() {
+    if (this.state.hangoutId) {
+      return <Timer />
+    }
+  }
+
   loadHangoutButton () {
     if (this.state.hangoutId) {
       if (this.state.inHangout){
@@ -194,6 +200,7 @@ class GroupShow extends React.Component {
           <div className='card group-content' >
             <div className='hangout-button' >
               {this.loadHangoutButton()}
+              {this.showTimer()}
             </div>
             <div className='card-header'>
               <h3>Group Name</h3>
