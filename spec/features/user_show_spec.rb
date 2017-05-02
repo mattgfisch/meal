@@ -75,7 +75,7 @@ describe 'UserShow' do
       fill_in 'Email', with: 'matt@matt.com'
       fill_in 'Password', with: 'password'
       click_on 'Log In'
-      click_on('joined')
+      click_on('.joined-link')
       expect(page).to have_content('Members')
     end
 

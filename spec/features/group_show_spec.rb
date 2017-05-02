@@ -25,12 +25,14 @@ describe 'GroupShow' do
       expect(page).to have_content('Members')
     end
     it 'Can click on joined groups and have page show' do
-      click_link('joined', :match => :first)
+      link = page.find('.joined-link', match: :first)
+      link.click
       expect(page).to have_content('Members')
     end
 
     it 'Can navigate back to user show page from group show' do
-      click_link('joined', :match => :first)
+      link = page.find('.joined-link', match: :first)
+      link.click
       click_on('Meals')
       expect(page).to have_content('Your Meals')
     end
