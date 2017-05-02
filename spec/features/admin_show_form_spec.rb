@@ -30,7 +30,8 @@ describe 'GroupShow' do
     end
 
     it 'Can click on joined groups and to not have admin features' do
-      click_link('joined', :match => :first)
+      link = page.find('.joined-link', :match => :first)
+      link.click
       expect(page).not_to have_content('Add Users')
     end
 
