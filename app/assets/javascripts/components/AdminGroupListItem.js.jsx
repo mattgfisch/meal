@@ -9,7 +9,11 @@ class AdminGroupListItem extends React.Component {
     event.preventDefault()
 
     let groupId = this.props.group.id
-    this.props.changeStates('GroupPage',null,null, groupId)
+    if(this.props.sessionID == this.props.group.admin_id){
+      this.props.changeStates('GroupPage', this.props.sessionID, null, groupId)
+    } else {
+      this.props.changeStates('GroupPage', null, null, groupId)
+    }
   }
 
   deleteGroup () {
