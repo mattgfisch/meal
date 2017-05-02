@@ -52,6 +52,7 @@ describe 'GroupShow' do
       click_link('created', :match => :first)
       fill_in 'email', with: 'weqrdsfasdfdfg'
       click_on 'Invite User'
+      
       expect(page).to have_content('Invalid email')
     end
 
