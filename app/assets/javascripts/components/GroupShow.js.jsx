@@ -209,6 +209,7 @@ class GroupShow extends React.Component {
             <div id='member-list' className="card-body text-center">
               {this.showMembers()}
             </div>
+            {this.addMembers()}
           </div>
           <div className='card group-content' >
             <div className='card-header'>
@@ -220,7 +221,6 @@ class GroupShow extends React.Component {
               <p className='restaurants'></p>
             </div>
           </div>
-          {this.addMembers()}
         </div>
     </div>
     )
