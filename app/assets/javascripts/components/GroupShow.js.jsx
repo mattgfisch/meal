@@ -12,7 +12,7 @@ class GroupShow extends React.Component {
     this.createHangout = this.createHangout.bind(this)
   }
 
-  showMembers(){
+  showMembers () {
     if(this.state.members != null){
       let n = 0
       return(
@@ -26,7 +26,7 @@ class GroupShow extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     let page = this
     $.ajax ({
       url: '/groups/'+ this.props.groupId,
@@ -102,7 +102,11 @@ class GroupShow extends React.Component {
     }
   }
 
+  loadMap(){
+    if (this.state.inHangout) {
 
+    }
+  }
 
   loadHangoutButton () {
     if (this.state.hangoutId) {
@@ -115,7 +119,7 @@ class GroupShow extends React.Component {
       return <button className='btn btn-default' onClick={this.createHangout}>Create Hangout</button>
     }
   }
-  render() {
+  render () {
     return (
       <div className="card">
         <div className="card-body">
@@ -138,6 +142,7 @@ class GroupShow extends React.Component {
               {this.showMembers()}
             </div>
           </div>
+          {this.loadMap()}
         </div>
     </div>
     )
