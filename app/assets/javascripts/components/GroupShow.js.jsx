@@ -124,8 +124,9 @@ class GroupShow extends React.Component {
     }
   }
   render () {
-    // console.log(this.state.centerPoint);
-    getRestaurants(parseFloat(this.state.centerPoint.average_lat), parseFloat(this.state.centerPoint.average_long))
+    if (this.state.centerPoint) {
+      getRestaurants(parseFloat(this.state.centerPoint.average_lat), parseFloat(this.state.centerPoint.average_long))
+    }
     return (
       <div className="card">
         <div className="card-body">
