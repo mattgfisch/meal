@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe GroupsController, type: :controller do
-<<<<<<< HEAD
   describe 'GET groups/:id' do
     let!(:user) { User.create!(name: "Matt", email: "matt@matt.com", password: 'password') }
     let!(:group) { Group.create!(name: 'Grouptastic', admin_id: user.id) }
@@ -19,7 +18,9 @@ RSpec.describe GroupsController, type: :controller do
       hangout = Hangout.create!(creator_id: user.id, group_id: group.id)
       get :show, :id => group.id
       expect(assigns(:hangout_id)).to eq hangout.id
-=======
+    end
+  end
+
   describe 'post group add members' do
     let!(:user) { User.create!(name: 'Josh', email: 'email@email.com', password: 'password') }
     let!(:group) { Group.create!(name: 'dog', admin_id: user.id) }
@@ -34,7 +35,6 @@ RSpec.describe GroupsController, type: :controller do
     it 'responds with status code 422 when failed' do
       get :add_members, params: {id: group.id, currentEmail: "xfghsry"}
       expect(response).to have_http_status 422
->>>>>>> master
     end
   end
 end
