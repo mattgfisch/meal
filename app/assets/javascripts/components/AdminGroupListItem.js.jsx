@@ -19,7 +19,7 @@ class AdminGroupListItem extends React.Component {
   deleteGroup () {
     var request = $.ajax({
       type: 'DELETE',
-      url: `/groups/${this.props.group.id}`
+      url: "/groups/" + this.props.group.id
     })
   }
 
