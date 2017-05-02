@@ -55,13 +55,6 @@ describe 'UserShow' do
       expect(find('#joined-groups')).to have_content 'Test'
     end
 
-    it 'Shows current hangouts of user' do
-      visit '/'
-      fill_in 'Email', with: 'matt@matt.com'
-      fill_in 'Password', with: 'password'
-      click_on 'Log In'
-      expect(find('#current-hangouts')).to have_content 'Hangout!'
-    end
     it 'Can click on created groups and have page show' do
       visit '/'
       fill_in 'Email', with: 'matt@matt.com'
@@ -80,12 +73,11 @@ describe 'UserShow' do
       expect(page).to have_content('Members')
     end
 
-    it 'Shows no hangouts or groups if user has not joined any' do
+    it 'Shows no groups if user has not joined any' do
       visit '/'
       fill_in 'Email', with: 'jack@jack.com'
       fill_in 'Password', with: 'password'
       click_on 'Log In'
-      expect(find('#current-hangouts')).not_to have_content 'Hangout!'
       expect(find('#joined-groups')).not_to have_content 'Test'
       expect(find('#created-groups')).not_to have_content 'Test'
     end
