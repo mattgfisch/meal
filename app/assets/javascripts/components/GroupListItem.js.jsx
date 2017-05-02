@@ -19,8 +19,8 @@ class GroupListItem extends React.Component {
   deleteMember() {
     let form = this
     var request = $.ajax({
-      type: "PUT",
-      url: `/groups/${this.props.group.id}`
+      type: 'PUT',
+      url: '/groups/' + this.props.group.id
     })
   }
 

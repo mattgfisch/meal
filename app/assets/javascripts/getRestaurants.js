@@ -17,7 +17,7 @@ function getRestaurants (latitude, longitude) {
 function callback(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
-      $('.restaurants').append(`<p>${results[i].name}</p>`)
+      $('.restaurants').append('<p>' + results[i].name + '</p>')
     }
   }
 }

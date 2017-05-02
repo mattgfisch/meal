@@ -111,14 +111,14 @@ class GroupShow extends React.Component {
       if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(sendPosition)
       } else {
-          x = "Geolocation is not supported by this browser."
+          x = 'Geolocation is not supported by this browser.'
       }
       function sendPosition(position) {
         let lat = position.coords.latitude
         let long = position.coords.longitude
         function sendRequest (page, result) {
           var joinRequest = $.ajax ({
-            url: `/groups/${page.props.groupId}/hangouts/${page.state.hangoutId}`,
+            url: '/groups/' + page.props.groupId + '/hangouts/' + page.state.hangoutId,
             type: 'PATCH',
             data: {lat: lat, long: long}
           })
@@ -149,7 +149,7 @@ class GroupShow extends React.Component {
         let long = position.coords.longitude
         function sendRequest (page, result) {
           var joinRequest = $.ajax ({
-            url: `/groups/${page.props.groupId}/hangouts`,
+            url: '/groups/' + page.props.groupId + '/hangouts',
             type: 'POST',
             data: {lat: lat, long: long}
           })
@@ -189,8 +189,8 @@ class GroupShow extends React.Component {
   render () {
 
     return (
-      <div className="card">
-        <div className="card-body">
+      <div className='card'>
+        <div className='card-body'>
           <div className='card group-content' >
             <div className='hangout-button' >
               {this.loadHangoutButton()}
@@ -198,7 +198,7 @@ class GroupShow extends React.Component {
             <div className='card-header'>
               <h3>Group Name</h3>
             </div>
-            <div className="card-body text-center">
+            <div className='card-body text-center'>
               {this.state.title}
             </div>
           </div>
@@ -206,7 +206,7 @@ class GroupShow extends React.Component {
             <div className='card-header'>
               <h3>Members</h3>
             </div>
-            <div id='member-list' className="card-body text-center">
+            <div id='member-list' className='card-body text-center'>
               {this.showMembers()}
             </div>
             {this.addMembers()}
@@ -215,7 +215,7 @@ class GroupShow extends React.Component {
             <div className='card-header'>
               {this.returnRestaurants()}
             </div>
-            <div className="card-body text-center">
+            <div className='card-body text-center'>
               <div className='map'>
               </div>
               <p className='restaurants'></p>
