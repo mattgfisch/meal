@@ -179,10 +179,15 @@ class GroupShow extends React.Component {
       return <button className='btn btn-default' onClick={this.createHangout}>Create Hangout</button>
     }
   }
-  render () {
-    if (this.state.centerPoint) {
+
+  returnRestaurants () {
+    if (this.state.centerPoint && this.state.inHangout) {
       getRestaurants(parseFloat(this.state.centerPoint.average_lat), parseFloat(this.state.centerPoint.average_long))
+      return (<h3>Restaurants</h3>)
     }
+  }
+  render () {
+
     return (
       <div className="card">
         <div className="card-body">
@@ -207,7 +212,7 @@ class GroupShow extends React.Component {
           </div>
           <div className='card group-content' >
             <div className='card-header'>
-              <h3>Restaurants</h3>
+              {this.returnRestaurants()}
             </div>
             <div className="card-body text-center">
               <div className='map'>
