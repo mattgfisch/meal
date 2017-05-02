@@ -7,6 +7,9 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore environment file
+.env
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
@@ -15,11 +18,10 @@
 /coverage/*
 /node_modules/*
 
+
 # Ignore Byebug command history file.
 .byebug_history
 
-# Ignore environment variables
-.env
 
 # Ignore coveralls file
 coveralls.yml

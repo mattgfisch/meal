@@ -52,9 +52,31 @@ class GroupsController < ApplicationController
     render json: { groups: groups }
   end
 
+  def add_members
+    user = User.find_by(email: params[:currentEmail])
+    group = Group.find(params[:id])
+    if user && !group.members.include?(user)
+      group.members << user
+      render json: {username: user.name}
+    else
+      return render json: {errors: "Invalid email" }, status: 422
+    end
+  end
+
   def admin_groups
     user = User.find(session[:user_id])
     admin_groups = user.created_groups
     render json: { admin_groups: admin_groups }
+  end
+
+  def update
+    group = Group.find(params[:id])
+    user = User.find(session[:user_id])
+    group.members.delete(user)
+  end
+
+  def destroy
+    group = Group.find(params[:id])
+    Group.destroy(group)
   end
 end

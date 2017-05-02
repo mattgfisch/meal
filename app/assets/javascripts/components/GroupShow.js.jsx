@@ -3,11 +3,72 @@ class GroupShow extends React.Component {
     super();
     this.state = {
       title: null,
+<<<<<<< HEAD
       adminId: null,
       members: null,
       hangoutId: null,
       inHangout: false,
       centerPoint: ''
+=======
+      admin_id: null,
+      members: null,
+      currentEmail: null,
+      errors: null
+    }
+  }
+
+  handleInvite (event) {
+    event.preventDefault()
+    let form = this
+    if (this.state.currentEmail) {
+      let request = $.ajax({
+        type: 'POST',
+        url: '/groups/'+form.props.groupId+'/members',
+        data: {currentEmail: this.state.currentEmail}
+      })
+      request.success((response) => {
+        $('#member-list').append('<div>' + response.username + '</div>')
+      })
+      request.fail((response) => {
+        var error = response.responseJSON['errors']
+        form.setState({
+          errors: error,
+          currentEmail: null
+        })
+      })
+    }
+    $("input[type='email']").val('')
+  }
+
+  handleEmailChange (event) {
+    this.setState({
+      currentEmail: event.target.value
+    })
+  }
+
+  addMembers(){
+    if(this.props.sessionID != null){
+      return (
+        <div className='card group-content'>
+          <div className='card-header'>
+            <h3>Add Users</h3>
+          </div>
+          <div className="card-body text-center">
+            <form action='/users' method='post'>
+              <div className='errors errors-container'>
+                {this.state.errors}
+              </div>
+              <div className='form-group'>
+                <input type='email' name="email" onChange={this.handleEmailChange.bind(this)} className='form-control' placeholder='johndoe@email.com' />
+              </div>
+              <div className='register-btn'>
+                <button onClick={this.handleInvite.bind(this)} className='btn btn-default'>Invite User</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )
+>>>>>>> master
     }
     this.joinHangout = this.joinHangout.bind(this)
     this.createHangout = this.createHangout.bind(this)
@@ -145,10 +206,11 @@ class GroupShow extends React.Component {
             <div className='card-header'>
               <h3>Members</h3>
             </div>
-            <div className="card-body text-center">
+            <div id='member-list' className="card-body text-center">
               {this.showMembers()}
             </div>
           </div>
+<<<<<<< HEAD
           <div className='card group-content' >
             <div className='card-header'>
               <h3>Restaurants</h3>
@@ -160,6 +222,9 @@ class GroupShow extends React.Component {
             </div>
           </div>
 
+=======
+          {this.addMembers()}
+>>>>>>> master
         </div>
     </div>
     )
