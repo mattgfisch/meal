@@ -6,7 +6,8 @@ class GroupShow extends React.Component {
       adminId: null,
       members: null,
       hangoutId: null,
-      inHangout: false
+      inHangout: false,
+      centerPoint: ''
     }
     this.joinHangout = this.joinHangout.bind(this)
     this.createHangout = this.createHangout.bind(this)
@@ -43,14 +44,14 @@ class GroupShow extends React.Component {
         adminId: response.groupAdminId,
         members: groupMemberNames,
         hangoutId: response.hangoutId,
-        inHangout: response.inHangout
+        inHangout: response.inHangout,
+        centerPoint: response.centerPoint
       })
     })
   }
   joinHangout () {
+    let page = this
     if (this.state.hangoutId) {
-      let page = this
-
       if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(sendPosition)
       } else {
@@ -59,15 +60,23 @@ class GroupShow extends React.Component {
       function sendPosition(position) {
           let lat = position.coords.latitude
           let long = position.coords.longitude
-          var joinRequest = $.ajax ({
-            url: `/groups/${page.props.groupId}/hangouts/${page.state.hangoutId}`,
-            type: 'PATCH',
-            data: {lat: lat, long: long}
-          })
-          joinRequest.done((response) => {
+          function sendRequest (page, result) {
+            var joinRequest = $.ajax ({
+              url: `/groups/${page.props.groupId}/hangouts/${page.state.hangoutId}`,
+              type: 'PATCH',
+              data: {lat: lat, long: long}
+            })
+            joinRequest.done((response) => {
+              result(response, page)
+            })
+          }
+          sendRequest(page, function (result, page) {
+            page.setState({
+              inHangout: result.inHangout,
+              centerPoint: result.centerPoint
+            })
           })
       }
-
     }
   }
 
@@ -95,16 +104,11 @@ class GroupShow extends React.Component {
           sendRequest(page, function (result, page) {
             page.setState({
               inHangout: result.inHangout,
-              hangoutId: result.hangoutId
+              hangoutId: result.hangoutId,
+              centerPoint: result.centerPoint
             })
           })
       }
-    }
-  }
-
-  loadMap(){
-    if (this.state.inHangout) {
-
     }
   }
 
@@ -120,6 +124,8 @@ class GroupShow extends React.Component {
     }
   }
   render () {
+    // console.log(this.state.centerPoint);
+    getRestaurants(parseFloat(this.state.centerPoint.average_lat), parseFloat(this.state.centerPoint.average_long))
     return (
       <div className="card">
         <div className="card-body">
@@ -142,7 +148,9 @@ class GroupShow extends React.Component {
               {this.showMembers()}
             </div>
           </div>
-          {this.loadMap()}
+          <div className='map'>
+            
+          </div>
         </div>
     </div>
     )

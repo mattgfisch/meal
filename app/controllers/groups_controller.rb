@@ -35,11 +35,15 @@ class GroupsController < ApplicationController
     group = Group.find(params[:id])
     if !(group.hangouts.empty?)
       hangout_id = group.hangouts.first.id
+      center_point = Hangout.find(hangout_id).center_point
+
+      center_point = {average_lat: center_point[:average_lat].to_f, average_long: center_point[:average_long].to_f}
+
       in_hangout = user.hangouts.any?{|user_hangout| user_hangout.id == hangout_id}
     else
       hangout_id = nil
     end
-    render json: {groupTitle: group.name, groupMembers: group.members, groupAdminId: group.admin_id, hangoutId: hangout_id, inHangout: in_hangout }
+    render json: {groupTitle: group.name, groupMembers: group.members, groupAdminId: group.admin_id, hangoutId: hangout_id, inHangout: in_hangout, centerPoint: center_point }
   end
 
   def joined_groups
