@@ -22,4 +22,4 @@
 .env
 
 # Ignore coveralls file
-./coveralls.yml
+coveralls.yml
