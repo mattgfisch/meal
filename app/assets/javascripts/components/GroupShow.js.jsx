@@ -30,7 +30,7 @@ class GroupShow extends React.Component {
   componentDidMount () {
     let page = this
     $.ajax ({
-      url: '/groups/'+ this.props.groupId,
+      url: '/groups/' + this.props.groupId,
       type: 'GET',
     }).done(function(response){
       var groupMemberNames = []
