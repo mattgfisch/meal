@@ -1,6 +1,6 @@
 class GroupShow extends React.Component {
-  constructor() {
-    super();
+  constructor () {
+    super()
     this.state = {
       title: null,
       adminId: null,
@@ -21,7 +21,7 @@ class GroupShow extends React.Component {
     if (this.state.currentEmail) {
       let request = $.ajax({
         type: 'POST',
-        url: '/groups/'+form.props.groupId+'/members',
+        url: '/groups/' + form.props.groupId + '/members',
         data: {currentEmail: this.state.currentEmail}
       })
       request.success((response) => {
@@ -44,8 +44,8 @@ class GroupShow extends React.Component {
     })
   }
 
-  addMembers(){
-    if(this.props.sessionID != null){
+  addMembers () {
+    if (this.props.sessionID) {
       return (
         <div className='card group-content'>
           <div className='card-header'>
@@ -70,12 +70,12 @@ class GroupShow extends React.Component {
   }
 
   showMembers () {
-    if (this.state.members != null) {
+    if (this.state.members) {
       let n = 0
-      return(
+      return (
         this.state.members.map((member, n) => {
           n++
-          return(
+          return (
             <div key={this.state.title + n}>{member}</div>
           )
         })
@@ -85,13 +85,13 @@ class GroupShow extends React.Component {
 
   componentDidMount () {
     let page = this
-    $.ajax ({
+    $.ajax({
       url: '/groups/' + this.props.groupId,
-      type: 'GET',
-    }).done(function(response){
+      type: 'GET'
+    }).done(function (response) {
       var groupMemberNames = []
       response.groupMembers.map((member) => {
-        return(
+        return (
           groupMemberNames.push(member.name)
         )
       })
@@ -109,15 +109,15 @@ class GroupShow extends React.Component {
     let page = this
     if (this.state.hangoutId) {
       if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(sendPosition)
+        navigator.geolocation.getCurrentPosition(sendPosition)
       } else {
-          x = 'Geolocation is not supported by this browser.'
+        var x = 'Geolocation is not supported by this browser.'
       }
-      function sendPosition(position) {
+      function sendPosition (position) {
         let lat = position.coords.latitude
         let long = position.coords.longitude
         function sendRequest (page, result) {
-          var joinRequest = $.ajax ({
+          var joinRequest = $.ajax({
             url: '/groups/' + page.props.groupId + '/hangouts/' + page.state.hangoutId,
             type: 'PATCH',
             data: {lat: lat, long: long}
@@ -142,13 +142,13 @@ class GroupShow extends React.Component {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(sendPosition)
       } else {
-        x = 'Geolocation is not supported by this browser.'
+        var x = 'Geolocation is not supported by this browser.'
       }
       function sendPosition (position) {
         let lat = position.coords.latitude
         let long = position.coords.longitude
         function sendRequest (page, result) {
-          var joinRequest = $.ajax ({
+          var joinRequest = $.ajax({
             url: '/groups/' + page.props.groupId + '/hangouts',
             type: 'POST',
             data: {lat: lat, long: long}
@@ -170,12 +170,12 @@ class GroupShow extends React.Component {
 
   loadHangoutButton () {
     if (this.state.hangoutId) {
-      if (this.state.inHangout){
+      if (this.state.inHangout) {
         return <button className='btn btn-default'>HANGING OUT</button>
       } else {
         return <button className='btn btn-default' onClick={this.joinHangout}>Join Hangout</button>
       }
-    }else {
+    } else {
       return <button className='btn btn-default' onClick={this.createHangout}>Create Hangout</button>
     }
   }
@@ -187,7 +187,6 @@ class GroupShow extends React.Component {
     }
   }
   render () {
-
     return (
       <div className='card'>
         <div className='card-body'>
@@ -216,13 +215,12 @@ class GroupShow extends React.Component {
               {this.returnRestaurants()}
             </div>
             <div className='card-body text-center'>
-              <div className='map'>
-              </div>
-              <p className='restaurants'></p>
+              <div className='map' />
+              <p className='restaurants' />
             </div>
           </div>
         </div>
-    </div>
+      </div>
     )
   }
 }

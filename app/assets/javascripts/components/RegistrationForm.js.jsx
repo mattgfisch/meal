@@ -27,10 +27,10 @@ class RegistrationForm extends React.Component {
       password: e.target.value
     })
   }
-  listErrors(){
-    if(this.state.errors != null){
-      return( this.state.errors.map((error) => {
-        return(<div className='indv-error' key={error}>{error}</div>)
+  listErrors () {
+    if (this.state.errors) {
+      return (this.state.errors.map((error) => {
+        return (<div className='indv-error' key={error}>{error}</div>)
       }))
     }
   }
@@ -43,56 +43,56 @@ class RegistrationForm extends React.Component {
     var userPassword = this.state.password
 
     var request = $.ajax({
-     url: '/users',
-     method: 'POST',
-     data: {
-       user: {
-        name: userName,
-        email: userEmail,
-        password: userPassword
-       }
-     }
-   })
-   request.fail(function (response) {
-     form.setState({
-       errors: null
-     })
-     var error = response.responseJSON['errors']
-     var valueArray = []
-     for (var key in error) {
-       valueArray.push(key.substring(0,1).toUpperCase()+ key.substring(1) +' '+ error[key])
-     }
-     form.setState({
+      url: '/users',
+      method: 'POST',
+      data: {
+        user: {
+          name: userName,
+          email: userEmail,
+          password: userPassword
+        }
+      }
+    })
+    request.fail(function (response) {
+      form.setState({
+        errors: null
+      })
+      var error = response.responseJSON['errors']
+      var valueArray = []
+      for (var key in error) {
+        valueArray.push(key.substring(0, 1).toUpperCase() + key.substring(1) + ' ' + error[key])
+      }
+      form.setState({
         errors: valueArray,
         name: null,
         email: null,
         password: null
-     })
-   })
-   request.success((successfulRegistration) => {
-     form.setState({
-       errors: null
-     })
-     $.ajax({
-       url: '/sessions',
-       method: 'POST',
-       data: {
-         user: {
-          email: userEmail,
-          password: userPassword
-         }
-       }
-     }).done((successfulLogin) => {
-         form.setState({
-            errors: null
-         })
-         this.props.changeStates('Home', successfulLogin['user_id'], successfulLogin['user_name'])
-       })
-     })
-   // Reset registration fields
-   $("input").val('')
+      })
+    })
+    request.success((successfulRegistration) => {
+      form.setState({
+        errors: null
+      })
+      $.ajax({
+        url: '/sessions',
+        method: 'POST',
+        data: {
+          user: {
+            email: userEmail,
+            password: userPassword
+          }
+        }
+      }).done((successfulLogin) => {
+        form.setState({
+          errors: null
+        })
+        this.props.changeStates('Home', successfulLogin['user_id'], successfulLogin['user_name'])
+      })
+    })
 
+    $("input").val('')
   }
+
   render () {
     return (
       <div className='card'>

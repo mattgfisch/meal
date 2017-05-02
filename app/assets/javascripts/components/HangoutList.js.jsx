@@ -5,13 +5,13 @@ class HangoutList extends React.Component {
       userHangouts: null
     }
   }
-  componentDidMount() {
+  componentDidMount () {
     let hangoutList = null
     $.ajax({
       url: '/hangouts',
       method: 'GET'
     }).done((response) => {
-        hangoutList = (
+      hangoutList = (
         response.hangouts.map((hangout) => {
           return (
             <HangoutListItem hangout={hangout} key={'hangout' + hangout.id} />
@@ -21,7 +21,7 @@ class HangoutList extends React.Component {
       this.setState({
         userHangouts: hangoutList
       })
-    });
+    })
   }
 
   render () {
