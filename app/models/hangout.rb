@@ -19,8 +19,6 @@ class Hangout < ApplicationRecord
       average_lat = nil
       average_long = nil
     end
-    p average_lat
-    p average_long
     {average_lat: average_lat, average_long: average_long}
   end
 end
