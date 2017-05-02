@@ -65,7 +65,7 @@ describe 'GroupCreate' do
       fill_in 'email', with: superman.email
       click_on 'Invite User'
       click_on 'Create Group'
-      expect(page).to have_content " #{superman.name} #{wonderwoman.name} #{batman.name}"
+      expect(page).to have_content "#{batman.name} #{wonderwoman.name} #{superman.name}"
     end
   end
 end
