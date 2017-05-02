@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resource :users
   resource :sessions
   resources :groups, except: [:index]
-  resource :hangouts, except: [:show]
+  resource :hangouts, except: [:show, :create, :update]
   resource :locations
 
   post '/groups/:id/members', to: 'groups#add_members'
@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   get '/hangouts', to: 'hangouts#current_hangouts'
   get '/admin_groups', to: 'groups#admin_groups'
   delete '/sessions/:id', to: 'sessions#destroy'
+  patch '/groups/:group_id/hangouts/:id', to: 'hangouts#update'
+  post '/groups/:group_id/hangouts', to: 'hangouts#create'
 end
