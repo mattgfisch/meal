@@ -3,18 +3,16 @@ class GroupShow extends React.Component {
     super();
     this.state = {
       title: null,
-<<<<<<< HEAD
       adminId: null,
       members: null,
       hangoutId: null,
       inHangout: false,
-      centerPoint: ''
-=======
-      admin_id: null,
-      members: null,
+      centerPoint: '',
       currentEmail: null,
       errors: null
     }
+    this.joinHangout = this.joinHangout.bind(this)
+    this.createHangout = this.createHangout.bind(this)
   }
 
   handleInvite (event) {
@@ -53,13 +51,13 @@ class GroupShow extends React.Component {
           <div className='card-header'>
             <h3>Add Users</h3>
           </div>
-          <div className="card-body text-center">
+          <div className='card-body text-center'>
             <form action='/users' method='post'>
               <div className='errors errors-container'>
                 {this.state.errors}
               </div>
               <div className='form-group'>
-                <input type='email' name="email" onChange={this.handleEmailChange.bind(this)} className='form-control' placeholder='johndoe@email.com' />
+                <input type='email' name='email' onChange={this.handleEmailChange.bind(this)} className='form-control' placeholder='johndoe@email.com' />
               </div>
               <div className='register-btn'>
                 <button onClick={this.handleInvite.bind(this)} className='btn btn-default'>Invite User</button>
@@ -68,14 +66,11 @@ class GroupShow extends React.Component {
           </div>
         </div>
       )
->>>>>>> master
     }
-    this.joinHangout = this.joinHangout.bind(this)
-    this.createHangout = this.createHangout.bind(this)
   }
 
   showMembers () {
-    if(this.state.members != null){
+    if (this.state.members != null) {
       let n = 0
       return(
         this.state.members.map((member, n) => {
@@ -210,7 +205,6 @@ class GroupShow extends React.Component {
               {this.showMembers()}
             </div>
           </div>
-<<<<<<< HEAD
           <div className='card group-content' >
             <div className='card-header'>
               <h3>Restaurants</h3>
@@ -221,10 +215,7 @@ class GroupShow extends React.Component {
               <p className='restaurants'></p>
             </div>
           </div>
-
-=======
           {this.addMembers()}
->>>>>>> master
         </div>
     </div>
     )
