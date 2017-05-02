@@ -148,9 +148,17 @@ class GroupShow extends React.Component {
               {this.showMembers()}
             </div>
           </div>
-          <div className='map'>
-            
+          <div className='card group-content' >
+            <div className='card-header'>
+              <h3>Restaurants</h3>
+            </div>
+            <div className="card-body text-center">
+              <div className='map'>
+              </div>
+              <p className='restaurants'></p>
+            </div>
           </div>
+
         </div>
     </div>
     )

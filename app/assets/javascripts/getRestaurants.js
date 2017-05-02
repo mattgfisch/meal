@@ -5,7 +5,6 @@ function getRestaurants (latitude, longitude) {
           center: center,
           zoom: 15
         });
-        debugger;
     var service = new google.maps.places.PlacesService(map)
     service.nearbySearch({
             location: center,
@@ -13,13 +12,12 @@ function getRestaurants (latitude, longitude) {
             type: ['restaurant']
           }, callback)
   }
-  debugger;
 }
 
 function callback(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
-      debugger
+      $('.restaurants').append(`<p>${results[i].name}</p>`)
     }
   }
 }
