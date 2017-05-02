@@ -46,4 +46,15 @@ class GroupsController < ApplicationController
     admin_groups = user.created_groups
     render json: { admin_groups: admin_groups }
   end
+
+  def update
+    group = Group.find(params[:id])
+    user = User.find(session[:user_id])
+    group.members.delete(user)
+  end
+
+  def destroy
+    group = Group.find(params[:id])
+    Group.destroy(group)
+  end
 end

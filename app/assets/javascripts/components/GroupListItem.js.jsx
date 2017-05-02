@@ -2,6 +2,7 @@ class GroupListItem extends React.Component {
   constructor () {
     super()
     this.handler = this.handler.bind(this)
+    this.deleteHandler = this.deleteHandler.bind(this)
   }
 
   handler (event) {
@@ -11,13 +12,26 @@ class GroupListItem extends React.Component {
     this.props.changeStates('GroupPage',null,null, groupId)
   }
 
+  deleteMember() {
+    let form = this
+    var request = $.ajax({
+      type: "PUT",
+      url: `/groups/${this.props.group.id}`
+    })
+  }
+
+  deleteHandler (event) {
+    this.deleteMember()
+    location.reload()
+  }
+
 
 
   render () {
 
     return (
       <div>
-        <a id='joined' href='#' onClick={this.handler}> {this.props.group.name} </a>
+        <a id='joined' href='#' onClick={this.handler}> {this.props.group.name} </a><button onClick={this.deleteHandler} className='btn btn-xs remove'> - </button>
       </div>
     )
   }
