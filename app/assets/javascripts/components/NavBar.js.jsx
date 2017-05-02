@@ -16,7 +16,7 @@ class NavBar extends React.Component {
   }
 
   sessionId () {
-    if (this.props.session != null) {
+    if (this.props.session) {
       return (
         <button type='button' className='btn pull-right btn-default navbar-btn navbar-right' href='#' onClick={this.logoutHandler.bind(this)}>Logout</button>
       )
@@ -38,7 +38,7 @@ class NavBar extends React.Component {
   }
 
   userName () {
-    if (this.props.user != null) {
+    if (this.props.user) {
       return (
         <span className='navbar-text pull-left'>{this.props.user}</span>
       )
