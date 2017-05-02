@@ -20,7 +20,7 @@ class GroupShow extends React.Component {
         data: {currentEmail: this.state.currentEmail}
       })
       request.success((response) => {
-        $('#member-list').append(<div>response.username</div>)
+        $('#member-list').append(<div>{response.username}</div>)
       })
       request.fail((response) => {
         var error = response.responseJSON['errors']
