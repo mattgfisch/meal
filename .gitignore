@@ -20,3 +20,6 @@
 
 # Ignore environment variables
 .env
+
+# Ignore coveralls file
+./coveralls.yml
