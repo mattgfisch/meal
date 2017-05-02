@@ -24,7 +24,7 @@ class Content extends React.Component {
     })
   }
   changeStates (mode, sessionID = null, username = null, pageId = null) {
-    const GroupPage = <GroupShow groupId={pageId} />
+    const GroupPage = <GroupShow changeStates={this.changeStates} sessionID={sessionID} groupId={pageId} />
     const registration = <RegistrationForm changeStates={this.changeStates} />
     const login = <Login changeStates={this.changeStates} />
     const Home = <UserContent changeStates={this.changeStates} sessionID={sessionID} username={username} />

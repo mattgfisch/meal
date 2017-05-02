@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resource :hangouts, except: [:show]
   resource :locations
 
-
+  post '/groups/:id/members', to: 'groups#add_members'
   get '/groups', to: 'groups#joined_groups'
   get '/hangouts', to: 'hangouts#current_hangouts'
   get '/admin_groups', to: 'groups#admin_groups'
