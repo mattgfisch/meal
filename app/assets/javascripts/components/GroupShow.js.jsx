@@ -50,20 +50,24 @@ class GroupShow extends React.Component {
       return (
         <div className='card group-content'>
           <div className='card-header'>
-            <h3>Add Users</h3>
-          </div>
-          <div className='card-body text-center'>
-            <form action='/users' method='post'>
-              <div className='errors errors-container'>
-                {this.state.errors}
+            <button className='btn btn-default' type='button' data-toggle='collapse' data-target='#collapseExample' aria-expanded='false' aria-controls='collapseExample'>
+            Add Users
+            </button>
+            <div id='collapseExample' className='card-body text-center collapse'>
+              <div className='well'>
+                <form action='/users' method='post'>
+                  <div className='errors errors-container'>
+                    {this.state.errors}
+                  </div>
+                  <div className='form-group'>
+                    <input type='email' name='email' onChange={this.handleEmailChange.bind(this)} className='form-control' placeholder='johndoe@email.com' />
+                  </div>
+                  <div className='register-btn'>
+                    <button onClick={this.handleInvite.bind(this)} className='btn btn-default'>Invite User</button>
+                  </div>
+                </form>
               </div>
-              <div className='form-group'>
-                <input type='email' name='email' onChange={this.handleEmailChange.bind(this)} className='form-control' placeholder='johndoe@email.com' />
-              </div>
-              <div className='register-btn'>
-                <button onClick={this.handleInvite.bind(this)} className='btn btn-default'>Invite User</button>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       )
@@ -193,7 +197,11 @@ hangOutHelper (url, type) {
             <div id='member-list' className='card-body text-center'>
               {this.showMembers()}
             </div>
-            {this.addMembers()}
+          </div>
+          <div className='card group-content'>
+            <div className='form-show'>
+                {this.addMembers()}
+            </div>
           </div>
           <div className='card group-content' >
             <div className='card-header'>
