@@ -16,7 +16,6 @@ describe 'Showing restaurants', js: true do
       button = page.find('.joined-link', match: :first)
       button.click
       click_on 'Create Hangout'
-      sleep 2
       expect(page).to have_content 'Warning'
     end
   end
