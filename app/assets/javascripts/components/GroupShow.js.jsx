@@ -69,6 +69,13 @@ class GroupShow extends React.Component {
     }
   }
 
+  memberIsHanging (member) {
+    // glyphicon glyphicon-ok-circle
+    // glyphicon glyphicon-cutlery
+    // member
+
+  }
+
   showMembers () {
     if (this.state.members) {
       let n = 0
@@ -89,16 +96,11 @@ class GroupShow extends React.Component {
       url: '/groups/' + this.props.groupId,
       type: 'GET'
     }).done(function (response) {
-      var groupMemberNames = []
-      response.groupMembers.map((member) => {
-        return (
-          groupMemberNames.push(member.name)
-        )
-      })
+      debugger;
       page.setState({
         title: response.groupTitle,
         adminId: response.groupAdminId,
-        members: groupMemberNames,
+        members: response.groupMembers,
         hangoutId: response.hangoutId,
         inHangout: response.inHangout,
         centerPoint: response.centerPoint
