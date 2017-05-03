@@ -145,9 +145,10 @@ hangOutHelper (url, type) {
       case error.UNKNOWN_ERROR:
         errorMessage = 'An unknown error occurred. Please refresh the page and try again.'
     }
-    $(".hangout-button").after('<div>' + errorMessage + '</div>')
+    $("#location-error").html(errorMessage)
   }
   function sendPosition (position) {
+    $("#location-error").empty()
     let lat = position.coords.latitude
     let long = position.coords.longitude
     function sendRequest (page, result) {
@@ -195,6 +196,7 @@ hangOutHelper (url, type) {
           <div className='card group-content' >
             <div className='hangout-button' >
               {this.loadHangoutButton()}
+              <div id='location-error' />
             </div>
             <div className='card-header'>
               <h3>Group Name</h3>
