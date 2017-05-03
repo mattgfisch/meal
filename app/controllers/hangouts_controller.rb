@@ -32,4 +32,12 @@ class HangoutsController < ApplicationController
 
     render json: {inHangout: in_hangout, hangoutId: hangout.id, centerPoint: center_point}
   end
+
+  def leave_session
+    user = User.find(sessions[:user_id])
+    group = Group.find(params[:group_id])
+    hangout = Hangout.find(params[:id])
+    hangout.delete(user)
+
+  end
 end
