@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'GroupShow' do
+describe 'AdminGroupShow' do
   feature 'Admin form on group show', js: true do
     let!(:user) { User.create!(name: 'Matt', email: 'matt@matt.com', password: 'password') }
     let!(:new_user) { User.create!(name: 'Jack', email: 'jack@jack.com', password: 'password') }

@@ -81,7 +81,6 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    group = Group.find(params[:id])
-    Group.destroy(group)
+    Group.destroy(params[:id])
   end
 end

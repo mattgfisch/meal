@@ -4,8 +4,8 @@ class GroupShow extends React.Component {
     this.state = {
       title: null,
       adminId: null,
-      activeMembers: null,
-      members: null,
+      activeMembers: [],
+      members: [],
       hangoutId: null,
       inHangout: false,
       centerPoint: '',
@@ -74,11 +74,14 @@ class GroupShow extends React.Component {
     // glyphicon glyphicon-ok-circle
     // glyphicon glyphicon-cutlery
     // member
-    if (this.state.activeMembers.includes(member)) {
-      return (
-        <button className='btn btn-default btn-xs'><span className='glyphicon glyphicon-cutlery glyphicon-align-left' aria-hidden='true' /></button>
-      )
+    if (this.state.activeMembers) {
+      if (this.state.activeMembers.includes(member)) {
+        return (
+          <button className='btn btn-default btn-xs'><span className='glyphicon glyphicon-cutlery glyphicon-align-left' aria-hidden='true' /></button>
+        )
+      }
     }
+
   }
 
   showMembers () {
