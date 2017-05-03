@@ -50,11 +50,11 @@ class GroupShow extends React.Component {
       return (
         <div className='card group-content'>
           <div className='card-header'>
-            <button className="btn btn-default" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <button className='btn btn-default' type='button' data-toggle='collapse' data-target='#collapseExample' aria-expanded='false' aria-controls='collapseExample'>
             Add Users
             </button>
-            <div id="collapseExample" className='card-body text-center collapse'>
-              <div className="well">
+            <div id='collapseExample' className='card-body text-center collapse'>
+              <div className='well'>
                 <form action='/users' method='post'>
                   <div className='errors errors-container'>
                     {this.state.errors}
