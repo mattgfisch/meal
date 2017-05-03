@@ -1,6 +1,6 @@
 class GroupShow extends React.Component {
-  constructor() {
-    super();
+  constructor () {
+    super()
     this.state = {
       title: null,
       adminId: null,
@@ -21,7 +21,7 @@ class GroupShow extends React.Component {
     if (this.state.currentEmail) {
       let request = $.ajax({
         type: 'POST',
-        url: '/groups/'+form.props.groupId+'/members',
+        url: '/groups/' + form.props.groupId + '/members',
         data: {currentEmail: this.state.currentEmail}
       })
       request.success((response) => {
@@ -44,8 +44,8 @@ class GroupShow extends React.Component {
     })
   }
 
-  addMembers(){
-    if(this.props.sessionID != null){
+  addMembers () {
+    if (this.props.sessionID) {
       return (
         <div className='card group-content'>
           <div className='card-header'>
@@ -70,12 +70,12 @@ class GroupShow extends React.Component {
   }
 
   showMembers () {
-    if (this.state.members != null) {
+    if (this.state.members) {
       let n = 0
-      return(
+      return (
         this.state.members.map((member, n) => {
           n++
-          return(
+          return (
             <div key={this.state.title + n}>{member}</div>
           )
         })
@@ -85,13 +85,13 @@ class GroupShow extends React.Component {
 
   componentDidMount () {
     let page = this
-    $.ajax ({
+    $.ajax({
       url: '/groups/' + this.props.groupId,
-      type: 'GET',
-    }).done(function(response){
+      type: 'GET'
+    }).done(function (response) {
       var groupMemberNames = []
       response.groupMembers.map((member) => {
-        return(
+        return (
           groupMemberNames.push(member.name)
         )
       })
@@ -151,12 +151,12 @@ hangOutHelper(url, type) {
 
   loadHangoutButton () {
     if (this.state.hangoutId) {
-      if (this.state.inHangout){
+      if (this.state.inHangout) {
         return <button className='btn btn-default'>HANGING OUT</button>
       } else {
         return <button className='btn btn-default' onClick={this.joinHangout}>Join Hangout</button>
       }
-    }else {
+    } else {
       return <button className='btn btn-default' onClick={this.createHangout}>Create Hangout</button>
     }
   }
@@ -168,10 +168,9 @@ hangOutHelper(url, type) {
     }
   }
   render () {
-
     return (
-      <div className="card">
-        <div className="card-body">
+      <div className='card'>
+        <div className='card-body'>
           <div className='card group-content' >
             <div className='hangout-button' >
               {this.loadHangoutButton()}
@@ -179,7 +178,7 @@ hangOutHelper(url, type) {
             <div className='card-header'>
               <h3>Group Name</h3>
             </div>
-            <div className="card-body text-center">
+            <div className='card-body text-center'>
               {this.state.title}
             </div>
           </div>
@@ -187,7 +186,7 @@ hangOutHelper(url, type) {
             <div className='card-header'>
               <h3>Members</h3>
             </div>
-            <div id='member-list' className="card-body text-center">
+            <div id='member-list' className='card-body text-center'>
               {this.showMembers()}
             </div>
             {this.addMembers()}
@@ -196,14 +195,13 @@ hangOutHelper(url, type) {
             <div className='card-header'>
               {this.returnRestaurants()}
             </div>
-            <div className="card-body text-center">
-              <div className='map'>
-              </div>
-              <p className='restaurants'></p>
+            <div className='card-body text-center'>
+              <div className='map' />
+              <p className='restaurants' />
             </div>
           </div>
         </div>
-    </div>
+      </div>
     )
   }
 }

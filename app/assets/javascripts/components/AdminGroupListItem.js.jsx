@@ -9,7 +9,7 @@ class AdminGroupListItem extends React.Component {
     event.preventDefault()
 
     let groupId = this.props.group.id
-    if(this.props.sessionID == this.props.group.admin_id){
+    if (this.props.sessionID === this.props.group.admin_id) {
       this.props.changeStates('GroupPage', this.props.sessionID, null, groupId)
     } else {
       this.props.changeStates('GroupPage', null, null, groupId)
@@ -17,16 +17,16 @@ class AdminGroupListItem extends React.Component {
   }
 
   deleteGroup () {
-    var request = $.ajax({
+    $.ajax({
       type: 'DELETE',
-      url: `/groups/${this.props.group.id}`
+      url: '/groups/' + this.props.group.id
     })
   }
 
   deleteHandler () {
     this.deleteGroup()
     location.reload()
-   }
+  }
 
   render () {
     return (

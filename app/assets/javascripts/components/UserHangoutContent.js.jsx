@@ -1,7 +1,6 @@
 class UserHangoutContent extends React.Component {
 
   render () {
-  
     return (
       <div className='card user-content' id='current-hangouts'>
         <div className='card-header'>
