@@ -177,7 +177,6 @@ leaveHangout() {
         activeMembers: page.state.activeMembers.splice(response.index,1)
       })
     }
-    debugger
   })
 }
 
@@ -197,9 +196,11 @@ leaveHangout() {
   returnRestaurants () {
     if (this.state.centerPoint && this.state.inHangout) {
       getRestaurants(parseFloat(this.state.centerPoint.average_lat), parseFloat(this.state.centerPoint.average_long))
-
+    }else {
+      $('.restaurants-list').html('')
     }
   }
+
   render () {
     return (
       <div className='card'>
