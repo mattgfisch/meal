@@ -197,7 +197,11 @@ hangOutHelper (url, type) {
             <div id='member-list' className='card-body text-center'>
               {this.showMembers()}
             </div>
-            {this.addMembers()}
+          </div>
+          <div className='card group-content'>
+            <div className='form-show'>
+                {this.addMembers()}
+            </div>
           </div>
           <div className='card group-content' >
             <div className='card-header'>
