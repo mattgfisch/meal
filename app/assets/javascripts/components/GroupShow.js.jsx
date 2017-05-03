@@ -126,10 +126,26 @@ class GroupShow extends React.Component {
 hangOutHelper (url, type) {
   let page = this
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(sendPosition)
+    navigator.geolocation.getCurrentPosition(sendPosition, showError)
   } else {
-    var x = 'Geolocation is not supported by this browser.'
+    alert('Geolocation is not supported by this browser.')
   }
+  function showError (error) {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        alert('User denied the request for Geolocation.')
+        break;
+      case error.POSITION_UNAVAILABLE:
+        alert('Location information is unavailable.')
+        break;
+      case error.TIMEOUT:
+        alert('The request to get user location timed out.')
+        break;
+      case error.UNKNOWN_ERROR:
+        alert('An unknown error occurred.')
+        break;
+    }
+}
   function sendPosition (position) {
     let lat = position.coords.latitude
     let long = position.coords.longitude
