@@ -41,4 +41,18 @@ class HangoutsController < ApplicationController
 
     render json: {activeMembers: active_members, inHangout: in_hangout, hangoutId: hangout.id, centerPoint: center_point}
   end
+
+  def leave
+    user = User.find(session[:user_id])
+    hangout = Hangout.find(params[:id])
+    hangout.members.delete(user)
+    in_hangout = hangout.members.include?(user)
+    active_members = []
+    if(hangout.members.length != 0)
+      hangout.members.map do |user|
+        active_members << user.name
+      end
+    end
+    render json: {activeMembers: active_members, inHangout: in_hangout}
+  end
 end

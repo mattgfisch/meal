@@ -14,6 +14,7 @@ class GroupShow extends React.Component {
     }
     this.joinHangout = this.joinHangout.bind(this)
     this.createHangout = this.createHangout.bind(this)
+    this.leaveHangout =  this.leaveHangout.bind(this)
   }
 
   handleInvite (event) {
@@ -158,10 +159,25 @@ hangOutHelper (url, type) {
   }
 }
 
+leaveHangout() {
+  let page = this
+  var request = $.ajax ({
+    url: '/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId + '/leave',
+    type: 'PUT'
+  })
+  request.done((response) => {
+    page.setState({
+      inHangout: response.inHangout,
+      activeMembers: response.activeMembers
+    })
+  })
+}
+
+
   loadHangoutButton () {
     if (this.state.hangoutId) {
       if (this.state.inHangout) {
-        return <button className='btn btn-default'>HANGING OUT</button>
+        return <button onClick={this.leaveHangout} className='btn btn-default'>Leave Hangout</button>
       } else {
         return <button className='btn btn-default' onClick={this.joinHangout}>Join Hangout</button>
       }
@@ -173,9 +189,11 @@ hangOutHelper (url, type) {
   returnRestaurants () {
     if (this.state.centerPoint && this.state.inHangout) {
       getRestaurants(parseFloat(this.state.centerPoint.average_lat), parseFloat(this.state.centerPoint.average_long))
-
+    }else {
+      $('.restaurants-list').html('')
     }
   }
+
   render () {
     return (
       <div className='card'>
