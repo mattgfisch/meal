@@ -149,6 +149,7 @@ hangOutHelper (url, type) {
     }
     sendRequest(page, function (result, page) {
       page.setState({
+        activeMembers: result.activeMembers,
         inHangout: result.inHangout,
         centerPoint: result.centerPoint,
         hangoutId: result.hangoutId
@@ -172,7 +173,7 @@ hangOutHelper (url, type) {
   returnRestaurants () {
     if (this.state.centerPoint && this.state.inHangout) {
       getRestaurants(parseFloat(this.state.centerPoint.average_lat), parseFloat(this.state.centerPoint.average_long))
-      
+
     }
   }
   render () {

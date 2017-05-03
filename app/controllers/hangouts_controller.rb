@@ -7,6 +7,7 @@ class HangoutsController < ApplicationController
 
   def update
     hangout = Hangout.find(params[:id])
+    selected_group = Group.find(params[:group_id])
     user = User.find(session[:user_id])
     if !(user.hangouts.any? {|user_hangout| user_hangout.id == hangout.id})
       user.hangouts << hangout
@@ -14,8 +15,12 @@ class HangoutsController < ApplicationController
       center_point = hangout.center_point
       center_point = {average_lat: center_point[:average_lat].to_f, average_long: center_point[:average_long].to_f}
       in_hangout = user.hangouts.any?{|user_hangout| user_hangout.id == hangout.id}
+      active_members = selected_group.members.select do |user|
+        user.hangouts.any?{|user_hangout| user_hangout.id == hangout.id}
+      end
+      active_members.map! { |user| user.name }
     end
-    render json: {centerPoint: center_point, hangoutId: hangout.id, inHangout: in_hangout}
+    render json: {activeMembers: active_members, centerPoint: center_point, hangoutId: hangout.id, inHangout: in_hangout}
   end
 
   def create
@@ -29,7 +34,11 @@ class HangoutsController < ApplicationController
 
     in_hangout = user.hangouts.any?{|user_hangout| user_hangout.id == hangout.id}
     center_point = {average_lat: params[:lat], average_long: params[:long]}
+    active_members = selected_group.members.select do |user|
+      user.hangouts.any?{|user_hangout| user_hangout.id == hangout.id}
+    end
+    active_members.map! { |user| user.name }
 
-    render json: {inHangout: in_hangout, hangoutId: hangout.id, centerPoint: center_point}
+    render json: {activeMembers: active_members, inHangout: in_hangout, hangoutId: hangout.id, centerPoint: center_point}
   end
 end
