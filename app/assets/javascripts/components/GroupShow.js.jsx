@@ -128,24 +128,25 @@ hangOutHelper (url, type) {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(sendPosition, showError)
   } else {
-    alert('Geolocation is not supported by this browser.')
+    alert('We apologize, but your browser does not support location services used by our app')
   }
   function showError (error) {
+    let errorMessage
     switch (error.code) {
       case error.PERMISSION_DENIED:
-        alert('User denied the request for Geolocation.')
-        break;
+        errorMessage = 'Please enable location services to participate in a hangout'
+        break
       case error.POSITION_UNAVAILABLE:
-        alert('Location information is unavailable.')
-        break;
+        errorMessage = 'Sorry, but we cannot find your location. Please refresh the page and try again.'
+        break
       case error.TIMEOUT:
-        alert('The request to get user location timed out.')
-        break;
+        errorMessage = 'Sorry, but it took too long to find your location. Please refresh the page and try again.'
+        break
       case error.UNKNOWN_ERROR:
-        alert('An unknown error occurred.')
-        break;
+        errorMessage = 'An unknown error occurred. Please refresh the page and try again.'
     }
-}
+    $(".hangout-button").after('<div>' + errorMessage + '</div>')
+  }
   function sendPosition (position) {
     let lat = position.coords.latitude
     let long = position.coords.longitude
