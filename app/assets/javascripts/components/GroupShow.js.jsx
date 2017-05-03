@@ -10,7 +10,8 @@ class GroupShow extends React.Component {
       inHangout: false,
       centerPoint: '',
       currentEmail: null,
-      errors: null
+      errors: null,
+      locationError: null
     }
     this.joinHangout = this.joinHangout.bind(this)
     this.createHangout = this.createHangout.bind(this)
@@ -127,53 +128,54 @@ class GroupShow extends React.Component {
     }
   }
 
-hangOutHelper (url, type) {
-  let page = this
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(sendPosition, showError)
-  } else {
-    alert('We apologize, but your browser does not support location services used by our app')
-  }
-  function showError (error) {
-    let errorMessage
-    switch (error.code) {
-      case error.PERMISSION_DENIED:
-        errorMessage = 'Please enable location services to participate in a hangout'
-        break
-      case error.POSITION_UNAVAILABLE:
-        errorMessage = 'Sorry, but we cannot find your location. Please refresh the page and try again.'
-        break
-      case error.TIMEOUT:
-        errorMessage = 'Sorry, but it took too long to find your location. Please refresh the page and try again.'
-        break
-      case error.UNKNOWN_ERROR:
-        errorMessage = 'An unknown error occurred. Please refresh the page and try again.'
+  hangOutHelper (url, type) {
+    let page = this
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(sendPosition, showError)
+    } else {
+      $('#location-error').html('We apologize, but your browser does not support location services used by our app')
     }
-    $("#location-error").html(errorMessage)
-  }
-  function sendPosition (position) {
-    $("#location-error").empty()
-    let lat = position.coords.latitude
-    let long = position.coords.longitude
-    function sendRequest (page, result) {
-      var joinRequest = $.ajax({
-        url: url,
-        type: type,
-        data: {lat: lat, long: long}
-      })
-      joinRequest.done((response) => {
-        result(response, page)
+    function showError (error) {
+      let errorMessage
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          errorMessage = 'Please enable location services to participate in a hangout'
+          break
+        case error.POSITION_UNAVAILABLE:
+          errorMessage = 'Sorry, but we cannot find your location. Please refresh the page and try again.'
+          break
+        case error.TIMEOUT:
+          errorMessage = 'Sorry, but it took too long to find your location. Please refresh the page and try again.'
+          break
+        case error.UNKNOWN_ERROR:
+          errorMessage = 'An unknown error occurred. Please refresh the page and try again.'
+      }
+      page.setState({locationError: errorMessage})
+    }
+
+    function sendPosition (position) {
+      $('#location-error').empty()
+      let lat = position.coords.latitude
+      let long = position.coords.longitude
+      function sendRequest (page, result) {
+        var joinRequest = $.ajax({
+          url: url,
+          type: type,
+          data: {lat: lat, long: long}
+        })
+        joinRequest.done((response) => {
+          result(response, page)
+        })
+      }
+      sendRequest(page, function (result, page) {
+        page.setState({
+          inHangout: result.inHangout,
+          centerPoint: result.centerPoint,
+          hangoutId: result.hangoutId
+        })
       })
     }
-    sendRequest(page, function (result, page) {
-      page.setState({
-        inHangout: result.inHangout,
-        centerPoint: result.centerPoint,
-        hangoutId: result.hangoutId
-      })
-    })
   }
-}
 
   loadHangoutButton () {
     if (this.state.hangoutId) {
@@ -193,6 +195,7 @@ hangOutHelper (url, type) {
       return (<h3>Restaurants</h3>)
     }
   }
+
   render () {
     return (
       <div className='card'>
@@ -200,7 +203,7 @@ hangOutHelper (url, type) {
           <div className='card group-content' >
             <div className='hangout-button' >
               {this.loadHangoutButton()}
-              <div id='location-error' />
+              <LocationError locationError={this.state.locationError} />
             </div>
             <div className='card-header'>
               <h3>Group Name</h3>
@@ -219,7 +222,7 @@ hangOutHelper (url, type) {
           </div>
           <div className='card group-content'>
             <div className='form-show'>
-                {this.addMembers()}
+              {this.addMembers()}
             </div>
           </div>
           <div className='card group-content' >
