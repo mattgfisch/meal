@@ -4,6 +4,7 @@ class GroupShow extends React.Component {
     this.state = {
       title: null,
       adminId: null,
+      activeMembers: null,
       members: null,
       hangoutId: null,
       inHangout: false,
@@ -73,7 +74,11 @@ class GroupShow extends React.Component {
     // glyphicon glyphicon-ok-circle
     // glyphicon glyphicon-cutlery
     // member
-
+    if (this.state.activeMembers.includes(member)) {
+      return (
+        <button className='btn btn-default btn-xs'><span className='glyphicon glyphicon-cutlery glyphicon-align-left' aria-hidden='true' /></button>
+      )
+    }
   }
 
   showMembers () {
@@ -83,7 +88,7 @@ class GroupShow extends React.Component {
         this.state.members.map((member, n) => {
           n++
           return (
-            <div key={this.state.title + n}>{member}</div>
+            <div key={this.state.title + n}>{member} {this.memberIsHanging(member)} </div>
           )
         })
       )
@@ -96,8 +101,8 @@ class GroupShow extends React.Component {
       url: '/groups/' + this.props.groupId,
       type: 'GET'
     }).done(function (response) {
-      debugger;
       page.setState({
+        activeMembers: response.activeMembers,
         title: response.groupTitle,
         adminId: response.groupAdminId,
         members: response.groupMembers,
