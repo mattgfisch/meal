@@ -149,6 +149,7 @@ hangOutHelper (url, type) {
     }
     sendRequest(page, function (result, page) {
       page.setState({
+        activeMembers: result.activeMembers,
         inHangout: result.inHangout,
         centerPoint: result.centerPoint,
         hangoutId: result.hangoutId
