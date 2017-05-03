@@ -1,7 +1,9 @@
 class Timer extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {count: 600}
+    this.state = {
+      timeout: (this.props.createdAt + 10 * 60 * 1000)
+    }
   }
   componentWillUnmount () {
     clearInterval(this.timer)
@@ -9,32 +11,22 @@ class Timer extends React.Component {
   tick () {
     this.setState({count: (this.state.count - 1)})
   }
-  convertTime(){
-    var total = this.state.count
-    var sec = total%60
-    total = total - sec
-    var mins = total/ 60
+  convertTime () {
+    var currentTime = new Date().toString()
+    debugger
+    var timeLeft = this.state.timeout
+    var mins = timeLeft / 60000
     mins = Math.round(mins)
-   if(sec <= 9){
-     sec = "0" + parseInt(sec,10)
-   }
-   if(mins <= 9){
-     mins = "0" + parseInt(mins,10)
-   }
-    if(mins == 0 && sec == 0){
+    if(timeLeft <= 0){
       this.stopTimer()
-      this.resetTimer()
     }
     return (
       <div>
-        {mins} : {sec}
+        {mins} minutes till lockout
       </div>
     )
   }
 
-  resetTimer () {
-    this.state.count = 600
-  }
   startTimer () {
     clearInterval(this.timer)
     this.timer = setInterval(this.tick.bind(this), 1000)
@@ -43,11 +35,12 @@ class Timer extends React.Component {
     clearInterval(this.timer)
   }
   render () {
+    debugger
     return (
       <div className='timer'>
         <h1>{this.convertTime()}</h1>
+        {this.startTimer()}
         <div>
-          <button onClick={this.startTimer.bind(this)}>Start</button>
           <button onClick={this.stopTimer.bind(this)}>Stop</button>
         </div>
       </div>

@@ -9,10 +9,12 @@ class GroupShow extends React.Component {
       inHangout: false,
       centerPoint: '',
       currentEmail: null,
-      errors: null
+      errors: null,
+      createdAt: null
     }
     this.joinHangout = this.joinHangout.bind(this)
     this.createHangout = this.createHangout.bind(this)
+    this.showTimer = this.showTimer.bind(this)
   }
 
   handleInvite (event) {
@@ -101,7 +103,8 @@ class GroupShow extends React.Component {
         members: groupMemberNames,
         hangoutId: response.hangoutId,
         inHangout: response.inHangout,
-        centerPoint: response.centerPoint
+        centerPoint: response.centerPoint,
+        createdAt: response.createdAt
       })
     })
   }
@@ -137,6 +140,7 @@ class GroupShow extends React.Component {
   }
 
   createHangout () {
+
     let page = this
     if (!this.state.hangoutId) {
       if (navigator.geolocation) {
@@ -158,19 +162,22 @@ class GroupShow extends React.Component {
           })
         }
         sendRequest(page, function (result, page) {
+          var createdTime = new Date().getTime()
           page.setState({
             inHangout: result.inHangout,
             hangoutId: result.hangoutId,
-            centerPoint: result.centerPoint
+            centerPoint: result.centerPoint,
+            createdAt: createdTime
           })
         })
       }
     }
   }
 
+
   showTimer() {
     if (this.state.hangoutId) {
-      return <Timer />
+      return <Timer  createdAt={this.state.createdAt} />
     }
   }
 
