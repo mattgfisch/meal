@@ -26,9 +26,11 @@ class GroupShow extends React.Component {
         url: '/groups/' + form.props.groupId + '/members',
         data: {currentEmail: this.state.currentEmail}
       })
+      
       request.success((response) => {
         $('#member-list').append('<div>' + response.username + '</div>')
       })
+
       request.fail((response) => {
         var error = response.responseJSON['errors']
         form.setState({
@@ -40,12 +42,12 @@ class GroupShow extends React.Component {
     $("input[type='email']").val('')
   }
 
-  handleEmailChange (event) {
-    this.setState({
-      currentEmail: event.target.value
-    })
-  }
 
+   handleEmailChange(event) {
+     this.setState({
+       currentEmail: event.target.value
+     })
+  }
   addMembers () {
     if (this.props.sessionID) {
       return (
@@ -136,6 +138,7 @@ class GroupShow extends React.Component {
     } else {
       $('#location-error').html('We apologize, but your browser does not support location services used by our app')
     }
+
     function showError (error) {
       let errorMessage
       switch (error.code) {
@@ -158,6 +161,7 @@ class GroupShow extends React.Component {
       $('#location-error').empty()
       let lat = position.coords.latitude
       let long = position.coords.longitude
+
       function sendRequest (page, result) {
         var joinRequest = $.ajax({
           url: url,
@@ -168,8 +172,10 @@ class GroupShow extends React.Component {
           result(response, page)
         })
       }
+
       sendRequest(page, function (result, page) {
         page.setState({
+          activeMembers: result.activeMembers,
           inHangout: result.inHangout,
           centerPoint: result.centerPoint,
           hangoutId: result.hangoutId
@@ -193,7 +199,7 @@ class GroupShow extends React.Component {
   returnRestaurants () {
     if (this.state.centerPoint && this.state.inHangout) {
       getRestaurants(parseFloat(this.state.centerPoint.average_lat), parseFloat(this.state.centerPoint.average_long))
-      return (<h3>Restaurants</h3>)
+
     }
   }
 
@@ -228,7 +234,9 @@ class GroupShow extends React.Component {
           </div>
           <div className='card group-content' >
             <div className='card-header'>
-              {this.returnRestaurants()}
+              <div className='restaurants-list'>
+                {this.returnRestaurants()}
+              </div>
             </div>
             <div className='card-body text-center'>
               <div className='map' />
