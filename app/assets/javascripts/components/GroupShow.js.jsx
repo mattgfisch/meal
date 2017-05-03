@@ -39,12 +39,12 @@ class GroupShow extends React.Component {
     $("input[type='email']").val('')
   }
 
-  handleEmailChange (event) {
-    this.setState({
-      currentEmail: event.target.value
-    })
-  }
 
+   handleEmailChange(event) {
+     this.setState({
+       currentEmail: event.target.value
+     })
+  }
   addMembers () {
     if (this.props.sessionID) {
       return (
@@ -149,6 +149,7 @@ hangOutHelper (url, type) {
     }
     sendRequest(page, function (result, page) {
       page.setState({
+        activeMembers: result.activeMembers,
         inHangout: result.inHangout,
         centerPoint: result.centerPoint,
         hangoutId: result.hangoutId
@@ -172,7 +173,7 @@ hangOutHelper (url, type) {
   returnRestaurants () {
     if (this.state.centerPoint && this.state.inHangout) {
       getRestaurants(parseFloat(this.state.centerPoint.average_lat), parseFloat(this.state.centerPoint.average_long))
-      return (<h3>Restaurants</h3>)
+
     }
   }
   render () {
@@ -205,7 +206,9 @@ hangOutHelper (url, type) {
           </div>
           <div className='card group-content' >
             <div className='card-header'>
-              {this.returnRestaurants()}
+              <div className='restaurants-list'>
+                {this.returnRestaurants()}
+              </div>
             </div>
             <div className='card-body text-center'>
               <div className='map' />
