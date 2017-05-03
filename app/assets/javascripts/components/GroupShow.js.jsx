@@ -167,7 +167,7 @@ leaveHangout() {
   })
   request.done((response) => {
     page.setState({
-      inHangout: false,
+      inHangout: response.inHangout,
       activeMembers: response.activeMembers
     })
   })

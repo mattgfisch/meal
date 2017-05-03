@@ -46,13 +46,13 @@ class HangoutsController < ApplicationController
     user = User.find(session[:user_id])
     hangout = Hangout.find(params[:id])
     hangout.members.delete(user)
+    in_hangout = hangout.members.include?(user)
     active_members = []
     if(hangout.members.length != 0)
       hangout.members.map do |user|
-        active_members << user
+        active_members << user.name
       end
-      active_members.map! { |user| user.name }
     end
-    render json: {activeMembers: active_members}
+    render json: {activeMembers: active_members, inHangout: in_hangout}
   end
 end
