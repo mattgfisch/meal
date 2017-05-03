@@ -37,6 +37,7 @@ describe 'AdminGroupShow' do
 
     it 'Group admin can invite valid user' do
       click_link('created', :match => :first)
+      click_on('Add Users')
       fill_in 'email', with: 'jack@jack.com'
       click_on 'Invite User'
       expect(page).to have_content('Jack')
@@ -44,6 +45,7 @@ describe 'AdminGroupShow' do
 
     it 'Group admin can not invite themselves to group/ anyone already in group' do
       click_link('created', :match => :first)
+      click_on('Add Users')
       fill_in 'email', with: 'matt@matt.com'
       click_on 'Invite User'
       expect(page).to have_content('Invalid email')
@@ -51,6 +53,7 @@ describe 'AdminGroupShow' do
 
     it 'Group admin can not invite invaild emails' do
       click_link('created', :match => :first)
+      click_on('Add Users')
       fill_in 'email', with: 'weqrdsfasdfdfg'
       click_on 'Invite User'
 
@@ -61,6 +64,7 @@ describe 'AdminGroupShow' do
       click_on '+'
       fill_in 'groupName', with: 'Grouptastic'
       click_on 'Create Group'
+      click_on('Add Users')
       fill_in 'email', with: 'jack@jack.com'
       click_on 'Invite User'
       expect(page).to have_content('Jack')
@@ -70,6 +74,7 @@ describe 'AdminGroupShow' do
       click_on '+'
       fill_in 'groupName', with: 'Grouptastic'
       click_on 'Create Group'
+      click_on('Add Users')
       fill_in 'email', with: 'matt@matt.com'
       click_on 'Invite User'
       expect(page).to have_content('Invalid email')
@@ -79,6 +84,7 @@ describe 'AdminGroupShow' do
       click_on '+'
       fill_in 'groupName', with: 'Grouptastic'
       click_on 'Create Group'
+      click_on('Add Users')
       fill_in 'email', with: 'weqrdsfasdfdfg'
       click_on 'Invite User'
 
