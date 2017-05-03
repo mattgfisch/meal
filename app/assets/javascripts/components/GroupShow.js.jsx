@@ -166,17 +166,10 @@ leaveHangout() {
     type: 'PUT'
   })
   request.done((response) => {
-    if (page.state.activeMembers.length == 1) {
-      page.setState({
-        inHangout: false,
-        activeMembers: []
-      })
-    }else {
-      page.setState({
-        inHangout: false,
-        activeMembers: page.state.activeMembers.splice(response.index,1)
-      })
-    }
+    page.setState({
+      inHangout: false,
+      activeMembers: response.activeMembers
+    })
   })
 }
 

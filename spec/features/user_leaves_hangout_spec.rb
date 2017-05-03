@@ -24,10 +24,20 @@ describe 'GroupShow' do
       expect(page).to have_content('Leave Hangout')
     end
 
-    it "removes user from hangout and all views associated with a active member of hangout" do
+    it "removes user from hangout and all Restaurants removed" do
       click_on 'Leave Hangout'
       expect(page).not_to have_content('Restaurants')
     end
 
+    it "removes user from hangout and button goes back to join hangout" do
+      click_on 'Leave Hangout'
+      expect(page).to have_content('Join Hangout')
+    end
+
+    it "removes user from hangout and icon next to name is removed" do
+      click_on 'Leave Hangout'
+      user_div = page.find("div", :text => /\AMatt\z/)
+      expect(user_div).not_to have_selector("button")
+    end
   end
 end
