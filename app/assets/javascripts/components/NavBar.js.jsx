@@ -1,14 +1,14 @@
 class NavBar extends React.Component {
 
-  componentDidMount(){
+  componentDidMount () {
     this.sessionId()
     this.userName()
   }
 
-   logoutHandler(e)  {
+  logoutHandler (e) {
     e.preventDefault()
     $.ajax({
-      url: '/sessions/'+ this.props.session,
+      url: '/sessions/' + this.props.session,
       type: 'DELETE'
     }).done((response) => {
       this.props.changeStates('Login')
@@ -16,31 +16,29 @@ class NavBar extends React.Component {
   }
 
   sessionId () {
-    if (this.props.session != null) {
-    return(
-      <button type='button' className='btn pull-right btn-default navbar-btn navbar-right' href='#' onClick={this.logoutHandler.bind(this)}>Logout</button>
-        )
-      }
+    if (this.props.session) {
+      return (
+        <button type='button' className='btn pull-right btn-default navbar-btn navbar-right' href='#' onClick={this.logoutHandler.bind(this)}>Logout</button>
+      )
+    }
   }
 
   homeLink () {
     const handler = (e) => {
       e.preventDefault()
-      if (this.props.session != null) {
-        this.props.changeStates('Home',this.props.session,this.props.user)
-      }
-      else
-      {
+      if (this.props.session) {
+        this.props.changeStates('Home', this.props.session, this.props.user)
+      } else {
         this.props.changeStates('Login')
       }
     }
     return (
-        <a href='#' onClick={handler} className='navbar-brand navbar-link'>Meals</a>
+      <a href='#' onClick={handler} className='navbar-brand navbar-link'>Meals</a>
     )
   }
 
   userName () {
-    if (this.props.user != null) {
+    if (this.props.user) {
       return (
         <span className='navbar-text pull-left'>{this.props.user}</span>
       )

@@ -5,13 +5,13 @@ class GroupList extends React.Component {
       userGroups: null
     }
   }
-  componentDidMount() {
+  componentDidMount () {
     let groupList = null
     $.ajax({
       url: '/groups',
       method: 'GET'
     }).done((response) => {
-        groupList = (
+      groupList = (
         response.groups.map((group) => {
           return (
             <GroupListItem changeStates={this.props.changeStates} sessionID={this.props.sessionID} username={this.props.username} group={group} key={'group' + group.id} />
@@ -21,11 +21,10 @@ class GroupList extends React.Component {
       this.setState({
         userGroups: groupList
       })
-    });
+    })
   }
 
   render () {
-
     return (
       <div>
         {this.state.userGroups}
