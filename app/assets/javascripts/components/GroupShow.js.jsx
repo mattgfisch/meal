@@ -107,13 +107,13 @@ class GroupShow extends React.Component {
   }
   joinHangout () {
     if (this.state.hangoutId != null){
-      this.hangOutHelper(`/groups/${this.props.groupId}/hangouts/${this.state.hangoutId}`,'PATCH')
+      this.hangOutHelper('/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId,'PATCH')
     }
   }
 
   createHangout () {
     if (this.state.hangoutId == null){
-      this.hangOutHelper(`/groups/${this.props.groupId}/hangouts`,'POST')
+      this.hangOutHelper('/groups/' + this.props.groupId + '/hangouts','POST')
     }
   }
 
