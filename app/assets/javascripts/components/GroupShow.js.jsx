@@ -116,67 +116,48 @@ class GroupShow extends React.Component {
     })
   }
   joinHangout () {
-    let page = this
-    if (this.state.hangoutId) {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(sendPosition)
-      } else {
-        var x = 'Geolocation is not supported by this browser.'
-      }
-      function sendPosition (position) {
-        let lat = position.coords.latitude
-        let long = position.coords.longitude
-        function sendRequest (page, result) {
-          var joinRequest = $.ajax({
-            url: '/groups/' + page.props.groupId + '/hangouts/' + page.state.hangoutId,
-            type: 'PATCH',
-            data: {lat: lat, long: long}
-          })
-          joinRequest.done((response) => {
-            result(response, page)
-          })
-        }
-        sendRequest(page, function (result, page) {
-          page.setState({
-            inHangout: result.inHangout,
-            centerPoint: result.centerPoint
-          })
-        })
-      }
+    if (this.state.hangoutId != null){
+      this.hangOutHelper('/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId,'PATCH')
     }
   }
 
   createHangout () {
-    let page = this
-    if (!this.state.hangoutId) {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(sendPosition)
-      } else {
-        var x = 'Geolocation is not supported by this browser.'
-      }
-      function sendPosition (position) {
-        let lat = position.coords.latitude
-        let long = position.coords.longitude
-        function sendRequest (page, result) {
-          var joinRequest = $.ajax({
-            url: '/groups/' + page.props.groupId + '/hangouts',
-            type: 'POST',
-            data: {lat: lat, long: long}
-          })
-          joinRequest.done((response) => {
-            result(response, page)
-          })
-        }
-        sendRequest(page, function (result, page) {
-          page.setState({
-            inHangout: result.inHangout,
-            hangoutId: result.hangoutId,
-            centerPoint: result.centerPoint
-          })
-        })
-      }
+    if (this.state.hangoutId == null){
+      this.hangOutHelper('/groups/' + this.props.groupId + '/hangouts','POST')
     }
   }
+
+
+hangOutHelper(url, type) {
+  let page = this
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(sendPosition)
+    } else {
+      x = "Geolocation is not supported by this browser."
+    }
+    function sendPosition(position) {
+      let lat = position.coords.latitude
+      let long = position.coords.longitude
+      function sendRequest (page, result) {
+        var joinRequest = $.ajax ({
+          url: url,
+          type: type,
+          data: {lat: lat, long: long}
+        })
+        joinRequest.done((response) => {
+          result(response, page)
+        })
+      }
+      sendRequest(page, function (result, page) {
+        page.setState({
+          inHangout: result.inHangout,
+          centerPoint: result.centerPoint,
+          hangoutId: result.hangoutId
+        })
+      }
+    )
+  }
+}
 
   loadHangoutButton () {
     if (this.state.hangoutId) {
