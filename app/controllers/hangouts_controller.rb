@@ -43,10 +43,11 @@ class HangoutsController < ApplicationController
   end
 
   def leave_session
-    user = User.find(sessions[:user_id])
+    user = User.find(session[:user_id])
     group = Group.find(params[:group_id])
     hangout = Hangout.find(params[:id])
-    hangout.delete(user)
-
+    index = hangout.members.find_index(user)
+    hangout.members.delete(user)
+    render json: {index: index}
   end
 end

@@ -14,6 +14,7 @@ class GroupShow extends React.Component {
     }
     this.joinHangout = this.joinHangout.bind(this)
     this.createHangout = this.createHangout.bind(this)
+    this.leaveHangout =  this.leaveHangout.bind(this)
   }
 
   handleInvite (event) {
@@ -164,7 +165,22 @@ leaveHangout() {
     url: '/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId + '/leave',
     type: 'PUT'
   })
+  request.done((response) => {
+    if (page.state.activeMembers.length == 1) {
+      page.setState({
+        inHangout: false,
+        activeMembers: []
+      })
+    }else {
+      page.setState({
+        inHangout: false,
+        activeMembers: page.state.activeMembers.splice(response.index,1)
+      })
+    }
+    debugger
+  })
 }
+
 
   loadHangoutButton () {
     if (this.state.hangoutId) {
