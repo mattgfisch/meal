@@ -39,13 +39,13 @@ class GroupShow extends React.Component {
     $("input[type='email']").val('')
   }
 
-  handleEmailChange (event) {
-    this.setState({
-      currentEmail: event.target.value
-    })
-  }
 
   addMembers () {
+    function handleEmailChange (event) {
+      this.setState({
+        currentEmail: event.target.value
+      })
+    }
     if (this.props.sessionID) {
       return (
         <div className='card group-content'>
@@ -60,7 +60,7 @@ class GroupShow extends React.Component {
                     {this.state.errors}
                   </div>
                   <div className='form-group'>
-                    <input type='email' name='email' onChange={this.handleEmailChange.bind(this)} className='form-control' placeholder='johndoe@email.com' />
+                    <input type='email' name='email' onChange={this.handleEmailChange} className='form-control' placeholder='johndoe@email.com' />
                   </div>
                   <div className='register-btn'>
                     <button onClick={this.handleInvite.bind(this)} className='btn btn-default'>Invite User</button>
