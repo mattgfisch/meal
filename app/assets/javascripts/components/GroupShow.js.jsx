@@ -123,7 +123,6 @@ class GroupShow extends React.Component {
     }
   }
 
-
 hangOutHelper (url, type) {
   let page = this
   if (navigator.geolocation) {
@@ -135,7 +134,7 @@ hangOutHelper (url, type) {
     let lat = position.coords.latitude
     let long = position.coords.longitude
     function sendRequest (page, result) {
-      var joinRequest = $.ajax ({
+      var joinRequest = $.ajax({
         url: url,
         type: type,
         data: {lat: lat, long: long}
