@@ -4,7 +4,8 @@ class GroupShow extends React.Component {
     this.state = {
       title: null,
       adminId: null,
-      members: null,
+      activeMembers: [],
+      members: [],
       hangoutId: null,
       inHangout: false,
       centerPoint: '',
@@ -69,6 +70,16 @@ class GroupShow extends React.Component {
     }
   }
 
+  memberIsHanging (member) {
+    if (this.state.activeMembers) {
+      if (this.state.activeMembers.includes(member)) {
+        return (
+          <button className='btn btn-default btn-xs'><span className='glyphicon glyphicon-cutlery glyphicon-align-left' aria-hidden='true' /></button>
+        )
+      }
+    }
+  }
+
   showMembers () {
     if (this.state.members) {
       let n = 0
@@ -76,7 +87,7 @@ class GroupShow extends React.Component {
         this.state.members.map((member, n) => {
           n++
           return (
-            <div key={this.state.title + n}>{member}</div>
+            <div key={this.state.title + n}>{member} {this.memberIsHanging(member)} </div>
           )
         })
       )
@@ -89,16 +100,11 @@ class GroupShow extends React.Component {
       url: '/groups/' + this.props.groupId,
       type: 'GET'
     }).done(function (response) {
-      var groupMemberNames = []
-      response.groupMembers.map((member) => {
-        return (
-          groupMemberNames.push(member.name)
-        )
-      })
       page.setState({
+        activeMembers: response.activeMembers,
         title: response.groupTitle,
         adminId: response.groupAdminId,
-        members: groupMemberNames,
+        members: response.groupMembers,
         hangoutId: response.hangoutId,
         inHangout: response.inHangout,
         centerPoint: response.centerPoint
@@ -106,46 +112,44 @@ class GroupShow extends React.Component {
     })
   }
   joinHangout () {
-    if (this.state.hangoutId != null){
-      this.hangOutHelper('/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId,'PATCH')
+    if (this.state.hangoutId != null) {
+      this.hangOutHelper('/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId, 'PATCH')
     }
   }
 
   createHangout () {
-    if (this.state.hangoutId == null){
-      this.hangOutHelper('/groups/' + this.props.groupId + '/hangouts','POST')
+    if (this.state.hangoutId == null) {
+      this.hangOutHelper('/groups/' + this.props.groupId + '/hangouts', 'POST')
     }
   }
 
-
-hangOutHelper(url, type) {
+hangOutHelper (url, type) {
   let page = this
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(sendPosition)
-    } else {
-      x = "Geolocation is not supported by this browser."
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(sendPosition)
+  } else {
+    var x = 'Geolocation is not supported by this browser.'
+  }
+  function sendPosition (position) {
+    let lat = position.coords.latitude
+    let long = position.coords.longitude
+    function sendRequest (page, result) {
+      var joinRequest = $.ajax({
+        url: url,
+        type: type,
+        data: {lat: lat, long: long}
+      })
+      joinRequest.done((response) => {
+        result(response, page)
+      })
     }
-    function sendPosition(position) {
-      let lat = position.coords.latitude
-      let long = position.coords.longitude
-      function sendRequest (page, result) {
-        var joinRequest = $.ajax ({
-          url: url,
-          type: type,
-          data: {lat: lat, long: long}
-        })
-        joinRequest.done((response) => {
-          result(response, page)
-        })
-      }
-      sendRequest(page, function (result, page) {
-        page.setState({
-          inHangout: result.inHangout,
-          centerPoint: result.centerPoint,
-          hangoutId: result.hangoutId
-        })
-      }
-    )
+    sendRequest(page, function (result, page) {
+      page.setState({
+        inHangout: result.inHangout,
+        centerPoint: result.centerPoint,
+        hangoutId: result.hangoutId
+      })
+    })
   }
 }
 

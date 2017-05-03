@@ -40,10 +40,15 @@ class GroupsController < ApplicationController
       center_point = {average_lat: center_point[:average_lat].to_f, average_long: center_point[:average_long].to_f}
 
       in_hangout = user.hangouts.any?{|user_hangout| user_hangout.id == hangout_id}
+      active_members = group.members.select do |user|
+        user.hangouts.any?{|user_hangout| user_hangout.id == hangout_id}
+      end
+      active_members.map! { |user| user.name }
     else
       hangout_id = nil
     end
-    render json: {groupTitle: group.name, groupMembers: group.members, groupAdminId: group.admin_id, hangoutId: hangout_id, inHangout: in_hangout, centerPoint: center_point }
+    group_members = group.members.map { |user| user.name }
+    render json: {activeMembers: active_members, groupTitle: group.name, groupMembers: group_members, groupAdminId: group.admin_id, hangoutId: hangout_id, inHangout: in_hangout, centerPoint: center_point }
   end
 
   def joined_groups
@@ -76,7 +81,6 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    group = Group.find(params[:id])
-    Group.destroy(group)
+    Group.destroy(params[:id])
   end
 end
