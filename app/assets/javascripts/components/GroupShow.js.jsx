@@ -27,7 +27,7 @@ class GroupShow extends React.Component {
         url: '/groups/' + form.props.groupId + '/members',
         data: {currentEmail: this.state.currentEmail}
       })
-      
+
       request.success((response) => {
         $('#member-list').append('<div>' + response.username + '</div>')
       })
