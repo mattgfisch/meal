@@ -5,7 +5,7 @@ describe 'Showing restaurants', js: true do
   let!(:group1) { Group.create!(name: 'Grouptastic', admin_id: user.id) }
 
   feature 'Display warning' do
-    it "Displays if location services are unavailable" do
+    it "Does not display if location services are available" do
       group1.members << user
 
       visit '/'
@@ -16,8 +16,7 @@ describe 'Showing restaurants', js: true do
       button = page.find('.joined-link', match: :first)
       button.click
       click_on 'Create Hangout'
-      sleep 2 # Required for test to pass
-      expect(page).to have_content 'Warning'
+      expect(page).to_not have_content 'Warning'
     end
   end
 end
