@@ -1,11 +1,11 @@
 class Dropdown extends React.Component {
 
   userIsGroupAdmin () {
-    return this.props.userId === this.props.admin
+    return this.props.userId === this.props.groupAdminId
   }
 
   deleteButton () {
-    if (this.props.userId === this.props.admin) {
+    if (this.props.userId === this.props.hangoutAdminId) {
       return <a className='btn' onClick={this.props.deleteHangout}>Delete Hangout</a>
     }
   }
