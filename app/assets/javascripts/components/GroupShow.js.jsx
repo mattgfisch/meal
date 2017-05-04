@@ -11,7 +11,8 @@ class GroupShow extends React.Component {
       centerPoint: '',
       currentEmail: null,
       errors: null,
-      hangoutAdmin: null
+      hangoutAdmin: null,
+      locationError: null
     }
     this.joinHangout = this.joinHangout.bind(this)
     this.createHangout = this.createHangout.bind(this)
@@ -28,9 +29,11 @@ class GroupShow extends React.Component {
         url: '/groups/' + form.props.groupId + '/members',
         data: {currentEmail: this.state.currentEmail}
       })
+
       request.success((response) => {
         $('#member-list').append('<div>' + response.username + '</div>')
       })
+
       request.fail((response) => {
         var error = response.responseJSON['errors']
         form.setState({
@@ -119,6 +122,7 @@ class GroupShow extends React.Component {
       })
     })
   }
+
   joinHangout () {
     if (this.state.hangoutId != null) {
       this.hangOutHelper('/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId, 'PATCH')
@@ -131,34 +135,55 @@ class GroupShow extends React.Component {
     }
   }
 
-hangOutHelper (url, type) {
-  let page = this
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(sendPosition)
-  } else {
-    var x = 'Geolocation is not supported by this browser.'
-  }
-  function sendPosition (position) {
-    let lat = position.coords.latitude
-    let long = position.coords.longitude
-    function sendRequest (page, result) {
-      var joinRequest = $.ajax({
-        url: url,
-        type: type,
-        data: {lat: lat, long: long}
-      })
-      joinRequest.done((response) => {
-        result(response, page)
-      })
+  hangOutHelper (url, type) {
+    let page = this
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(sendPosition, showError)
+    } else {
+      $('#location-error').html('We apologize, but your browser does not support location services used by our app')
     }
-    sendRequest(page, function (result, page) {
-      page.setState({
-        activeMembers: result.activeMembers,
-        inHangout: result.inHangout,
-        centerPoint: result.centerPoint,
-        hangoutId: result.hangoutId,
-        hangoutAdmin: result.hangoutAdmin
+    function showError (error) {
+      let errorMessage
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          errorMessage = 'Please enable location services to participate in a hangout'
+          break
+        case error.POSITION_UNAVAILABLE:
+          errorMessage = 'Sorry, but we cannot find your location. Please refresh the page and try again.'
+          break
+        case error.TIMEOUT:
+          errorMessage = 'Sorry, but it took too long to find your location. Please refresh the page and try again.'
+          break
+        case error.UNKNOWN_ERROR:
+          errorMessage = 'An unknown error occurred. Please refresh the page and try again.'
+      }
+      page.setState({locationError: errorMessage})
+    }
+
+    function sendPosition (position) {
+      $('#location-error').empty()
+      let lat = position.coords.latitude
+      let long = position.coords.longitude
+
+      function sendRequest (page, result) {
+        var joinRequest = $.ajax({
+          url: url,
+          type: type,
+          data: {lat: lat, long: long}
+        })
+        joinRequest.done((response) => {
+          result(response, page)
+        })
+      }
+      sendRequest(page, function (result, page) {
+        page.setState({
+          activeMembers: result.activeMembers,
+          inHangout: result.inHangout,
+          centerPoint: result.centerPoint,
+          hangoutId: result.hangoutId,
+          hangoutAdmin: result.hangoutAdmin
       })
+      debugger
     })
   }
 }
@@ -184,12 +209,13 @@ leaveHangout() {
   loadHangoutButton () {
     if (this.state.hangoutId) {
       if (this.state.inHangout) {
-        return <button onClick={this.leaveHangout} className='btn btn-default'>Leave Hangout</button>
+        debugger
+        return <div><button onClick={this.leaveHangout} className='btn btn-default'>Leave Hangout</button>{this.adminDeleteButton()}</div>
       } else {
-        return <button className='btn btn-default' onClick={this.joinHangout}>Join Hangout</button>
+        return <div><button className='btn btn-default' onClick={this.joinHangout}>Join Hangout</button>{this.adminDeleteButton()}</div>
       }
     } else {
-      return <button className='btn btn-default' onClick={this.createHangout}>Create Hangout</button>
+      return <div><button className='btn btn-default' onClick={this.createHangout}>Create Hangout</button>{this.adminDeleteButton()}</div>
     }
   }
 
@@ -219,7 +245,8 @@ leaveHangout() {
   }
 
   adminDeleteButton() {
-    if (this.state.hangoutId && this.props.sessionID == this.state.hangoutAdmin) {
+    debugger
+    if (this.props.sessionID == this.state.hangoutAdmin) {
       return <button onClick={this.deleteHangout} className='btn btn-default'>Delete Hangout</button>
     }
   }
@@ -230,7 +257,8 @@ leaveHangout() {
         <div className='card-body'>
           <div className='card group-content' >
             <div className='hangout-button' >
-              {this.loadHangoutButton()}{this.adminDeleteButton()}
+              {this.loadHangoutButton()}
+              <LocationError locationError={this.state.locationError} />
             </div>
             <div className='card-header'>
               <h3>Group Name</h3>
@@ -249,7 +277,7 @@ leaveHangout() {
           </div>
           <div className='card group-content'>
             <div className='form-show'>
-                {this.addMembers()}
+              {this.addMembers()}
             </div>
           </div>
           <div className='card group-content' >
