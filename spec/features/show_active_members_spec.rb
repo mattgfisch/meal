@@ -8,12 +8,12 @@ describe 'ShowActiveMembers' do
     let!(:hangout) {Hangout.create!(group_id: group.id, creator_id: creator.id)}
 
     before(:each) do
+      Capybara.ignore_hidden_elements = false
       group.members << creator
       group.members << user
       hangout.members << user
 
       visit '/'
-      sleep 2
       fill_in 'Email', with: 'matt@matt.com'
       fill_in 'Password', with: 'password'
       click_on 'Log In'
