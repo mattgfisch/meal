@@ -20,7 +20,7 @@ describe 'Update Radius' do
     it 'Admin can delete a group' do
       click_on "Test", match: :first
 
-      expect(page).to have_selector('p', count: 10)
+      page.all("p", :minimum => 10)
     end
   end
 end
