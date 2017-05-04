@@ -17,23 +17,30 @@ describe 'GroupShow' do
 
       click_link('Test', match: :first)
       click_on 'Create Hangout'
+      sleep 3
+      click_on 'Lock Hangout'
     end
 
     it "Hangout admin can lock hangout" do
-      sleep 3
-      click_on 'Lock Hangout'
       expect(page).to have_content('Hangout Locked')
     end
 
     it "can't join hangout when locked" do
-      click_on 'Lock Hangout'
       click_on 'Logout'
-        fill_in 'Email', with: 'max@max.com'
-        fill_in 'Password', with: 'password'
-        click_on 'Log In'
-        click_link('Test', match: :first)
-        expect(page).to have_content('Hangout Locked')
+      fill_in 'Email', with: 'max@max.com'
+      fill_in 'Password', with: 'password'
+      click_on 'Log In'
+      click_link('Test', match: :first)
+      expect(page).to have_content('Hangout Locked')
     end
 
+    it 'join hangout button is not present when locked' do
+      click_on 'Logout'
+      fill_in 'Email', with: 'max@max.com'
+      fill_in 'Password', with: 'password'
+      click_on 'Log In'
+      click_link('Test', match: :first)
+      expect(page).to_not have_content('Join Hangout')
+    end
   end
 end
