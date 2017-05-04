@@ -259,7 +259,6 @@ leaveHangout() {
       type: 'PUT'
     })
     request.done((response) => {
-      debugger
       page.setState({
         lockedOut: response.locked_out
       })
