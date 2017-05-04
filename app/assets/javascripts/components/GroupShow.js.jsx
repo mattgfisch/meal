@@ -10,11 +10,13 @@ class GroupShow extends React.Component {
       inHangout: false,
       centerPoint: '',
       currentEmail: null,
-      errors: null
+      errors: null,
+      hangoutAdmin: null
     }
     this.joinHangout = this.joinHangout.bind(this)
     this.createHangout = this.createHangout.bind(this)
     this.leaveHangout =  this.leaveHangout.bind(this)
+    this.deleteHangout = this.deleteHangout.bind(this)
   }
 
   handleInvite (event) {
@@ -112,7 +114,8 @@ class GroupShow extends React.Component {
         members: response.groupMembers,
         hangoutId: response.hangoutId,
         inHangout: response.inHangout,
-        centerPoint: response.centerPoint
+        centerPoint: response.centerPoint,
+        hangoutAdmin: response.hangoutAdmin
       })
     })
   }
@@ -153,7 +156,8 @@ hangOutHelper (url, type) {
         activeMembers: result.activeMembers,
         inHangout: result.inHangout,
         centerPoint: result.centerPoint,
-        hangoutId: result.hangoutId
+        hangoutId: result.hangoutId,
+        hangoutAdmin: response.hangoutAdmin
       })
     })
   }
@@ -194,13 +198,37 @@ leaveHangout() {
     }
   }
 
+  deleteHangout() {
+    let page = this
+    var request = $.ajax ({
+      url: '/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId + '/delete',
+      type: 'PUT'
+    })
+    request.done((response) => {
+      page.setState({
+        activeMembers: [],
+        hangoutId: null,
+        inHangout: false,
+        centerPoint: '',
+        hangoutAdmin: null
+      })
+      debugger
+    })
+  }
+
+  adminDeleteButton() {
+    if (this.state.hangoutId && this.props.sessionID == this.state.hangoutAdmin) {
+      return <button onClick={this.deleteHangout} className='btn btn-default'>Delete Hangout</button>
+    }
+  }
+
   render () {
     return (
       <div className='card'>
         <div className='card-body'>
           <div className='card group-content' >
             <div className='hangout-button' >
-              {this.loadHangoutButton()}
+              {this.loadHangoutButton()}{this.adminDeleteButton()}
             </div>
             <div className='card-header'>
               <h3>Group Name</h3>
