@@ -21,17 +21,21 @@ class HangoutsController < ApplicationController
       end
       active_members.map! { |user| user.name }
     end
-    render json: {hangoutAdmin: hangout_admin, activeMembers: active_members, centerPoint: center_point, hangoutId: hangout.id, inHangout: in_hangout}
+    render json: {lockedOut: hangout.locked_out, hangoutAdmin: hangout_admin, activeMembers: active_members, centerPoint: center_point, hangoutId: hangout.id, inHangout: in_hangout}
   end
 
   def create
     selected_group = Group.find(params[:group_id])
     user = User.find(session[:user_id])
-    hangout = Hangout.create(creator_id: user.id, group_id: selected_group.id)
-
-
-    hangout.members << user
-    hangout.locations << Location.create(latitude: params[:lat], longitude: params[:long])
+    if(selected_group.hangouts.first)
+      hangout = selected_group.hangouts.first
+      hangout.members << user
+      hangout.locations << Location.create(latitude: params[:lat], longitude: params[:long])
+    else
+      hangout = Hangout.create(creator_id: user.id, group_id: selected_group.id)
+      hangout.members << user
+      hangout.locations << Location.create(latitude: params[:lat], longitude: params[:long])
+    end
 
     in_hangout = user.hangouts.any?{|user_hangout| user_hangout.id == hangout.id}
     center_point = {average_lat: params[:lat], average_long: params[:long]}
@@ -40,7 +44,7 @@ class HangoutsController < ApplicationController
     end
     active_members.map! { |user| user.name }
 
-    render json: {hangoutAdmin: user.id, activeMembers: active_members, inHangout: in_hangout, hangoutId: hangout.id, centerPoint: center_point}
+    render json: {lockedOut: hangout.locked_out, hangoutAdmin: hangout.creator_id, activeMembers: active_members, inHangout: in_hangout, hangoutId: hangout.id, centerPoint: center_point}
   end
 
   def leave
@@ -59,5 +63,11 @@ class HangoutsController < ApplicationController
 
   def delete
     Hangout.destroy(params[:id])
+  end
+
+  def lock
+    hangout = Hangout.find(params[:id])
+    hangout.update_attributes(locked_out: true)
+    render json: {locked_out: hangout.locked_out}
   end
 end

@@ -13,12 +13,14 @@ class GroupShow extends React.Component {
       errors: null,
       hangoutAdmin: null,
       locationError: null,
-      curretUserId: null
+      curretUserId: null,
+      lockedOut: false
     }
     this.joinHangout = this.joinHangout.bind(this)
     this.createHangout = this.createHangout.bind(this)
     this.leaveHangout =  this.leaveHangout.bind(this)
     this.deleteHangout = this.deleteHangout.bind(this)
+    this.lockHangout = this.lockHangout.bind(this)
   }
 
   handleInvite (event) {
@@ -120,7 +122,8 @@ class GroupShow extends React.Component {
         inHangout: response.inHangout,
         centerPoint: response.centerPoint,
         hangoutAdmin: response.hangoutAdmin,
-        curretUserId: response.curretUserId
+        curretUserId: response.curretUserId,
+        lockedOut: response.lockedOut
       })
     })
   }
@@ -183,7 +186,8 @@ class GroupShow extends React.Component {
           inHangout: result.inHangout,
           centerPoint: result.centerPoint,
           hangoutId: result.hangoutId,
-          hangoutAdmin: result.hangoutAdmin
+          hangoutAdmin: result.hangoutAdmin,
+          lockedOut: result.lockedOut
       })
     })
   }
@@ -208,14 +212,17 @@ leaveHangout() {
 
 
   loadHangoutButton () {
-    if (this.state.hangoutId) {
+    if (this.state.hangoutId && this.state.lockedOut != true) {
       if (this.state.inHangout) {
-        return <div><button onClick={this.leaveHangout} className='btn btn-default'>Leave Hangout</button>{this.adminDeleteButton()}</div>
+        return <div><button onClick={this.leaveHangout} className='btn btn-default'>Leave Hangout</button>{this.adminDeleteButton()}{this.adminLockButton()}</div>
       } else {
-        return <div><button className='btn btn-default' onClick={this.joinHangout}>Join Hangout</button>{this.adminDeleteButton()}</div>
+        return <div><button className='btn btn-default' onClick={this.joinHangout}>Join Hangout</button>{this.adminDeleteButton()}{this.adminLockButton()}</div>
       }
+    }
+    else if (this.state.lockedOut != true){
+      return <div><button className='btn btn-default' onClick={this.createHangout}>Create Hangout</button>{this.adminDeleteButton()}{this.adminLockButton()}</div>
     } else {
-      return <div><button className='btn btn-default' onClick={this.createHangout}>Create Hangout</button>{this.adminDeleteButton()}</div>
+      return <div><button className='btn btn-default'>Hangout Locked</button>{this.adminDeleteButton()}</div>
     }
   }
 
@@ -239,9 +246,29 @@ leaveHangout() {
         hangoutId: null,
         inHangout: false,
         centerPoint: '',
-        hangoutAdmin: null
+        hangoutAdmin: null,
+        lockedOut: null
       })
     })
+  }
+
+  lockHangout() {
+    let page = this
+    var request = $.ajax ({
+      url: '/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId + '/lock',
+      type: 'PUT'
+    })
+    request.done((response) => {
+      page.setState({
+        lockedOut: response.locked_out
+      })
+    })
+  }
+
+  adminLockButton() {
+    if (this.state.curretUserId == this.state.hangoutAdmin) {
+      return <button onClick={this.lockHangout} className='btn btn-default'>Lock Hangout</button>
+    }
   }
 
   adminDeleteButton() {
