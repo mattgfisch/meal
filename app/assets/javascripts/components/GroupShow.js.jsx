@@ -46,18 +46,18 @@ class GroupShow extends React.Component {
     $("input[type='email']").val('')
   }
 
-
-   handleEmailChange(event) {
-     this.setState({
-       currentEmail: event.target.value
-     })
+  handleEmailChange (event) {
+    this.setState({
+      currentEmail: event.target.value
+    })
   }
+
   addMembers () {
     if (this.props.sessionID) {
       return (
         <div className='card group-content'>
           <div className='card-header'>
-            <button className='btn btn-default' type='button' data-toggle='collapse' data-target='#collapseExample' aria-expanded='false' aria-controls='collapseExample'>
+            <button className='btn btn-default add-extra-users' type='button' data-toggle='collapse' data-target='#collapseExample' aria-expanded='false' aria-controls='collapseExample'>
             Add Users
             </button>
             <div id='collapseExample' className='card-body text-center collapse'>

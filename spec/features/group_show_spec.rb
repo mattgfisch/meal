@@ -40,6 +40,7 @@ describe 'GroupShow' do
       click_link('created', :match => :first)
       expect(page).to have_content('Members')
     end
+
     it 'Can click on joined groups and have page show' do
       link = page.find('.joined-link', match: :first)
       link.click
