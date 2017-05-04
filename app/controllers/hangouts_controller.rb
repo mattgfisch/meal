@@ -7,6 +7,7 @@ class HangoutsController < ApplicationController
 
   def update
     hangout = Hangout.find(params[:id])
+    hangout_admin = hangout.creator_id
     selected_group = Group.find(params[:group_id])
     user = User.find(session[:user_id])
     if !(user.hangouts.any? {|user_hangout| user_hangout.id == hangout.id})
@@ -20,7 +21,7 @@ class HangoutsController < ApplicationController
       end
       active_members.map! { |user| user.name }
     end
-    render json: {activeMembers: active_members, centerPoint: center_point, hangoutId: hangout.id, inHangout: in_hangout}
+    render json: {hangoutAdmin: hangout_admin, activeMembers: active_members, centerPoint: center_point, hangoutId: hangout.id, inHangout: in_hangout}
   end
 
   def create
@@ -39,7 +40,7 @@ class HangoutsController < ApplicationController
     end
     active_members.map! { |user| user.name }
 
-    render json: {activeMembers: active_members, inHangout: in_hangout, hangoutId: hangout.id, centerPoint: center_point}
+    render json: {hangoutAdmin: user.id, activeMembers: active_members, inHangout: in_hangout, hangoutId: hangout.id, centerPoint: center_point}
   end
 
   def leave
@@ -54,5 +55,10 @@ class HangoutsController < ApplicationController
       end
     end
     render json: {activeMembers: active_members, inHangout: in_hangout}
+  end
+
+  def delete
+    hangout = Hangout.find(params[:id])
+    hangout.destroy()
   end
 end

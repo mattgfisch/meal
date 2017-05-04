@@ -11,11 +11,14 @@ class GroupShow extends React.Component {
       centerPoint: '',
       currentEmail: null,
       errors: null,
-      locationError: null
+      hangoutAdmin: null,
+      locationError: null,
+      curretUserId: null
     }
     this.joinHangout = this.joinHangout.bind(this)
     this.createHangout = this.createHangout.bind(this)
     this.leaveHangout =  this.leaveHangout.bind(this)
+    this.deleteHangout = this.deleteHangout.bind(this)
   }
 
   handleInvite (event) {
@@ -115,7 +118,9 @@ class GroupShow extends React.Component {
         members: response.groupMembers,
         hangoutId: response.hangoutId,
         inHangout: response.inHangout,
-        centerPoint: response.centerPoint
+        centerPoint: response.centerPoint,
+        hangoutAdmin: response.hangoutAdmin,
+        curretUserId: response.curretUserId
       })
     })
   }
@@ -139,7 +144,6 @@ class GroupShow extends React.Component {
     } else {
       $('#location-error').html('We apologize, but your browser does not support location services used by our app')
     }
-
     function showError (error) {
       let errorMessage
       switch (error.code) {
@@ -173,17 +177,17 @@ class GroupShow extends React.Component {
           result(response, page)
         })
       }
-
       sendRequest(page, function (result, page) {
         page.setState({
           activeMembers: result.activeMembers,
           inHangout: result.inHangout,
           centerPoint: result.centerPoint,
-          hangoutId: result.hangoutId
-        })
+          hangoutId: result.hangoutId,
+          hangoutAdmin: result.hangoutAdmin
       })
-    }
+    })
   }
+}
 
 leaveHangout() {
   let page = this
@@ -196,6 +200,9 @@ leaveHangout() {
       inHangout: response.inHangout,
       activeMembers: response.activeMembers
     })
+    if (page.state.activeMembers.length == 0) {
+      page.deleteHangout()
+    }
   })
 }
 
@@ -203,12 +210,12 @@ leaveHangout() {
   loadHangoutButton () {
     if (this.state.hangoutId) {
       if (this.state.inHangout) {
-        return <button onClick={this.leaveHangout} className='btn btn-default'>Leave Hangout</button>
+        return <div><button onClick={this.leaveHangout} className='btn btn-default'>Leave Hangout</button>{this.adminDeleteButton()}</div>
       } else {
-        return <button className='btn btn-default' onClick={this.joinHangout}>Join Hangout</button>
+        return <div><button className='btn btn-default' onClick={this.joinHangout}>Join Hangout</button>{this.adminDeleteButton()}</div>
       }
     } else {
-      return <button className='btn btn-default' onClick={this.createHangout}>Create Hangout</button>
+      return <div><button className='btn btn-default' onClick={this.createHangout}>Create Hangout</button>{this.adminDeleteButton()}</div>
     }
   }
 
@@ -217,6 +224,29 @@ leaveHangout() {
       getRestaurants(parseFloat(this.state.centerPoint.average_lat), parseFloat(this.state.centerPoint.average_long))
     }else {
       $('.restaurants-list').html('')
+    }
+  }
+
+  deleteHangout() {
+    let page = this
+    var request = $.ajax ({
+      url: '/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId + '/delete',
+      type: 'DELETE'
+    })
+    request.done((response) => {
+      page.setState({
+        activeMembers: [],
+        hangoutId: null,
+        inHangout: false,
+        centerPoint: '',
+        hangoutAdmin: null
+      })
+    })
+  }
+
+  adminDeleteButton() {
+    if (this.state.curretUserId == this.state.hangoutAdmin) {
+      return <button onClick={this.deleteHangout} className='btn btn-default'>Delete Hangout</button>
     }
   }
 
