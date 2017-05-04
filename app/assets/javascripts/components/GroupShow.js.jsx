@@ -246,7 +246,8 @@ leaveHangout() {
         hangoutId: null,
         inHangout: false,
         centerPoint: '',
-        hangoutAdmin: null
+        hangoutAdmin: null,
+        lockedOut: null
       })
     })
   }
