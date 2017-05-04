@@ -3,6 +3,9 @@
 }
 .navbar {
   position: relative;
+  background-color: #CECFCF;
+
+
 }
 .navbar-brand{
   transform: translateX(-50%);
@@ -10,4 +13,9 @@
    left: 50%;
   display: block;
   font-size: 2em;
+
+}
+
+#logo {
+    color: #BE0011;
 }
