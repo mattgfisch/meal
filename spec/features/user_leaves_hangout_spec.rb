@@ -18,6 +18,11 @@ describe 'GroupShow' do
       click_on 'Log In'
 
       click_link('Test', match: :first)
+      click_on 'Options'
+    end
+
+    def find_and_click(text)
+      page.find("a", :text => /\A#{text}\z/).click
     end
 
     it "shows leave hangout button" do
@@ -25,17 +30,18 @@ describe 'GroupShow' do
     end
 
     it "removes user from hangout and all Restaurants removed" do
-      click_on 'Leave Hangout'
+      find_and_click('Leave Hangout')
       expect(page).not_to have_content('Restaurants')
     end
 
     it "removes user from hangout and button goes back to create hangout" do
-      click_on 'Leave Hangout'
+      find_and_click('Leave Hangout')
+      click_on 'Options'
       expect(page).to have_content('Create Hangout')
     end
 
     it "removes user from hangout and icon next to name is removed" do
-      click_on 'Leave Hangout'
+      find_and_click('Leave Hangout')
       user_div = page.find("div", :text => /\AMatt\z/)
       expect(user_div).not_to have_selector("button")
     end
