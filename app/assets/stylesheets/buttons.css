@@ -6,3 +6,12 @@ div.register-btn {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.dropdown-open {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  margin-left: 23%;
+}
