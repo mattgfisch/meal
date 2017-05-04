@@ -19,7 +19,7 @@ function callback (results, status) {
     var collection = '<div><h3>Restaurants</h3></div>'
     for (var i = 0; i < results.length; i++) {
       var restaurantName = results[i].name
-      let url = 'https://www.google.com/maps/place/' + restaurantName.replace(/\s/g, '+')
+      var url = 'https://www.google.com/maps/place/' + restaurantName.replace(/\s/g, '+')
       collection += ('<p>' + '<a href=' + url + '>' + restaurantName + '</p>')
     }
     $('.restaurants-list').html(collection)
