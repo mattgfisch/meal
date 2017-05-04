@@ -27,7 +27,7 @@ class HangoutsController < ApplicationController
   def create
     selected_group = Group.find(params[:group_id])
     user = User.find(session[:user_id])
-    if(selected_group.hangouts)
+    if(selected_group.hangouts.first)
       hangout = selected_group.hangouts.first
       hangout.members << user
       hangout.locations << Location.create(latitude: params[:lat], longitude: params[:long])
