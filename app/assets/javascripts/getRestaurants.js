@@ -14,7 +14,7 @@ function getRestaurants (latitude, longitude, radius = 500) {
     function callback (results, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK || status === "ZERO_RESULTS") {
         if (results.length < 10) {
-          getRestaurants(center.lat, center.long, radius + 100)
+          getRestaurants(center.lat, center.lng, radius + 100)
         } else {
           var collection = '<div><h3>Restaurants</h3></div>'
           for (var i = 0; i < results.length; i++) {
