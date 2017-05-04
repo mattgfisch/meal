@@ -13,10 +13,10 @@ describe 'ShowActiveMembers' do
       hangout.members << user
 
       visit '/'
-      fill_in 'Email', with: 'matt@matt.com'
-      fill_in 'Password', with: 'password'
+      fill_in 'email', with: 'matt@matt.com'
+      fill_in 'password', with: 'password'
       click_on 'Log In'
-      
+
       click_link('Test', match: :first)
     end
 
