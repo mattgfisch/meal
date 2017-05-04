@@ -49,7 +49,17 @@ class GroupsController < ApplicationController
       hangout_id = nil
     end
     group_members = group.members.map { |user| user.name }
-    render json: {curretUserId: user.id, hangoutAdmin: hangout_admin, activeMembers: active_members, groupTitle: group.name, groupMembers: group_members, groupAdminId: group.admin_id, hangoutId: hangout_id, inHangout: in_hangout, centerPoint: center_point }
+    render json: {
+      curretUserId: user.id,
+      hangoutAdmin: hangout_admin,
+      activeMembers: active_members,
+      groupTitle: group.name, 
+      groupMembers: group_members,
+      groupAdminId: group.admin_id,
+      hangoutId: hangout_id,
+      inHangout: in_hangout,
+      centerPoint: center_point
+     }
   end
 
   def joined_groups

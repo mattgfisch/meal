@@ -231,7 +231,7 @@ leaveHangout() {
     let page = this
     var request = $.ajax ({
       url: '/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId + '/delete',
-      type: 'PUT'
+      type: 'DELETE'
     })
     request.done((response) => {
       page.setState({
