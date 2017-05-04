@@ -73,6 +73,10 @@ class GroupShow extends React.Component {
   }
 
   addMembers () {
+    function closeIt () {
+      event.preventDefault()
+    }
+
     if (this.props.sessionID) {
       return (
         <div className='card group-content'>
@@ -88,6 +92,7 @@ class GroupShow extends React.Component {
                   </div>
                   <div className='register-btn'>
                     <button onClick={this.handleInvite.bind(this)} className='btn btn-default'>Invite User</button>
+                    <a data-toggle='collapse' data-target='#collapseExample' id='closeInvitation'>x</a>
                   </div>
                 </form>
               </div>

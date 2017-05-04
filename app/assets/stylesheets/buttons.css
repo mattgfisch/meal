@@ -14,3 +14,13 @@ div.register-btn {
   left: 50%;
   transform: translateX(-50%);
 }
+
+#collapseExample {
+  position: relative;
+}
+
+#closeInvitation {
+  position: absolute;
+  top: 0;
+  right: 7px;
+}
