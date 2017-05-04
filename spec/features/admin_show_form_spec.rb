@@ -24,20 +24,27 @@ describe 'AdminGroupShow' do
       click_on 'Log In'
     end
 
+    def find(text)
+      page.find("a", :text => /\A#{text}\z/)
+    end
+
     it 'Can click on created groups and see add users because we are group admin' do
       click_link('created', :match => :first)
-      expect(page).to have_content('Add Users')
+      click_on 'Options'
+      expect(page).to have_content('Invite to Group')
     end
 
     it 'Can click on joined groups and to not have admin features' do
       link = page.find('.joined-link', :match => :first)
       link.click
-      expect(page).not_to have_content('Add Users')
+      click_on 'Options'
+      expect(page).not_to have_content('Invite to Group')
     end
 
     it 'Group admin can invite valid user' do
       click_link('created', :match => :first)
-      click_on('Add Users')
+      click_on('Options')
+      find('Invite to Group').click
       fill_in 'email', with: 'jack@jack.com'
       click_on 'Invite User'
       expect(page).to have_content('Jack')
@@ -45,7 +52,8 @@ describe 'AdminGroupShow' do
 
     it 'Group admin can not invite themselves to group/ anyone already in group' do
       click_link('created', :match => :first)
-      click_on('Add Users')
+      click_on 'Options'
+      find('Invite to Group').click
       fill_in 'email', with: 'matt@matt.com'
       click_on 'Invite User'
       expect(page).to have_content('Invalid email')
@@ -53,7 +61,8 @@ describe 'AdminGroupShow' do
 
     it 'Group admin can not invite invaild emails' do
       click_link('created', :match => :first)
-      click_on('Add Users')
+      click_on 'Options'
+      find('Invite to Group').click
       fill_in 'email', with: 'weqrdsfasdfdfg'
       click_on 'Invite User'
 
@@ -64,7 +73,8 @@ describe 'AdminGroupShow' do
       click_on '+'
       fill_in 'groupName', with: 'Grouptastic'
       click_on 'Create Group'
-      click_on('Add Users')
+      click_on 'Options'
+      find('Invite to Group').click
       fill_in 'email', with: 'jack@jack.com'
       click_on 'Invite User'
       expect(page).to have_content('Jack')
@@ -74,7 +84,8 @@ describe 'AdminGroupShow' do
       click_on '+'
       fill_in 'groupName', with: 'Grouptastic'
       click_on 'Create Group'
-      click_on('Add Users')
+      click_on 'Options'
+      find('Invite to Group').click
       fill_in 'email', with: 'matt@matt.com'
       click_on 'Invite User'
       expect(page).to have_content('Invalid email')
@@ -84,7 +95,8 @@ describe 'AdminGroupShow' do
       click_on '+'
       fill_in 'groupName', with: 'Grouptastic'
       click_on 'Create Group'
-      click_on('Add Users')
+      click_on 'Options'
+      find('Invite to Group').click
       fill_in 'email', with: 'weqrdsfasdfdfg'
       click_on 'Invite User'
 
