@@ -25,6 +25,7 @@ describe 'GroupShow' do
     end
 
     it "Hangout admin can delete hangout" do
+      sleep 5
       click_on 'Delete Hangout'
       expect(page).not_to have_content('Restaurants')
     end
