@@ -32,7 +32,7 @@ class HangoutsController < ApplicationController
       hangout.members << user
       hangout.locations << Location.create(latitude: params[:lat], longitude: params[:long])
     else
-      hangout = Hangout.create(creator_id: user.id, group_id: selected_group.id)
+      hangout = Hangout.create(creator_id: user.id, group_id: selected_group.id, locked_out: false)
       hangout.members << user
       hangout.locations << Location.create(latitude: params[:lat], longitude: params[:long])
     end
