@@ -12,7 +12,8 @@ class GroupShow extends React.Component {
       currentEmail: null,
       errors: null,
       hangoutAdmin: null,
-      locationError: null
+      locationError: null,
+      curretUserId: null
     }
     this.joinHangout = this.joinHangout.bind(this)
     this.createHangout = this.createHangout.bind(this)
@@ -118,7 +119,8 @@ class GroupShow extends React.Component {
         hangoutId: response.hangoutId,
         inHangout: response.inHangout,
         centerPoint: response.centerPoint,
-        hangoutAdmin: response.hangoutAdmin
+        hangoutAdmin: response.hangoutAdmin,
+        curretUserId: response.curretUserId
       })
     })
   }
@@ -183,7 +185,6 @@ class GroupShow extends React.Component {
           hangoutId: result.hangoutId,
           hangoutAdmin: result.hangoutAdmin
       })
-      debugger
     })
   }
 }
@@ -209,7 +210,6 @@ leaveHangout() {
   loadHangoutButton () {
     if (this.state.hangoutId) {
       if (this.state.inHangout) {
-        debugger
         return <div><button onClick={this.leaveHangout} className='btn btn-default'>Leave Hangout</button>{this.adminDeleteButton()}</div>
       } else {
         return <div><button className='btn btn-default' onClick={this.joinHangout}>Join Hangout</button>{this.adminDeleteButton()}</div>
@@ -245,8 +245,7 @@ leaveHangout() {
   }
 
   adminDeleteButton() {
-    debugger
-    if (this.props.sessionID == this.state.hangoutAdmin) {
+    if (this.state.curretUserId == this.state.hangoutAdmin) {
       return <button onClick={this.deleteHangout} className='btn btn-default'>Delete Hangout</button>
     }
   }
