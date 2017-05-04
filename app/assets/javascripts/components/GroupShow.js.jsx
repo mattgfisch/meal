@@ -244,6 +244,29 @@ leaveHangout() {
     })
   }
 
+  lockHangout() {
+    let page = this
+    var request = $.ajax ({
+      url: '/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId + '/lock',
+      type: 'PUT'
+    })
+    request.done((response) => {
+      page.setState({
+        activeMembers: [],
+        hangoutId: null,
+        inHangout: false,
+        centerPoint: '',
+        hangoutAdmin: null
+      })
+    })
+  }
+
+  adminLockButton() {
+    if (this.state.curretUserId == this.state.hangoutAdmin) {
+      return <button onClick={this.lockHangout} className='btn btn-default'>Lock Hangout</button>
+    }
+  }
+
   adminDeleteButton() {
     if (this.state.curretUserId == this.state.hangoutAdmin) {
       return <button onClick={this.deleteHangout} className='btn btn-default'>Delete Hangout</button>
