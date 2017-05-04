@@ -21,7 +21,7 @@ class HangoutsController < ApplicationController
       end
       active_members.map! { |user| user.name }
     end
-    render json: {hangoutAdmin: hangout_admin, activeMembers: active_members, centerPoint: center_point, hangoutId: hangout.id, inHangout: in_hangout}
+    render json: {lockedOut: hangout.locked_out, hangoutAdmin: hangout_admin, activeMembers: active_members, centerPoint: center_point, hangoutId: hangout.id, inHangout: in_hangout}
   end
 
   def create
@@ -40,7 +40,7 @@ class HangoutsController < ApplicationController
     end
     active_members.map! { |user| user.name }
 
-    render json: {hangoutAdmin: user.id, activeMembers: active_members, inHangout: in_hangout, hangoutId: hangout.id, centerPoint: center_point}
+    render json: {lockedOut: hangout.locked_out, hangoutAdmin: user.id, activeMembers: active_members, inHangout: in_hangout, hangoutId: hangout.id, centerPoint: center_point}
   end
 
   def leave
@@ -60,5 +60,11 @@ class HangoutsController < ApplicationController
   def delete
     hangout = Hangout.find(params[:id])
     hangout.destroy()
+  end
+
+  def lock
+    hangout = Hangout.find(params[:id])
+    hangout.update_attributes(locked_out: true)
+    render json: {locked_out: hangout.locked_out}
   end
 end
