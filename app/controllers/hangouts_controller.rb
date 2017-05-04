@@ -44,7 +44,7 @@ class HangoutsController < ApplicationController
     end
     active_members.map! { |user| user.name }
 
-    render json: {lockedOut: hangout.locked_out, hangoutAdmin: hangout.admin_id, activeMembers: active_members, inHangout: in_hangout, hangoutId: hangout.id, centerPoint: center_point}
+    render json: {lockedOut: hangout.locked_out, hangoutAdmin: hangout.creator_id, activeMembers: active_members, inHangout: in_hangout, hangoutId: hangout.id, centerPoint: center_point}
   end
 
   def leave

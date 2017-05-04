@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'GroupShow' do
-  feature 'User can leave Hangout', js: true do
+  feature 'Add User to Hangout', js: true do
     let!(:user) { User.create!(name: 'Matt', email: 'matt@matt.com', password: 'password') }
     let!(:creator) { User.create!(name: 'Max', email: 'max@max.com', password: 'password')}
     let!(:group) { Group.create!(name: "Test", admin_id: user.id) }
