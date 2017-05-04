@@ -67,9 +67,19 @@ class Content extends React.Component {
 
   render () {
     return (
-      <div>
+      <div id='body'>
         <NavBar user={this.state.username} session={this.state.session} changeStates={this.changeStates} />
-        {this.state.mode}
+        <div class = "row">
+          <div class = "col-xs-1">
+
+          </div>
+          <div class="col-xs-10">
+            {this.state.mode}
+          </div>
+          <div class="col-xs-1">
+
+          </div>
+        </div>
       </div>
     )
   };
