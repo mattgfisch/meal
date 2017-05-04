@@ -1,6 +1,6 @@
 function getRestaurants (latitude, longitude, radius = 500) {
   if (latitude && longitude) {
-    var center = {lat: 47.495911, lng: -122.325385}
+    var center = {lat: latitude, lng: longitude}
     var map = new google.maps.Map(document.getElementsByClassName('map')[0], {
       center: center,
       zoom: 15
@@ -12,10 +12,9 @@ function getRestaurants (latitude, longitude, radius = 500) {
       type: ['restaurant']
     }, callback)
     function callback (results, status) {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        debugger
+      if (status === google.maps.places.PlacesServiceStatus.OK || status === "ZERO_RESULTS") {
         if (results.length < 10) {
-          getRestaurants(5, 10, radius + 100)
+          getRestaurants(center.lat, center.long, radius + 100)
         } else {
           var collection = '<div><h3>Restaurants</h3></div>'
           for (var i = 0; i < results.length; i++) {
