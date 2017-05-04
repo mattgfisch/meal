@@ -29,9 +29,9 @@ describe 'GroupShow' do
       expect(page).not_to have_content('Restaurants')
     end
 
-    it "removes user from hangout and button goes back to join hangout" do
+    it "removes user from hangout and button goes back to create hangout" do
       click_on 'Leave Hangout'
-      expect(page).to have_content('Join Hangout')
+      expect(page).to have_content('Create Hangout')
     end
 
     it "removes user from hangout and icon next to name is removed" do
