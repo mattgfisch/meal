@@ -27,11 +27,15 @@ class HangoutsController < ApplicationController
   def create
     selected_group = Group.find(params[:group_id])
     user = User.find(session[:user_id])
-    hangout = Hangout.create(creator_id: user.id, group_id: selected_group.id)
-
-
-    hangout.members << user
-    hangout.locations << Location.create(latitude: params[:lat], longitude: params[:long])
+    if(selected_group.hangouts)
+      hangout = selected_group.hangouts.first
+      hangout.members << user
+      hangout.locations << Location.create(latitude: params[:lat], longitude: params[:long])
+    else
+      hangout = Hangout.create(creator_id: user.id, group_id: selected_group.id)
+      hangout.members << user
+      hangout.locations << Location.create(latitude: params[:lat], longitude: params[:long])
+    end
 
     in_hangout = user.hangouts.any?{|user_hangout| user_hangout.id == hangout.id}
     center_point = {average_lat: params[:lat], average_long: params[:long]}
@@ -40,7 +44,7 @@ class HangoutsController < ApplicationController
     end
     active_members.map! { |user| user.name }
 
-    render json: {lockedOut: hangout.locked_out, hangoutAdmin: user.id, activeMembers: active_members, inHangout: in_hangout, hangoutId: hangout.id, centerPoint: center_point}
+    render json: {lockedOut: hangout.locked_out, hangoutAdmin: hangout.admin_id, activeMembers: active_members, inHangout: in_hangout, hangoutId: hangout.id, centerPoint: center_point}
   end
 
   def leave
