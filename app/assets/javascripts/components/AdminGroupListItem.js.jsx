@@ -25,7 +25,7 @@ class AdminGroupListItem extends React.Component {
 
   deleteHandler () {
     this.deleteGroup()
-    location.reload()
+    window.location.reload()
   }
 
   render () {
