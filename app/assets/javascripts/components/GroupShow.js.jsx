@@ -138,6 +138,7 @@ class GroupShow extends React.Component {
     if (this.state.hangoutId == null) {
       this.hangOutHelper('/groups/' + this.props.groupId + '/hangouts', 'POST')
     }
+    setTimeout(this.lockHangout(),50000)
   }
 
   hangOutHelper (url, type) {
@@ -251,6 +252,7 @@ leaveHangout() {
       })
     })
   }
+
 
   lockHangout() {
     let page = this
