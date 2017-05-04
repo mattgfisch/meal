@@ -157,7 +157,7 @@ hangOutHelper (url, type) {
         inHangout: result.inHangout,
         centerPoint: result.centerPoint,
         hangoutId: result.hangoutId,
-        hangoutAdmin: response.hangoutAdmin
+        hangoutAdmin: result.hangoutAdmin
       })
     })
   }
@@ -174,6 +174,9 @@ leaveHangout() {
       inHangout: response.inHangout,
       activeMembers: response.activeMembers
     })
+    if (page.state.activeMembers.length == 0) {
+      page.deleteHangout()
+    }
   })
 }
 
@@ -212,7 +215,6 @@ leaveHangout() {
         centerPoint: '',
         hangoutAdmin: null
       })
-      debugger
     })
   }
 
