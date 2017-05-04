@@ -145,13 +145,13 @@ class GroupShow extends React.Component {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(sendPosition, showError)
     } else {
-      $('#location-error').html('We apologize, but your browser does not support location services used by our app')
+      $('#location-error').html('We apologize, but your browser does not support location services used by our app.')
     }
     function showError (error) {
       let errorMessage
       switch (error.code) {
         case error.PERMISSION_DENIED:
-          errorMessage = 'Please enable location services to participate in a hangout'
+          errorMessage = 'Please enable location services to participate in a hangout. Refresh the page and try again.'
           break
         case error.POSITION_UNAVAILABLE:
           errorMessage = 'Sorry, but we cannot find your location. Please refresh the page and try again.'

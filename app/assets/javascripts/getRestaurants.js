@@ -16,6 +16,7 @@ function getRestaurants (latitude, longitude) {
 
 function callback (results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
+    debugger;
     var collection = '<div><h3>Restaurants</h3></div>'
     for (var i = 0; i < results.length; i++) {
       let restaurantName = results[i].name
