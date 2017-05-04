@@ -24,7 +24,7 @@ describe 'RestaurantLink' do
     it "takes you to Google Maps page of restaurant" do
       # Click on link for a restaurant
       click_on 'Elysian Fields'
-      expect(page).to have_content "Popular times"
+      expect(page).to have_content "Directions"
     end
   end
 end
