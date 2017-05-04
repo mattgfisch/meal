@@ -206,22 +206,10 @@ class GroupShow extends React.Component {
     })
   }
 
-  // loadHangoutButton () {
-  //   if (this.state.hangoutId) {
-  //     if (this.state.inHangout) {
-  //       return <div><button onClick={this.leaveHangout} className='btn btn-default'>Leave Hangout</button>{this.adminDeleteButton()}</div>
-  //     } else {
-  //       return <div><button className='btn btn-default' onClick={this.joinHangout}>Join Hangout</button>{this.adminDeleteButton()}</div>
-  //     }
-  //   } else {
-  //     return <div><button className='btn btn-default' onClick={this.createHangout}>Create Hangout</button>{this.adminDeleteButton()}</div>
-  //   }
-  // }
-
   returnRestaurants () {
     if (this.state.centerPoint && this.state.inHangout) {
       getRestaurants(parseFloat(this.state.centerPoint.average_lat), parseFloat(this.state.centerPoint.average_long))
-    }else {
+    } else {
       $('.restaurants-list').html('')
     }
   }
@@ -243,22 +231,16 @@ class GroupShow extends React.Component {
     })
   }
 
-  // adminDeleteButton() {
-  //   if (this.state.curretUserId == this.state.hangoutAdmin) {
-  //     return <button onClick={this.deleteHangout} className='btn btn-default'>Delete Hangout</button>
-  //   }
-  // }
 
   render () {
     return (
       <div className='card'>
         <div className='card-body'>
-          <div className='card group-content' >
-            <div className='hangout-button' >
-              {/* {this.loadHangoutButton()} */}
-              <Dropdown joinHangout={this.joinHangout} createHangout={this.createHangout} deleteHangout={this.deleteHangout} admin={this.state.hangoutAdmin} userId={this.state.curretUserId} leaveHangout={this.leaveHangout} hangoutId={this.state.hangoutId} inHangout={this.state.inHangout} />
-              <LocationError locationError={this.state.locationError} />
-            </div>
+          <div className='card group-content hangout-button' >
+            <Dropdown joinHangout={this.joinHangout} createHangout={this.createHangout} deleteHangout={this.deleteHangout} admin={this.state.hangoutAdmin} userId={this.state.curretUserId} leaveHangout={this.leaveHangout} hangoutId={this.state.hangoutId} inHangout={this.state.inHangout} />
+            <LocationError locationError={this.state.locationError} />
+          </div>
+          <div className='card group-content ' >
             <div className='card-header'>
               <h3>Group Name</h3>
             </div>
