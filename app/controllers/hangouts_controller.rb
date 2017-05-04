@@ -58,7 +58,6 @@ class HangoutsController < ApplicationController
   end
 
   def delete
-    hangout = Hangout.find(params[:id])
-    hangout.destroy()
+    Hangout.destroy(params[:id])
   end
 end
