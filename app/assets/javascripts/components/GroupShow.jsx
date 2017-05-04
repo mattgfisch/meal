@@ -21,6 +21,26 @@ class GroupShow extends React.Component {
     this.deleteHangout = this.deleteHangout.bind(this)
   }
 
+  componentDidMount () {
+    let page = this
+    $.ajax({
+      url: '/groups/' + this.props.groupId,
+      type: 'GET'
+    }).done(function (response) {
+      page.setState({
+        activeMembers: response.activeMembers,
+        title: response.groupTitle,
+        adminId: response.groupAdminId,
+        members: response.groupMembers,
+        hangoutId: response.hangoutId,
+        inHangout: response.inHangout,
+        centerPoint: response.centerPoint,
+        hangoutAdmin: response.hangoutAdmin,
+        curretUserId: response.curretUserId
+      })
+    })
+  }
+
   handleInvite (event) {
     event.preventDefault()
     let form = this
@@ -57,9 +77,6 @@ class GroupShow extends React.Component {
       return (
         <div className='card group-content'>
           <div className='card-header'>
-            <button className='btn btn-default add-extra-users' type='button' data-toggle='collapse' data-target='#collapseExample' aria-expanded='false' aria-controls='collapseExample'>
-            Add Users
-            </button>
             <div id='collapseExample' className='card-body text-center collapse'>
               <div className='well'>
                 <form action='/users' method='post'>
@@ -105,25 +122,6 @@ class GroupShow extends React.Component {
     }
   }
 
-  componentDidMount () {
-    let page = this
-    $.ajax({
-      url: '/groups/' + this.props.groupId,
-      type: 'GET'
-    }).done(function (response) {
-      page.setState({
-        activeMembers: response.activeMembers,
-        title: response.groupTitle,
-        adminId: response.groupAdminId,
-        members: response.groupMembers,
-        hangoutId: response.hangoutId,
-        inHangout: response.inHangout,
-        centerPoint: response.centerPoint,
-        hangoutAdmin: response.hangoutAdmin,
-        curretUserId: response.curretUserId
-      })
-    })
-  }
 
   joinHangout () {
     if (this.state.hangoutId != null) {
@@ -231,13 +229,12 @@ class GroupShow extends React.Component {
     })
   }
 
-
   render () {
     return (
       <div className='card'>
         <div className='card-body'>
           <div className='card group-content hangout-button' >
-            <Dropdown joinHangout={this.joinHangout} createHangout={this.createHangout} deleteHangout={this.deleteHangout} admin={this.state.hangoutAdmin} userId={this.state.curretUserId} leaveHangout={this.leaveHangout} hangoutId={this.state.hangoutId} inHangout={this.state.inHangout} />
+            <Dropdown adminId={this.adminId} joinHangout={this.joinHangout} createHangout={this.createHangout} deleteHangout={this.deleteHangout} admin={this.state.hangoutAdmin} userId={this.state.curretUserId} leaveHangout={this.leaveHangout} hangoutId={this.state.hangoutId} inHangout={this.state.inHangout} />
             <LocationError locationError={this.state.locationError} />
           </div>
           <div className='card group-content ' >

@@ -53,7 +53,7 @@ class GroupsController < ApplicationController
       curretUserId: user.id,
       hangoutAdmin: hangout_admin,
       activeMembers: active_members,
-      groupTitle: group.name, 
+      groupTitle: group.name,
       groupMembers: group_members,
       groupAdminId: group.admin_id,
       hangoutId: hangout_id,
