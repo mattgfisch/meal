@@ -189,35 +189,34 @@ class GroupShow extends React.Component {
   }
 }
 
-leaveHangout() {
-  let page = this
-  var request = $.ajax ({
-    url: '/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId + '/leave',
-    type: 'PUT'
-  })
-  request.done((response) => {
-    page.setState({
-      inHangout: response.inHangout,
-      activeMembers: response.activeMembers
+  leaveHangout () {
+    let page = this
+    var request = $.ajax ({
+      url: '/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId + '/leave',
+      type: 'PUT'
     })
-    if (page.state.activeMembers.length == 0) {
-      page.deleteHangout()
-    }
-  })
-}
-
-
-  loadHangoutButton () {
-    if (this.state.hangoutId) {
-      if (this.state.inHangout) {
-        return <div><button onClick={this.leaveHangout} className='btn btn-default'>Leave Hangout</button>{this.adminDeleteButton()}</div>
-      } else {
-        return <div><button className='btn btn-default' onClick={this.joinHangout}>Join Hangout</button>{this.adminDeleteButton()}</div>
+    request.done((response) => {
+      page.setState({
+        inHangout: response.inHangout,
+        activeMembers: response.activeMembers
+      })
+      if (page.state.activeMembers.length === 0) {
+        page.deleteHangout()
       }
-    } else {
-      return <div><button className='btn btn-default' onClick={this.createHangout}>Create Hangout</button>{this.adminDeleteButton()}</div>
-    }
+    })
   }
+
+  // loadHangoutButton () {
+  //   if (this.state.hangoutId) {
+  //     if (this.state.inHangout) {
+  //       return <div><button onClick={this.leaveHangout} className='btn btn-default'>Leave Hangout</button>{this.adminDeleteButton()}</div>
+  //     } else {
+  //       return <div><button className='btn btn-default' onClick={this.joinHangout}>Join Hangout</button>{this.adminDeleteButton()}</div>
+  //     }
+  //   } else {
+  //     return <div><button className='btn btn-default' onClick={this.createHangout}>Create Hangout</button>{this.adminDeleteButton()}</div>
+  //   }
+  // }
 
   returnRestaurants () {
     if (this.state.centerPoint && this.state.inHangout) {
@@ -244,11 +243,11 @@ leaveHangout() {
     })
   }
 
-  adminDeleteButton() {
-    if (this.state.curretUserId == this.state.hangoutAdmin) {
-      return <button onClick={this.deleteHangout} className='btn btn-default'>Delete Hangout</button>
-    }
-  }
+  // adminDeleteButton() {
+  //   if (this.state.curretUserId == this.state.hangoutAdmin) {
+  //     return <button onClick={this.deleteHangout} className='btn btn-default'>Delete Hangout</button>
+  //   }
+  // }
 
   render () {
     return (
@@ -256,7 +255,8 @@ leaveHangout() {
         <div className='card-body'>
           <div className='card group-content' >
             <div className='hangout-button' >
-              {this.loadHangoutButton()}
+              {/* {this.loadHangoutButton()} */}
+              <Dropdown joinHangout={this.joinHangout} createHangout={this.createHangout} deleteHangout={this.deleteHangout} admin={this.state.hangoutAdmin} userId={this.state.curretUserId} leaveHangout={this.leaveHangout} hangoutId={this.state.hangoutId} inHangout={this.state.inHangout} />
               <LocationError locationError={this.state.locationError} />
             </div>
             <div className='card-header'>
