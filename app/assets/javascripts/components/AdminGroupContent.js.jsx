@@ -7,7 +7,7 @@ class AdminGroupContent extends React.Component {
             <h3>
               Created Groups
             </h3>
-            <div id='create-btn' className='create-group-btn'>
+            <div id='create-btn'>
               <UserCreateGroup changeStates={this.props.changeStates} sessionID={this.props.sessionID} username={this.props.username} />
             </div>
           </div>
