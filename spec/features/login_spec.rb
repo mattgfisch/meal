@@ -21,7 +21,7 @@ describe 'LoginForm' do
       fill_in 'Email', with: 'matt@matt.com'
       fill_in 'Password', with: 'password'
       click_on 'Log In'
-      expect(find('.col-xs-10').find('h2')).to have_content('Your Meals')
+      expect(page).to have_content('Your Meals')
     end
   end
 end

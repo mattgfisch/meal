@@ -1,6 +1,3 @@
-.center{
-  text-align: center;
-}
 .navbar {
   position: relative;
   background-color: #CECFCF;
@@ -8,11 +5,12 @@
 
   -webkit-box-shadow: 1px 1px 3px 2px #b7b8b8;
  box-shadow:         1px 1px 3px 2px #b7b8b8;
+  text-align: center;
 }
 
 .navbar-brand{
-  transform: translateX(-50%);
   position: absolute;
+  margin-left: -50px !important;
    left: 50%;
   display: block;
   font-size: 2em;
@@ -27,4 +25,8 @@
 
 #nav-username {
   color: black;
+}
+
+.navbar-btn{
+  margin-right: 2%;
 }
