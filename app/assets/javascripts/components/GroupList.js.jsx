@@ -27,7 +27,9 @@ class GroupList extends React.Component {
   render () {
     return (
       <table id='joined-table'>
-        {this.state.userGroups}
+        <tbody>
+          {this.state.userGroups}
+        </tbody>
       </table>
     )
   }
