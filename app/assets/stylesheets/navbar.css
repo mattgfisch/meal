@@ -4,18 +4,27 @@
 .navbar {
   position: relative;
   background-color: #CECFCF;
+  width: 100%;
 
-
+  -webkit-box-shadow: 1px 1px 3px 2px #b7b8b8;
+ box-shadow:         1px 1px 3px 2px #b7b8b8;
 }
+
 .navbar-brand{
   transform: translateX(-50%);
   position: absolute;
    left: 50%;
   display: block;
   font-size: 2em;
-
+  font-family: chalkduster;
 }
 
 #logo {
     color: #BE0011;
+    font-weight: bold;
+    text-shadow: 3px 3px 1px #808080;
+}
+
+#nav-username {
+  color: black;
 }

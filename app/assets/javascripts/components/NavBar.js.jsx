@@ -40,13 +40,13 @@ class NavBar extends React.Component {
   userName () {
     if (this.props.user) {
       return (
-        <span className='navbar-text pull-left'>{this.props.user}</span>
+        <span id='nav-username' className='navbar-text pull-left'>{this.props.user}</span>
       )
     }
   }
   render () {
     return (
-      <nav className='navbar navbar-default'>
+      <nav className='navbar navbar-default navbar-fixed-top'>
         <div className='container-fluid'>
           {this.userName()}
           {this.homeLink()}

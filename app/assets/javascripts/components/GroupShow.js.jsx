@@ -279,7 +279,7 @@ leaveHangout() {
 
   render () {
     return (
-      <div className='card'>
+      <div className='card content'>
         <div className='card-body'>
           <div className='card group-content' >
             <div className='hangout-button' >

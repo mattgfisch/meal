@@ -2,8 +2,8 @@ class UserContent extends React.Component {
 
   render () {
     return (
-      <div className='card'>
-        <div className='card-header'>
+      <div className='card content'>
+        <div className='card-header user-header'>
           <h2>Your Meals</h2>
         </div>
         <div className='card-block'>

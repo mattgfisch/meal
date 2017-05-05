@@ -1,3 +1,7 @@
 body {
-  background-color: #E5E6E7;
+  /*background-color: #929393;*/
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://cdn.pixabay.com/photo/2016/03/09/12/12/aperitif-1246311__340.jpg");
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  position: static;
 }
