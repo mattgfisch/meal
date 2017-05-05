@@ -33,7 +33,7 @@ class NavBar extends React.Component {
       }
     }
     return (
-      <a href='#' id='logo' onClick={handler} className='navbar-brand navbar-link'>Meals</a>
+      <a href='#' id='logo' onClick={handler} className='navbar-link navbar-brand'>Meal</a>
     )
   }
 
