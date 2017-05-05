@@ -74,10 +74,10 @@ class GroupCreationForm extends React.Component {
             <label htmlFor='email'>Send invites to:</label>
             <input type='email' name='email' onChange={this.handleEmailChange.bind(this)} className='form-control' placeholder='johndoe@email.com' />
           </div>
-          <div className='register-btn'>
+          <div id='invite-user' className='register-btn'>
             <button onClick={this.handleInvite} className='btn btn-default'>Invite User</button>
           </div>
-          <div className='register-btn'>
+          <div id='submit-group' className='register-btn'>
             <button onClick={this.handleSubmit} className='btn btn-default'>Create Group</button>
           </div>
         </form>
