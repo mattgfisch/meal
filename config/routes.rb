@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   post '/groups/:group_id/hangouts', to: 'hangouts#create'
   put '/groups/:group_id/hangouts/:id/leave', to: 'hangouts#leave'
   delete '/groups/:group_id/hangouts/:id/delete', to: 'hangouts#delete'
+  put '/groups/:group_id/hangouts/:id/lock', to: 'hangouts#lock'
 end

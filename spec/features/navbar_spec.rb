@@ -35,7 +35,7 @@ describe 'NavBar' do
       fill_in 'Password', with: 'password'
       click_on 'Log In'
       click_on 'Meals'
-      expect(find('.col-xs-10').find('h2')).to have_content('Your Meals')
+      expect(page).to have_content('Your Meals')
     end
 
     it 'Log out successfully ends a session and pulls up Log in page' do

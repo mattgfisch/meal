@@ -1,13 +1,15 @@
-.center{
+.navbar {
+  width: 100%;
   text-align: center;
 }
-.navbar {
-  position: relative;
-}
 .navbar-brand{
-  transform: translateX(-50%);
   position: absolute;
+  margin-left: -50px !important;
    left: 50%;
   display: block;
   font-size: 2em;
+}
+
+.navbar-btn{
+  margin-right: 2%;
 }

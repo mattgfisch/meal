@@ -37,6 +37,7 @@ class GroupsController < ApplicationController
       hangout_id = group.hangouts.first.id
       hangout_admin = Hangout.find(hangout_id).creator_id
       center_point = Hangout.find(hangout_id).center_point
+      locked_out = Hangout.find(hangout_id).locked_out
 
       center_point = {average_lat: center_point[:average_lat].to_f, average_long: center_point[:average_long].to_f}
 
@@ -58,7 +59,8 @@ class GroupsController < ApplicationController
       groupAdminId: group.admin_id,
       hangoutId: hangout_id,
       inHangout: in_hangout,
-      centerPoint: center_point
+      centerPoint: center_point,
+      lockedOut: locked_out
      }
   end
 

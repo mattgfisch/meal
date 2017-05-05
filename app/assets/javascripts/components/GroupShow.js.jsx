@@ -13,12 +13,14 @@ class GroupShow extends React.Component {
       errors: null,
       hangoutAdmin: null,
       locationError: null,
-      curretUserId: null
+      curretUserId: null,
+      lockedOut: false
     }
     this.joinHangout = this.joinHangout.bind(this)
     this.createHangout = this.createHangout.bind(this)
     this.leaveHangout =  this.leaveHangout.bind(this)
     this.deleteHangout = this.deleteHangout.bind(this)
+    this.lockHangout = this.lockHangout.bind(this)
   }
 
   componentDidMount () {
@@ -36,7 +38,8 @@ class GroupShow extends React.Component {
         inHangout: response.inHangout,
         centerPoint: response.centerPoint,
         hangoutAdmin: response.hangoutAdmin,
-        curretUserId: response.curretUserId
+        curretUserId: response.curretUserId,
+        lockedOut: response.lockedOut
       })
     })
   }
@@ -127,7 +130,6 @@ class GroupShow extends React.Component {
     }
   }
 
-
   joinHangout () {
     if (this.state.hangoutId != null) {
       this.hangOutHelper('/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId, 'PATCH')
@@ -145,13 +147,13 @@ class GroupShow extends React.Component {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(sendPosition, showError)
     } else {
-      $('#location-error').html('We apologize, but your browser does not support location services used by our app')
+      $('#location-error').html('We apologize, but your browser does not support location services used by our app.')
     }
     function showError (error) {
       let errorMessage
       switch (error.code) {
         case error.PERMISSION_DENIED:
-          errorMessage = 'Please enable location services to participate in a hangout'
+          errorMessage = 'Please enable location services to participate in a hangout. Refresh the page and try again.'
           break
         case error.POSITION_UNAVAILABLE:
           errorMessage = 'Sorry, but we cannot find your location. Please refresh the page and try again.'
@@ -186,7 +188,8 @@ class GroupShow extends React.Component {
           inHangout: result.inHangout,
           centerPoint: result.centerPoint,
           hangoutId: result.hangoutId,
-          hangoutAdmin: result.hangoutAdmin
+          hangoutAdmin: result.hangoutAdmin,
+          lockedOut: result.lockedOut
       })
     })
   }
@@ -198,6 +201,7 @@ class GroupShow extends React.Component {
       url: '/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId + '/leave',
       type: 'PUT'
     })
+
     request.done((response) => {
       page.setState({
         inHangout: response.inHangout,
@@ -229,7 +233,22 @@ class GroupShow extends React.Component {
         hangoutId: null,
         inHangout: false,
         centerPoint: '',
-        hangoutAdmin: null
+        hangoutAdmin: null,
+        lockedOut: null
+      })
+    })
+  }
+
+  lockHangout () {
+    let page = this
+    var request = $.ajax ({
+      url: '/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId + '/lock',
+      type: 'PUT'
+    })
+
+    request.done((response) => {
+      page.setState({
+        lockedOut: response.locked_out
       })
     })
   }
@@ -239,7 +258,7 @@ class GroupShow extends React.Component {
       <div className='card'>
         <div className='card-body'>
           <div className='card group-content hangout-button' >
-            <Dropdown groupAdminId={this.state.adminId} joinHangout={this.joinHangout} createHangout={this.createHangout} deleteHangout={this.deleteHangout} hangoutAdminId={this.state.hangoutAdmin} userId={this.state.curretUserId} leaveHangout={this.leaveHangout} hangoutId={this.state.hangoutId} inHangout={this.state.inHangout} />
+            <Dropdown lockedOut={this.state.lockedOut} lockHangout={this.lockHangout} groupAdminId={this.state.adminId} joinHangout={this.joinHangout} createHangout={this.createHangout} deleteHangout={this.deleteHangout} hangoutAdminId={this.state.hangoutAdmin} userId={this.state.curretUserId} leaveHangout={this.leaveHangout} hangoutId={this.state.hangoutId} inHangout={this.state.inHangout} />
             <LocationError locationError={this.state.locationError} />
           </div>
           <div className='card group-content ' >

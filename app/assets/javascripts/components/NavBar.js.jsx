@@ -46,7 +46,7 @@ class NavBar extends React.Component {
   }
   render () {
     return (
-      <nav className='navbar navbar-default'>
+      <nav className='navbar navbar-default navbar-fixed-top'>
         <div className='container-fluid'>
           {this.userName()}
           {this.homeLink()}

@@ -4,19 +4,30 @@ class Dropdown extends React.Component {
     return this.props.userId === this.props.groupAdminId
   }
 
-  deleteButton () {
+  deleteHangout () {
     if (this.props.userId === this.props.hangoutAdminId) {
       return <a className='btn' onClick={this.props.deleteHangout}>Delete Hangout</a>
     }
   }
 
+  lockButton () {
+    console.log("asdas")
+    if (this.props.userId === this.props.hangoutAdminId && !this.props.lockedOut) {
+      return <a className='btn' onClick={this.props.lockHangout}>Lock Hangout</a>
+    }
+  }
+
   hangoutButton () {
-    if (this.props.hangoutId && this.props.inHangout) {
-      return <a className='btn' onClick={this.props.leaveHangout}>Leave Hangout</a>
-    } else if (this.props.hangoutId) {
-      return <a className='btn' onClick={this.props.joinHangout}>Join Hangout</a>
+    if (!this.props.lockedOut) {
+      if (this.props.hangoutId && this.props.inHangout) {
+        return <a className='btn' onClick={this.props.leaveHangout}>Leave Hangout</a>
+      } else if (this.props.hangoutId) {
+        return <a className='btn' onClick={this.props.joinHangout}>Join Hangout</a>
+      } else {
+        return <a className='btn' onClick={this.props.createHangout}>Create Hangout</a>
+      }
     } else {
-      return <a className='btn' onClick={this.props.createHangout}>Create Hangout</a>
+      return <a className='btn'>Hangout Locked</a>
     }
   }
 
@@ -38,7 +49,8 @@ class Dropdown extends React.Component {
         </button>
         <ul className='dropdown-menu'>
           <li>{this.hangoutButton()}</li>
-          <li>{this.deleteButton()}</li>
+          <li>{this.lockButton()}</li>
+          <li>{this.deleteHangout()}</li>
           <li>{this.addButton()}</li>
         </ul>
       </div>
