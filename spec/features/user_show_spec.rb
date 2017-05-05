@@ -44,7 +44,7 @@ describe 'UserShow' do
       fill_in 'Email', with: 'matt@matt.com'
       fill_in 'Password', with: 'password'
       click_on 'Log In'
-      expect(find('#created-groups')).to have_content 'Test'
+      expect(find('#admin-table')).to have_content 'Test'
     end
 
     it 'Shows groups user has joined' do
@@ -79,7 +79,7 @@ describe 'UserShow' do
       fill_in 'Password', with: 'password'
       click_on 'Log In'
       expect(find('#joined-groups')).not_to have_content 'Test'
-      expect(find('#created-groups')).not_to have_content 'Test'
+      expect(find('#admin-table')).not_to have_content 'Test'
     end
 
 
