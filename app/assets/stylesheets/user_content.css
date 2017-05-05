@@ -9,8 +9,6 @@
 
 
 .card-block {
-  /*margin-bottom:20%;*/
-  /*min-height: 200px;*/
   overflow: scroll;
   top: -50%;
 }

@@ -3,9 +3,14 @@ div.register-btn {
 }
 
 .hangout-button {
+
   text-align: center;
   position: relative;
 }
+
+/*.dropdown {
+  margin-top: 30px;
+}*/
 
 
 .dropdown-menu {
