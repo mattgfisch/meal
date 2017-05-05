@@ -54,3 +54,7 @@ td {
 .btn-link{
   color: black;
 }
+
+#page-content {
+  margin-top: 60px;
+}
