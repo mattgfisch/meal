@@ -12,7 +12,7 @@ class AdminGroupContent extends React.Component {
             </div>
           </div>
         </div>
-        <div className='card-block user-home'>
+        <div className='card-block user-home created-groups'>
           <AdminGroupList changeStates={this.props.changeStates} sessionID={this.props.sessionID} username={this.props.username} />
         </div>
       </div>
