@@ -32,7 +32,7 @@ class AdminGroupListItem extends React.Component {
     return (
       <tr className='table-row'>
         <td><a id='created' href='#' onClick={this.handler}> {this.props.group.name} </a></td>
-        <td><button onClick={this.deleteHandler} className='btn btn-xs delete'>
+        <td><button onClick={this.deleteHandler} className='btn btn-xs btn-link delete'>
           <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
         </button></td>
       </tr>

@@ -32,3 +32,19 @@ td {
   border-spacing: 1em;
   width: 77%;
 }
+
+.btn-xl {
+    padding-bottom: 10px 20px;
+    width: 100px;
+}
+#create-btn {
+  padding-bottom: 10px;
+}
+
+.remove{
+  background-color: none;
+}
+
+.btn-link{
+  color: black;
+}
