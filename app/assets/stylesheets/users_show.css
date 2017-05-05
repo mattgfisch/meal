@@ -15,3 +15,36 @@
 .card{
   margin-top: 40px;
 }
+
+tr{
+  width: 75%;
+  vertical-align: middle;
+}
+td {
+  padding-bottom:15px;
+}
+
+#joined-table{
+  border-spacing: 1em;
+  width: 88%;
+}
+#admin-table{
+  border-spacing: 1em;
+  width: 88%;
+}
+
+.btn-xl {
+    padding-bottom: 10px 20px;
+    width: 100px;
+}
+#create-btn {
+  padding-bottom: 10px;
+}
+
+.remove{
+  background-color: none;
+}
+
+.btn-link{
+  color: black;
+}

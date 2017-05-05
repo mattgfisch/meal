@@ -6,7 +6,9 @@ class AdminGroupContent extends React.Component {
           <h3>
               Created Groups
           </h3>
-          <UserCreateGroup changeStates={this.props.changeStates} sessionID={this.props.sessionID} username={this.props.username} />
+          <div id='create-btn'>
+            <UserCreateGroup changeStates={this.props.changeStates} sessionID={this.props.sessionID} username={this.props.username} />
+          </div>
         </div>
         <div className='card-block user-home'>
           <AdminGroupList changeStates={this.props.changeStates} sessionID={this.props.sessionID} username={this.props.username} />

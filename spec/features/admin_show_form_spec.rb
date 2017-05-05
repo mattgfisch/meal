@@ -70,7 +70,7 @@ describe 'AdminGroupShow' do
     end
 
     it 'Admin can invite valid user after creating a new group' do
-      click_on '+'
+      find(:css, '.create-group-btn').click
       fill_in 'groupName', with: 'Grouptastic'
       click_on 'Create Group'
       click_on 'Options'
@@ -81,7 +81,7 @@ describe 'AdminGroupShow' do
     end
 
     it 'Admin can not invite themselves to group/ anyone already in group after creating a new group' do
-      click_on '+'
+    find(:css, '.create-group-btn').click
       fill_in 'groupName', with: 'Grouptastic'
       click_on 'Create Group'
       click_on 'Options'
@@ -92,7 +92,7 @@ describe 'AdminGroupShow' do
     end
 
     it 'Admin can not invite invaild emails after creating a group' do
-      click_on '+'
+      find(:css, '.create-group-btn').click
       fill_in 'groupName', with: 'Grouptastic'
       click_on 'Create Group'
       click_on 'Options'

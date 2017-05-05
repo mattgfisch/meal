@@ -30,9 +30,13 @@ class GroupListItem extends React.Component {
 
   render () {
     return (
-      <div>
-        <a className='joined-link' href='#' onClick={this.handler}> {this.props.group.name} </a><button onClick={this.deleteHandler} className='btn btn-xs remove'> - </button>
-      </div>
+      <tr>
+        <td><a className='joined-link' href='#' onClick={this.handler}> {this.props.group.name} </a></td>
+        <td><button onClick={this.deleteHandler} className='btn btn-xs btn-link remove'>
+            <span className="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+          </button>
+        </td>
+      </tr>
     )
   }
 }
