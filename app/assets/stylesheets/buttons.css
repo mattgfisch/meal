@@ -3,7 +3,6 @@ div.register-btn {
 }
 
 .hangout-button {
-
   text-align: center;
   position: relative;
 }
@@ -28,4 +27,8 @@ div.register-btn {
   position: absolute;
   top: 0;
   right: 7px;
+}
+
+.dropdown-toggle, .dropdown-toggle:focus {
+  background-color: #4f4f4f;
 }
