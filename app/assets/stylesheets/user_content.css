@@ -7,9 +7,10 @@
   width: 100%;
 }
 
+
 .card-block {
   margin-bottom:20%;
-  height: 400px;
+  min-height: 200px;
   overflow: scroll;
   top: -50%;
 }

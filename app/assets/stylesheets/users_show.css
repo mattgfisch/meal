@@ -1,11 +1,11 @@
 .user-home {
   text-align: center;
+  margin-top: 20px;
 }
 
 .create-group-btn{
-  text-align: right;
+  text-align: center;
   display: inline;
-  margin-left: 10px;
 }
 
 .user-content {
@@ -16,7 +16,7 @@
   margin-top: 40px;
 }
 
-tr{
+tr {
   width: 75%;
   vertical-align: middle;
 }
@@ -26,19 +26,21 @@ td {
 
 #joined-table{
   border-spacing: 1em;
-  width: 88%;
+  width: 100%;
 }
 #admin-table{
   border-spacing: 1em;
-  width: 88%;
+  width: 100%;
 }
 
 .btn-xl {
     padding-bottom: 10px 20px;
     width: 100px;
 }
-#create-btn {
+.create-btn {
+  postion: absolute;
   padding-bottom: 10px;
+  width: 100%;
 }
 
 .remove{
