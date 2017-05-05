@@ -58,29 +58,31 @@ class GroupCreationForm extends React.Component {
 //
   render () {
     return (
-      <div className='card'>
-        <div className='card-header'>
+      <div className='card content'>
+        <div className='card-header page-header'>
           <h2>Create Group</h2>
         </div>
-        <form action='/users' method='post'>
-          <div className='errors errors-container'>
-            {this.state.errors}
-          </div>
-          <div className='form-group'>
-            <label htmlFor='groupName'>Name</label>
-            <input type='text' name='groupName' value={this.state.groupName} onChange={this.handleNameChange.bind(this)} className='form-control' id='name' placeholder='Grouptastic' />
-          </div>
-          <div className='form-group'>
-            <label htmlFor='email'>Send invites to:</label>
-            <input type='email' name='email' onChange={this.handleEmailChange.bind(this)} className='form-control' placeholder='johndoe@email.com' />
-          </div>
-          <div id='invite-user' className='register-btn'>
-            <button onClick={this.handleInvite} className='btn btn-default'>Invite User</button>
-          </div>
-          <div id='submit-group' className='register-btn'>
-            <button onClick={this.handleSubmit} className='btn btn-default'>Create Group</button>
-          </div>
-        </form>
+        <div className='card-block'>
+          <form action='/users' method='post' id='group-create-form'>
+            <div className='errors errors-container'>
+              {this.state.errors}
+            </div>
+            <div className='form-group'>
+              <label htmlFor='groupName'>Name</label>
+              <input type='text' name='groupName' value={this.state.groupName} onChange={this.handleNameChange.bind(this)} className='form-control' id='name' placeholder='Grouptastic' />
+            </div>
+            <div className='form-group'>
+              <label htmlFor='email'>Send invites to:</label>
+              <input type='email' name='email' onChange={this.handleEmailChange.bind(this)} className='form-control' placeholder='johndoe@email.com' />
+            </div>
+            <div id='invite-user' className='register-btn'>
+              <button onClick={this.handleInvite} className='btn btn-default'>Invite User</button>
+            </div>
+            <div id='submit-group' className='register-btn'>
+              <button onClick={this.handleSubmit} className='btn btn-default'>Create Group</button>
+            </div>
+          </form>
+        </div>
       </div>
     )
   }

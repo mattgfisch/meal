@@ -33,14 +33,14 @@ class NavBar extends React.Component {
       }
     }
     return (
-      <a href='#' onClick={handler} className='navbar-brand navbar-link'>Meals</a>
+      <a href='#' id='logo' onClick={handler} className='navbar-link navbar-brand'>Meals</a>
     )
   }
 
   userName () {
     if (this.props.user) {
       return (
-        <span className='navbar-text pull-left'>{this.props.user}</span>
+        <span id='nav-username' className='navbar-text pull-left'>{this.props.user}</span>
       )
     }
   }

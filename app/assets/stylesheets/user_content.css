@@ -1,0 +1,60 @@
+.content {
+  background-color: #f0f0f0;
+  border-radius: 15px;
+  margin-top: 30px;
+  background-color: rgba(255,255,255,0.5);
+  height: 30%;
+  width: 100%;
+}
+
+
+.card-block {
+  overflow: scroll;
+  top: -50%;
+}
+
+.page-header {
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  background-color: rgba(255,255,255,0.5);
+}
+
+.register {
+  color: white;
+}
+
+#create-button {
+  z-index: -1;
+}
+
+#register-link {
+  color: #33b97d;
+  text-decoration: underline;
+}
+
+#created-groups {
+  margin-top: -120px;
+}
+
+h2 {
+  font-family: 'Quicksand', sans-serif;
+  text-shadow: 2px 2px 3px rgba(0,0,0,0.8), 0px 0px 2px  rgba(0,0,0,1);
+  color: white;
+  padding-bottom: .1cm;
+}
+
+h3 {
+  font-family: 'Satisfy', cursive;
+  /*font-family: 'Pacifico', cursive;*/
+  /*font-family: 'Quicksand', sans-serif;*/
+  color: rgb(132, 37, 37);
+}
+
+label {
+  color: white;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

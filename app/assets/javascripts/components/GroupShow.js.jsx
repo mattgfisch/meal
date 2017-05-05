@@ -255,8 +255,8 @@ class GroupShow extends React.Component {
 
   render () {
     return (
-      <div className='card'>
-        <div className='card-body'>
+      <div className='card content'>
+        <div className='card-body group-show'>
           <div className='card group-content hangout-button' >
             <Dropdown lockedOut={this.state.lockedOut} lockHangout={this.lockHangout} groupAdminId={this.state.adminId} joinHangout={this.joinHangout} createHangout={this.createHangout} deleteHangout={this.deleteHangout} hangoutAdminId={this.state.hangoutAdmin} userId={this.state.curretUserId} leaveHangout={this.leaveHangout} hangoutId={this.state.hangoutId} inHangout={this.state.inHangout} />
             <LocationError locationError={this.state.locationError} />
