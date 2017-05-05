@@ -6,8 +6,8 @@ describe 'GroupShow' do
     let!(:creator) { User.create!(name: 'Max', email: 'max@max.com', password: 'password')}
     let!(:group) { Group.create!(name: "Test", admin_id: user.id) }
 
-    def find_and_click
-      page.find("a", :text => /\A#{text}\z/)
+    def find_and_click(text)
+      page.find("a", :text => /\A#{text}\z/).click
     end
 
     before(:each) do
