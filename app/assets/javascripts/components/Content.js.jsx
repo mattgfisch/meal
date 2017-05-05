@@ -69,15 +69,11 @@ class Content extends React.Component {
       <div id='body'>
         <NavBar user={this.state.username} session={this.state.session} changeStates={this.changeStates} />
         <div className='card'>
-          <div className= "col-xs-1 .col-md-1 border">
-
-          </div>
-          <div className="col-xs-10 .col-md-10 border">
+          <div className='col-xs-1 .col-md-1 border' />
+          <div className='col-xs-10 .col-md-10 border'>
             {this.state.mode}
           </div>
-          <div className="col-xs-1 .col-md-1 border">
-
-          </div>
+          <div className='col-xs-1 .col-md-1 border' />
         </div>
       </div>
     )

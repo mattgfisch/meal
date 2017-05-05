@@ -25,7 +25,7 @@ class AdminGroupListItem extends React.Component {
 
   deleteHandler () {
     this.deleteGroup()
-    location.reload()
+    window.location.reload()
   }
 
   render () {
@@ -33,7 +33,7 @@ class AdminGroupListItem extends React.Component {
       <tr className='table-row'>
         <td><a id='created' href='#' onClick={this.handler}> {this.props.group.name} </a></td>
         <td><button onClick={this.deleteHandler} className='btn btn-xs btn-link delete'>
-          <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+          <span className='glyphicon glyphicon-trash' aria-hidden='true' />
         </button></td>
       </tr>
     )

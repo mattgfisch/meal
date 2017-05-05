@@ -42,14 +42,14 @@ class GroupsController < ApplicationController
       center_point = {average_lat: center_point[:average_lat].to_f, average_long: center_point[:average_long].to_f}
 
       in_hangout = user.hangouts.any?{|user_hangout| user_hangout.id == hangout_id}
-      active_members = group.members.select do |user|
-        user.hangouts.any?{|user_hangout| user_hangout.id == hangout_id}
+      active_members = group.members.select do |member|
+        member.hangouts.any?{|member_hangout| member_hangout.id == hangout_id}
       end
-      active_members.map! { |user| user.name }
+      active_members.map! { |member| member.name }
     else
       hangout_id = nil
     end
-    group_members = group.members.map { |user| user.name }
+    group_members = group.members.map { |member| member.name }
     render json: {
       curretUserId: user.id,
       hangoutAdmin: hangout_admin,
