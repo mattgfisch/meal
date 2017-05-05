@@ -48,7 +48,6 @@ class Content extends React.Component {
         stateVariable = CreateGroup
         break
       default:
-        console.log('OMG errorz')
         stateVariable = login
         break
     }
