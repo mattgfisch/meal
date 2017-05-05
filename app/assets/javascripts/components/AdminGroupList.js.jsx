@@ -14,6 +14,7 @@ class AdminGroupList extends React.Component {
       adminGroupList = (
         response.admin_groups.map((group) => {
           return (
+
             <AdminGroupListItem changeStates={this.props.changeStates} sessionID={this.props.sessionID} username={this.props.username} group={group} key={'adminGroup' + group.id} />
           )
         })
@@ -26,9 +27,9 @@ class AdminGroupList extends React.Component {
 
   render () {
     return (
-      <div>
+      <table className="table table-hover" id='admin-table'>
         {this.state.adminGroups}
-      </div>
+      </table>
     )
   }
 }

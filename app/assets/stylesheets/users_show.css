@@ -15,3 +15,20 @@
 .card{
   margin-top: 40px;
 }
+
+tr{
+  width: 75%;
+  vertical-align: middle;
+}
+td {
+  padding-bottom:15px;
+}
+
+#joined-table{
+  border-spacing: 1em;
+  width: 77%;
+}
+#admin-table{
+  border-spacing: 1em;
+  width: 77%;
+}
