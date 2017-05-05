@@ -26,7 +26,7 @@ class GroupList extends React.Component {
 
   render () {
     return (
-      <table id='joined-table'>
+      <table className="table table-hover" id='joined-table'>
         <tbody>
           {this.state.userGroups}
         </tbody>
