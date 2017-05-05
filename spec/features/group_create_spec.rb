@@ -11,7 +11,8 @@ describe 'GroupCreate' do
       fill_in 'Email', with: user1.email
       fill_in 'Password', with: 'password'
       click_on 'Log In'
-      click_on 'create-group-btn'
+      button = find('.create-group-btn')
+      click_on button
     end
 
     it 'Shows the Form' do
