@@ -10,7 +10,9 @@ class UserCreateGroup extends React.Component {
   render () {
     return (
       <div className='create-group-btn'>
-        <button onClick={this.handleClick} className='btn btn-default'> + </button>
+        <button onClick={this.handleClick} className='btn btn-default btn-xl'>
+          <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </button>
       </div>
     )
   }

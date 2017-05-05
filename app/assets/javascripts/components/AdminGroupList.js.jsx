@@ -26,9 +26,11 @@ class AdminGroupList extends React.Component {
 
   render () {
     return (
-      <div>
-        {this.state.adminGroups}
-      </div>
+      <table className="table table-hover" id='admin-table'>
+        <tbody>
+          {this.state.adminGroups}
+        </tbody>
+      </table>
     )
   }
 }

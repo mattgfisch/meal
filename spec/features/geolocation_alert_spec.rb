@@ -15,7 +15,8 @@ describe 'Showing restaurants', js: true do
 
       button = page.find('.joined-link', match: :first)
       button.click
-      click_on 'Create Hangout'
+      click_on 'Options'
+      page.find("a", :text => /\ACreate Hangout\z/).click
       expect(page).to_not have_content 'Warning'
     end
   end

@@ -6,12 +6,13 @@ describe 'GroupCreate' do
     let!(:batman) { User.create!(name: 'Clark Ent', email: 'batman@batman.com', password: 'password') }
     let!(:wonderwoman) { User.create!(name: 'Brew Swayne', email: 'wonder@wo.man', password: 'password') }
     let!(:superman) { User.create!(name: 'Peter Parkour', email: 'souper@man.clark', password: 'password') }
+
     before(:each) do
       visit '/'
       fill_in 'Email', with: user1.email
       fill_in 'Password', with: 'password'
       click_on 'Log In'
-      click_on '+'
+    find(:css, '.create-group-btn').click
     end
 
     it 'Shows the Form' do
@@ -59,10 +60,15 @@ describe 'GroupCreate' do
     it 'can invite multiple users' do
       fill_in 'groupName', with: 'Justiss Leeg'
       fill_in 'email', with: batman.email
+      sleep 1
       click_on 'Invite User'
       fill_in 'email', with: wonderwoman.email
+      sleep 1
+
       click_on 'Invite User'
       fill_in 'email', with: superman.email
+      sleep 1
+      
       click_on 'Invite User'
       click_on 'Create Group'
       expect(page).to have_content "#{batman.name} #{wonderwoman.name} #{superman.name}"

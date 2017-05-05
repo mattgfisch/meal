@@ -23,6 +23,27 @@ class GroupShow extends React.Component {
     this.lockHangout = this.lockHangout.bind(this)
   }
 
+  componentDidMount () {
+    let page = this
+    $.ajax({
+      url: '/groups/' + this.props.groupId,
+      type: 'GET'
+    }).done(function (response) {
+      page.setState({
+        activeMembers: response.activeMembers,
+        title: response.groupTitle,
+        adminId: response.groupAdminId,
+        members: response.groupMembers,
+        hangoutId: response.hangoutId,
+        inHangout: response.inHangout,
+        centerPoint: response.centerPoint,
+        hangoutAdmin: response.hangoutAdmin,
+        curretUserId: response.curretUserId,
+        lockedOut: response.lockedOut
+      })
+    })
+  }
+
   handleInvite (event) {
     event.preventDefault()
     let form = this
@@ -48,20 +69,21 @@ class GroupShow extends React.Component {
     $("input[type='email']").val('')
   }
 
-
-   handleEmailChange(event) {
-     this.setState({
-       currentEmail: event.target.value
-     })
+  handleEmailChange (event) {
+    this.setState({
+      currentEmail: event.target.value
+    })
   }
+
   addMembers () {
+    function closeIt () {
+      event.preventDefault()
+    }
+
     if (this.props.sessionID) {
       return (
         <div className='card group-content'>
           <div className='card-header'>
-            <button className='btn btn-default' type='button' data-toggle='collapse' data-target='#collapseExample' aria-expanded='false' aria-controls='collapseExample'>
-            Add Users
-            </button>
             <div id='collapseExample' className='card-body text-center collapse'>
               <div className='well'>
                 <form action='/users' method='post'>
@@ -73,6 +95,7 @@ class GroupShow extends React.Component {
                   </div>
                   <div className='register-btn'>
                     <button onClick={this.handleInvite.bind(this)} className='btn btn-default'>Invite User</button>
+                    <a data-toggle='collapse' data-target='#collapseExample' id='closeInvitation'>x</a>
                   </div>
                 </form>
               </div>
@@ -105,27 +128,6 @@ class GroupShow extends React.Component {
         })
       )
     }
-  }
-
-  componentDidMount () {
-    let page = this
-    $.ajax({
-      url: '/groups/' + this.props.groupId,
-      type: 'GET'
-    }).done(function (response) {
-      page.setState({
-        activeMembers: response.activeMembers,
-        title: response.groupTitle,
-        adminId: response.groupAdminId,
-        members: response.groupMembers,
-        hangoutId: response.hangoutId,
-        inHangout: response.inHangout,
-        centerPoint: response.centerPoint,
-        hangoutAdmin: response.hangoutAdmin,
-        curretUserId: response.curretUserId,
-        lockedOut: response.lockedOut
-      })
-    })
   }
 
   joinHangout () {
@@ -193,43 +195,28 @@ class GroupShow extends React.Component {
   }
 }
 
-leaveHangout() {
-  let page = this
-  var request = $.ajax ({
-    url: '/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId + '/leave',
-    type: 'PUT'
-  })
-  request.done((response) => {
-    page.setState({
-      inHangout: response.inHangout,
-      activeMembers: response.activeMembers
+  leaveHangout () {
+    let page = this
+    var request = $.ajax ({
+      url: '/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId + '/leave',
+      type: 'PUT'
     })
-    if (page.state.activeMembers.length == 0) {
-      page.deleteHangout()
-    }
-  })
-}
 
-
-  loadHangoutButton () {
-    if (this.state.hangoutId && this.state.lockedOut != true) {
-      if (this.state.inHangout) {
-        return <div><button onClick={this.leaveHangout} className='btn btn-default'>Leave Hangout</button>{this.adminDeleteButton()}{this.adminLockButton()}</div>
-      } else {
-        return <div><button className='btn btn-default' onClick={this.joinHangout}>Join Hangout</button>{this.adminDeleteButton()}{this.adminLockButton()}</div>
+    request.done((response) => {
+      page.setState({
+        inHangout: response.inHangout,
+        activeMembers: response.activeMembers
+      })
+      if (page.state.activeMembers.length === 0) {
+        page.deleteHangout()
       }
-    }
-    else if (this.state.lockedOut != true){
-      return <div><button className='btn btn-default' onClick={this.createHangout}>Create Hangout</button>{this.adminDeleteButton()}{this.adminLockButton()}</div>
-    } else {
-      return <div><button className='btn btn-default'>Hangout Locked</button>{this.adminDeleteButton()}</div>
-    }
+    })
   }
 
   returnRestaurants () {
     if (this.state.centerPoint && this.state.inHangout) {
       getRestaurants(parseFloat(this.state.centerPoint.average_lat), parseFloat(this.state.centerPoint.average_long))
-    }else {
+    } else {
       $('.restaurants-list').html('')
     }
   }
@@ -252,12 +239,13 @@ leaveHangout() {
     })
   }
 
-  lockHangout() {
+  lockHangout () {
     let page = this
     var request = $.ajax ({
       url: '/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId + '/lock',
       type: 'PUT'
     })
+
     request.done((response) => {
       page.setState({
         lockedOut: response.locked_out
@@ -265,27 +253,15 @@ leaveHangout() {
     })
   }
 
-  adminLockButton() {
-    if (this.state.curretUserId == this.state.hangoutAdmin) {
-      return <button onClick={this.lockHangout} className='btn btn-default'>Lock Hangout</button>
-    }
-  }
-
-  adminDeleteButton() {
-    if (this.state.curretUserId == this.state.hangoutAdmin) {
-      return <button onClick={this.deleteHangout} className='btn btn-default'>Delete Hangout</button>
-    }
-  }
-
   render () {
     return (
       <div className='card content'>
         <div className='card-body'>
-          <div className='card group-content' >
-            <div className='hangout-button' >
-              {this.loadHangoutButton()}
-              <LocationError locationError={this.state.locationError} />
-            </div>
+          <div className='card group-content hangout-button' >
+            <Dropdown lockedOut={this.state.lockedOut} lockHangout={this.lockHangout} groupAdminId={this.state.adminId} joinHangout={this.joinHangout} createHangout={this.createHangout} deleteHangout={this.deleteHangout} hangoutAdminId={this.state.hangoutAdmin} userId={this.state.curretUserId} leaveHangout={this.leaveHangout} hangoutId={this.state.hangoutId} inHangout={this.state.inHangout} />
+            <LocationError locationError={this.state.locationError} />
+          </div>
+          <div className='card group-content ' >
             <div className='card-header'>
               <h3>Group Name</h3>
             </div>
