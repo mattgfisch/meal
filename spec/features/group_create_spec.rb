@@ -24,7 +24,7 @@ describe 'GroupCreate' do
       fill_in 'email', with: batman.email
       click_on 'Invite User'
       click_on 'Create Group'
-      expect(page).to have_content "Members #{user1.name} #{batman.name}"
+      expect(page).to have_content "#{user1.name} #{batman.name}"
     end
 
     it 'invalid information returns error(s)' do
@@ -68,7 +68,7 @@ describe 'GroupCreate' do
       click_on 'Invite User'
       fill_in 'email', with: superman.email
       sleep 1
-      
+
       click_on 'Invite User'
       click_on 'Create Group'
       expect(page).to have_content "#{batman.name} #{wonderwoman.name} #{superman.name}"

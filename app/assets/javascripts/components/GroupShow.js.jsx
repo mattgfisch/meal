@@ -18,7 +18,7 @@ class GroupShow extends React.Component {
     }
     this.joinHangout = this.joinHangout.bind(this)
     this.createHangout = this.createHangout.bind(this)
-    this.leaveHangout =  this.leaveHangout.bind(this)
+    this.leaveHangout = this.leaveHangout.bind(this)
     this.deleteHangout = this.deleteHangout.bind(this)
     this.lockHangout = this.lockHangout.bind(this)
   }
@@ -76,10 +76,6 @@ class GroupShow extends React.Component {
   }
 
   addMembers () {
-    function closeIt () {
-      event.preventDefault()
-    }
-
     if (this.props.sessionID) {
       return (
         <div className='card group-content'>
@@ -190,14 +186,14 @@ class GroupShow extends React.Component {
           hangoutId: result.hangoutId,
           hangoutAdmin: result.hangoutAdmin,
           lockedOut: result.lockedOut
+        })
       })
-    })
+    }
   }
-}
 
   leaveHangout () {
     let page = this
-    var request = $.ajax ({
+    var request = $.ajax({
       url: '/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId + '/leave',
       type: 'PUT'
     })
@@ -221,9 +217,9 @@ class GroupShow extends React.Component {
     }
   }
 
-  deleteHangout() {
+  deleteHangout () {
     let page = this
-    var request = $.ajax ({
+    var request = $.ajax({
       url: '/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId + '/delete',
       type: 'DELETE'
     })
@@ -241,7 +237,7 @@ class GroupShow extends React.Component {
 
   lockHangout () {
     let page = this
-    var request = $.ajax ({
+    var request = $.ajax({
       url: '/groups/' + this.props.groupId + '/hangouts/' + this.state.hangoutId + '/lock',
       type: 'PUT'
     })

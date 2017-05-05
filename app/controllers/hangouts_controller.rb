@@ -16,10 +16,10 @@ class HangoutsController < ApplicationController
       center_point = hangout.center_point
       center_point = {average_lat: center_point[:average_lat].to_f, average_long: center_point[:average_long].to_f}
       in_hangout = user.hangouts.any?{|user_hangout| user_hangout.id == hangout.id}
-      active_members = selected_group.members.select do |user|
-        user.hangouts.any?{|user_hangout| user_hangout.id == hangout.id}
+      active_members = selected_group.members.select do |member|
+        member.hangouts.any?{|member_hangout| member_hangout.id == hangout.id}
       end
-      active_members.map! { |user| user.name }
+      active_members.map! { |member| member.name }
     end
     render json: {lockedOut: hangout.locked_out, hangoutAdmin: hangout_admin, activeMembers: active_members, centerPoint: center_point, hangoutId: hangout.id, inHangout: in_hangout}
   end
@@ -39,10 +39,10 @@ class HangoutsController < ApplicationController
 
     in_hangout = user.hangouts.any?{|user_hangout| user_hangout.id == hangout.id}
     center_point = {average_lat: params[:lat], average_long: params[:long]}
-    active_members = selected_group.members.select do |user|
-      user.hangouts.any?{|user_hangout| user_hangout.id == hangout.id}
+    active_members = selected_group.members.select do |member|
+      member.hangouts.any?{|member_hangout| member_hangout.id == hangout.id}
     end
-    active_members.map! { |user| user.name }
+    active_members.map! { |member| member.name }
 
     render json: {lockedOut: hangout.locked_out, hangoutAdmin: hangout.creator_id, activeMembers: active_members, inHangout: in_hangout, hangoutId: hangout.id, centerPoint: center_point}
   end

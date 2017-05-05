@@ -17,7 +17,7 @@ class GroupListItem extends React.Component {
   }
 
   deleteMember () {
-    var request = $.ajax({
+    $.ajax({
       type: 'PUT',
       url: '/groups/' + this.props.group.id
     })
@@ -25,15 +25,16 @@ class GroupListItem extends React.Component {
 
   deleteHandler (event) {
     this.deleteMember()
-    location.reload()
+    window.location.reload()
   }
 
   render () {
     return (
       <tr>
         <td><a className='joined-link' href='#' onClick={this.handler}> {this.props.group.name} </a></td>
-        <td><button onClick={this.deleteHandler} className='btn btn-xs btn-link remove'>
-            <span className="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+        <td>
+          <button onClick={this.deleteHandler} className='btn btn-xs btn-link remove'>
+            <span className='glyphicon glyphicon-remove-circle' aria-hidden='true' />
           </button>
         </td>
       </tr>

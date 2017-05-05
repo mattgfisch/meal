@@ -11,7 +11,7 @@ class UserCreateGroup extends React.Component {
     return (
       <div className='create-group-btn'>
         <button onClick={this.handleClick} className='btn btn-default btn-xl'>
-          <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          <span className='glyphicon glyphicon-plus' aria-hidden='true' />
         </button>
       </div>
     )
