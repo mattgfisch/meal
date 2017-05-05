@@ -20,14 +20,39 @@
   background-color: rgba(255,255,255,0.5);
 }
 
+.register {
+  color: white;
+}
+
+#create-button {
+  z-index: -1;
+}
+
+#register-link {
+  color: #33b97d;
+  text-decoration: underline;
+}
+
+#created-groups {
+  margin-top: -120px;
+}
+
 h2 {
+  font-family: 'Quicksand', sans-serif;
   text-shadow: 2px 2px 3px rgba(0,0,0,0.8), 0px 0px 2px  rgba(0,0,0,1);
   color: white;
   padding-bottom: .1cm;
 }
 
 h3 {
+  font-family: 'Satisfy', cursive;
+  /*font-family: 'Pacifico', cursive;*/
+  /*font-family: 'Quicksand', sans-serif;*/
   color: rgb(132, 37, 37);
+}
+
+label {
+  color: white;
 }
 
 a {
