@@ -21,7 +21,8 @@ describe 'GroupShow' do
 
     it 'adds user to existing hangout' do
       Hangout.create!(group_id: group.id, creator_id: creator.id)
-      click_on 'Create Hangout'
+      click_on 'Options'
+      page.find("a", :text => /\ACreate Hangout\z/).click
       expect(page).not_to have_content('Delete Hangout')
     end
   end

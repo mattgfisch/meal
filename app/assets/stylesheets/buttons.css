@@ -1,0 +1,26 @@
+div.register-btn {
+  margin-bottom: 10px;
+}
+
+.hangout-button {
+  text-align: center;
+  position: relative;
+}
+
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#collapseExample {
+  position: relative;
+}
+
+#closeInvitation {
+  position: absolute;
+  top: 0;
+  right: 7px;
+}

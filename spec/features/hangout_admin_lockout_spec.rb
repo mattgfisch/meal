@@ -6,6 +6,10 @@ describe 'GroupShow' do
     let!(:creator) { User.create!(name: 'Max', email: 'max@max.com', password: 'password')}
     let!(:group) { Group.create!(name: "Test", admin_id: user.id) }
 
+    def find_and_click(text)
+      page.find("a", :text => /\A#{text}\z/).click
+    end
+
     before(:each) do
       group.members << creator
       group.members << user
@@ -16,23 +20,30 @@ describe 'GroupShow' do
       click_on 'Log In'
 
       click_link('Test', match: :first)
-      click_on 'Create Hangout'
+      click_on 'Options'
+      find_and_click('Create Hangout')
+      sleep 5
     end
 
     it "Hangout admin can lock hangout" do
-      sleep 3
-      click_on 'Lock Hangout'
+      click_on 'Options'
+      find_and_click('Lock Hangout')
+      click_on 'Options'
       expect(page).to have_content('Hangout Locked')
     end
 
     it "can't join hangout when locked" do
-      click_on 'Lock Hangout'
+      click_on 'Options'
+      find_and_click('Lock Hangout')
+
       click_on 'Logout'
-        fill_in 'Email', with: 'max@max.com'
-        fill_in 'Password', with: 'password'
-        click_on 'Log In'
-        click_link('Test', match: :first)
-        expect(page).to have_content('Hangout Locked')
+
+      fill_in 'Email', with: 'max@max.com'
+      fill_in 'Password', with: 'password'
+      click_on 'Log In'
+      click_link('Test', match: :first)
+      click_on 'Options'
+      expect(page).to have_content('Hangout Locked')
     end
 
   end

@@ -6,6 +6,10 @@ describe 'GroupShow' do
     let!(:creator) { User.create!(name: 'Max', email: 'max@max.com', password: 'password')}
     let!(:group) { Group.create!(name: "Test", admin_id: user.id) }
 
+    def find_and_click(text)
+      page.find("a", :text => /\A#{text}\z/).click
+    end
+
     before(:each) do
       group.members << creator
       group.members << user
@@ -16,27 +20,31 @@ describe 'GroupShow' do
       click_on 'Log In'
 
       click_link('Test', match: :first)
-      click_on 'Create Hangout'
+      click_on 'Options'
+      find_and_click('Create Hangout')
+      sleep 6
+      click_on 'Options'
+
     end
 
     it "Hangout admin page shows delete hangout button" do
-      sleep 5
       expect(page).to have_content('Delete Hangout')
     end
 
     it "Hangout admin can delete hangout" do
-      sleep 5
-      click_on 'Delete Hangout'
+      find_and_click('Delete Hangout')
       expect(page).not_to have_content('Restaurants')
     end
 
     it "removes user from hangout and button goes back to join hangout" do
-      click_on 'Delete Hangout'
+      find_and_click('Delete Hangout')
+      click_on 'Options'
       expect(page).to have_content('Create Hangout')
     end
 
     it "removes user from hangout and icon next to name is removed" do
-      click_on 'Delete Hangout'
+      find_and_click('Delete Hangout')
+
       user_div = page.find("div", :text => /\AMatt\z/)
       expect(user_div).not_to have_selector("button")
     end
