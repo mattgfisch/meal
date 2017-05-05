@@ -11,7 +11,6 @@ class Dropdown extends React.Component {
   }
 
   lockButton () {
-    console.log("asdas")
     if (this.props.userId === this.props.hangoutAdminId && !this.props.lockedOut) {
       return <a className='btn' onClick={this.props.lockHangout}>Lock Hangout</a>
     }
