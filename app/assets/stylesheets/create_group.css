@@ -5,3 +5,11 @@
 #sumbit-group{
   margin-top: 5%;
 }
+
+.card-block {
+  padding: 10px;
+}
+
+#group-create-form label{
+  color: rgb(132, 37, 37);
+}

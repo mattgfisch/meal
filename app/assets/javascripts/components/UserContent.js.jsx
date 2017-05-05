@@ -3,7 +3,7 @@ class UserContent extends React.Component {
   render () {
     return (
       <div className='card content'>
-        <div className='card-header user-header'>
+        <div className='card-header page-header'>
           <h2>Your Meals</h2>
         </div>
         <div className='card-block'>
